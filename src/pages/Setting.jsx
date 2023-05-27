@@ -1,10 +1,6 @@
-import { Typography, InputBase, Box, useTheme, Button } from "@mui/material";
-import { tokens } from "../utils/Theme";
+import { Typography, InputBase, Box, Button } from "@mui/material";
 
 function Setting() {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-
   return (
     <Box
       sx={{
@@ -21,7 +17,7 @@ function Setting() {
         Update information
       </Typography>
       <Box
-        backgroundColor={colors.primary[400]}
+        backgroundColor="#F8F7F6"
         sx={{
           display: "flex",
           alignItems: "center",
@@ -34,18 +30,22 @@ function Setting() {
         <Typography sx={{ ml: 1, mr: 3, fontSize: "16px" }}>
           User name
         </Typography>
-        <Box
-          backgroundColor={colors.grey[900]}
-          sx={{ borderRadius: "12px", ml: 3 }}
-        >
+        <Box backgroundColor="#F8F7F6" sx={{ borderRadius: "12px", ml: 3 }}>
           <InputBase
-            sx={{ width: "500px", height: "45px", ml: 2 }}
-            placeholder="Brian"
+            sx={{
+              width: "500px",
+              height: "45px",
+              ml: 2,
+              backgroundColor: "white",
+              borderRadius: "10px",
+              padding: "16px",
+            }}
+            value="Brian"
           />
         </Box>
       </Box>
       <Box
-        backgroundColor={colors.primary[400]}
+        backgroundColor="#F8F7F6"
         sx={{
           display: "flex",
           alignItems: "center",
@@ -55,18 +55,22 @@ function Setting() {
         p={3}
       >
         <Typography sx={{ ml: 2, mr: 9, fontSize: "16px" }}>Email </Typography>
-        <Box
-          backgroundColor={colors.grey[900]}
-          sx={{ ml: 1, borderRadius: "12px" }}
-        >
+        <Box backgroundColor="#F8F7F6" sx={{ ml: 1, borderRadius: "12px" }}>
           <InputBase
-            sx={{ width: "500px", height: "45px", ml: 2 }}
-            placeholder="brian@gmail.com"
+            sx={{
+              width: "500px",
+              height: "45px",
+              ml: 2,
+              backgroundColor: "white",
+              borderRadius: "10px",
+              padding: "16px",
+            }}
+            value="brian@gmail.com"
           />
         </Box>
       </Box>
       <Box
-        backgroundColor={colors.primary[400]}
+        backgroundColor="#F8F7F6"
         sx={{
           display: "flex",
           alignItems: "center",
@@ -77,20 +81,37 @@ function Setting() {
         p={3}
       >
         <Typography sx={{ ml: 2, mr: 5, fontSize: "16px" }}>Address</Typography>
-        <Box
-          backgroundColor={colors.grey[900]}
-          sx={{ ml: 3, borderRadius: "12px" }}
-        >
+        <Box backgroundColor="#F8F7F6" sx={{ ml: 3, borderRadius: "12px" }}>
           <InputBase
-            sx={{ width: "500px", height: "45px", ml: 2 }}
-            placeholder="Egypt"
+            sx={{
+              width: "500px",
+              height: "45px",
+              ml: 2,
+              backgroundColor: "white",
+              borderRadius: "10px",
+              padding: "16px",
+            }}
+            value="Egypt"
           />
         </Box>
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginLeft: "130px",
+          marginTop: "20px",
+        }}
+      >
         <Button
           variant="contained"
-          sx={{ width: "120px", fontSize: "16px", textTransform: "capitalize" }}
+          sx={{
+            width: "120px",
+            fontSize: "16px",
+            textTransform: "capitalize",
+            background: "#133A5E",
+            "&:hover": { backgroundColor: "#FF9934" },
+          }}
         >
           Update
         </Button>

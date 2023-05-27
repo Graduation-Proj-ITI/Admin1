@@ -1,0 +1,93 @@
+{
+  "posts": [
+    {
+      "title": "Interior design is the art, the interior designer is the artist.",
+      "img": "../src/assets/blog.png",
+      "description": "Contrary to popular belief, Lorem Ipsum indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment.  Contrary to popular belief, Lorem Ipsum indignation and dislike men who are so beguiled ",
+      "id": 1
+    },
+    {
+      "title": "Interior design is the art, the interior designer is the artist.",
+      "img": "../src/assets/blog.png",
+      "description": "Contrary to popular belief, Lorem Ipsum indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment.  Contrary to popular belief, Lorem Ipsum indignation and dislike men who are so beguiled ",
+      "id": 2
+    }
+  ],
+  "categories": [
+    {
+      "name": "sofa",
+      "id": 1,
+      "status": "in stock",
+      "amount": "16 pieces",
+      "img": "../src/assets/chair.png",
+      "description": ""
+    },
+    {
+      "name": "chair",
+      "id": 2,
+      "status": "in stock",
+      "amount": "75 pieces",
+      "img": "../src/assets/dec.png",
+      "description": ""
+    },
+    {
+      "name": "lamp",
+      "id": 3,
+      "status": "in stock",
+      "amount": "11 pieces",
+      "img": "../src/assets/table.png",
+      "description": ""
+    },
+    {
+      "name": "table",
+      "id": 4,
+      "status": "in stock",
+      "amount": "53 pieces",
+      "img": "../src/assets/sofa.png",
+      "description": ""
+    },
+    {
+      "name": "bed",
+      "id": 5,
+      "status": "in stock",
+      "amount": "58 pieces",
+      "img": "../src/assets/bed.png",
+      "description": ""
+    },
+    {
+      "name": "bed",
+      "id": 6,
+      "status": "in stock",
+      "amount": "58 pieces",
+      "img": "../src/assets/carpet.png",
+      "description": ""
+    },
+    {
+      "name": "bed",
+      "id": 7,
+      "status": "in stock",
+      "amount": "58 pieces",
+      "img": "../src/assets/disk.png",
+      "description": ""
+    },
+    {
+      "name": "bed",
+      "id": 8,
+      "status": "in stock",
+      "amount": "58 pieces",
+      "img": "../src/assets/storage.png",
+      "description": ""
+    },
+    {
+      "name": "bed",
+      "id": 9,
+      "status": "in stock",
+      "amount": "58 pieces",
+      "img": "../src/assets/lamp.png",
+      "description": ""
+    }
+  ],
+  "products": [],
+  "orders": [],
+  "users": []
+}

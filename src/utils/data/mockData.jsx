@@ -284,7 +284,7 @@ export const mockTransactions = [
     user: "aberdohnny",
     date: "2021-09-01",
     cost: "40%",
-  }
+  },
 ];
 
 export const mockBarData = [
@@ -369,34 +369,28 @@ export const mockBarData = [
 
 export const mockPieData = [
   {
-    id: "hack",
+    id: "1",
     label: "hack",
-    value: 239,
+    value: 250,
     color: "hsl(104, 70%, 50%)",
   },
   {
-    id: "make",
+    id: "2",
     label: "make",
-    value: 170,
+    value: 220,
     color: "hsl(162, 70%, 50%)",
   },
   {
-    id: "go",
+    id: "3",
     label: "go",
-    value: 322,
+    value: 200,
     color: "hsl(291, 70%, 50%)",
   },
   {
-    id: "lisp",
+    id: "4",
     label: "lisp",
-    value: 503,
+    value: 100,
     color: "hsl(229, 70%, 50%)",
-  },
-  {
-    id: "scala",
-    label: "scala",
-    value: 584,
-    color: "hsl(344, 70%, 50%)",
   },
 ];
 
