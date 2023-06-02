@@ -1,100 +1,83 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import useBlogs from "../../hooks/useBlogs";
 
-function EditPost({ postId, onUpdatePost, onCancel }) {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [img, setImg] = useState(null);
-  const [isSaving, setIsSaving] = useState(false);
+function EditPost() {
+  const { posts } = useBlogs();
+  const { id } = useParams();
 
-  let obj = {};
-
-  if (title) {
-    obj.title = title;
-  }
-
-  if (content) {
-    obj.content = content;
-  }
-
-  if (img) {
-    obj.img = img;
-  }
-
-  const formData = new FormData();
-
-  formData.append("title", obj.title);
-  formData.append("content", obj.content);
-  formData.append("img", obj.img);
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    // img: "",
+  });
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/posts/${postId}`)
-      .then((response) => {
-        setTitle(response.data.title);
-        setContent(response.data.content);
-        setImg(response.data.img);
-      })
-      .catch((error) => {
-        console.log(error);
+    async function fetchPostById() {
+      const { data } = await axios.get(`http://localhost:3000/posts/${id}`);
+      setForm({
+        title: data.title,
+        description: data.description,
+        // img: data.img,
       });
-  }, [postId]);
+    }
+    fetchPostById();
+  }, []);
 
-  const handleSubmit = (event, postId) => {
-    event.preventDefault();
-
-    setIsSaving(true);
-
-    axios
-      .patch(`http://localhost:3000/posts/${postId}`, formData)
-      .then((response) => {
-        onUpdatePost(response.data);
-        setIsSaving(true);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsSaving(false);
-      });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleImage = (e) => {
-    console.log(e.target.files);
-    setImg(e.target.files[0]);
+  const handleEditPost = () => {
+    {
+      posts.map((post) => (post.id === post.id ? { ...post } : post));
+    }
+  };
+
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    const { data } = await axios.put(`http://localhost:3000/posts/${id}`, {
+      title: form.title,
+      description: form.description,
+      // img: form.img,
+    });
+    handleEditPost(data);
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          id="title"
-          type="text"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-        />
-        <br />
-        <textarea
-          id="content"
-          type="text"
-          value={content}
-          onChange={(event) => setContent(event.target.value)}
-        ></textarea>
-        <br />
-        <input
-          id="img"
-          type={"file"}
-          // value={img}
-          onChange={handleImage}
-        />
-        <div>
-          <button type="submit" disabled={isSaving}>
-            Save
-          </button>
-          <button type="button" onClick={onCancel}>
-            Cancel
-          </button>
-        </div>
-      </form>
-    </div>
+    <>
+      <h1>{id}</h1>
+      <div>
+        <form onSubmit={handleEdit}>
+          <input
+            id="title"
+            type="text"
+            name="title"
+            value={form.title}
+            onChange={handleChange}
+          />
+          <br />
+          <textarea
+            id="description"
+            type="text"
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+          ></textarea>
+          <br />
+          {/* <input
+            id="img"
+            type={"file"}
+            value={form.img}
+            onChange={handleChange}
+          /> */}
+          <div>
+            <button>Save</button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

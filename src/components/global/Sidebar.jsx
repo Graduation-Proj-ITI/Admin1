@@ -1,17 +1,17 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import { Box, useTheme, Typography } from "@mui/material";
-import { tokens } from "../../utils/Theme";
+// import { tokens } from "../../utils/Theme";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 function Side() {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  // const theme = useTheme();
+  // const colors = tokens(theme.palette.mode);
 
   return (
     <Box>
       <Sidebar
-        backgroundColor={colors.primary[400]}
+        backgroundColor="#EEEEEE"
         style={{
           height: "100vh",
           bottom: 0,
@@ -22,16 +22,24 @@ function Side() {
       >
         <Menu
         // menuItemStyles={{
-        //   button: {
-        //     [`&.active`]: {
-        //       backgroundColor: "red",
-        //       color: "#b6c8d9",
-        //     },
+        //   [`&.active`]: {
+        //     backgroundColor: "red",
+        //     color: "#b6c8d9",
         //   },
         // }}
         >
           <Box>
-            <MenuItem component={<Link to="/" />}>Overview</MenuItem>
+            <MenuItem
+              component={<Link to="/" />}
+              style={{
+                [`&.hover`]: {
+                  backgroundColor: "red",
+                  color: "#b6c8d9",
+                },
+              }}
+            >
+              Overview
+            </MenuItem>
             <SubMenu label="Products">
               <MenuItem component={<Link to="/message" />}>
                 All products
@@ -48,10 +56,14 @@ function Side() {
               <MenuItem
                 component={<Link to="/topCategories" />}
                 style={{
-                  "&:active": {
+                  ["&.hover"]: {
                     backgroundColor: "#FF9934",
-                    color: "white", // Change this to the desired color
+                    color: "white", 
                   },
+                  // [`&.focus`]: {
+                  //   backgroundColor: "red",
+                  //   color: "#b6c8d9",
+                  // },
                 }}
               >
                 Top categories

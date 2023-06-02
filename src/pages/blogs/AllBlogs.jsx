@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   Box,
@@ -6,14 +6,14 @@ import {
   Typography,
   Pagination,
   Breadcrumbs,
-  Link,
 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
-import { useNavigate } from "react-router-dom";
+import useBlogs from "../../hooks/useBlogs";
 
 const AllBlogs = () => {
-  const [posts, setPosts] = useState([]);
+  const { posts, setPosts } = useBlogs();
   const [currentPage, setCurrentPage] = useState(1);
 
   const postsPerPage = 6;
@@ -28,29 +28,12 @@ const AllBlogs = () => {
     setCurrentPage(page);
   };
 
-  const navigate = useNavigate();
-
-  const edit = () => {
-    navigate("/editBlog");
-  };
-
   function handleDelete(postId) {
     axios.delete(`http://localhost:3000/posts/${postId}`).then((res) => {
       const updatedBlogPosts = posts.filter((post) => post.id !== postId);
       setPosts(updatedBlogPosts);
     });
   }
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/posts")
-      .then((response) => {
-        setPosts(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
 
   return (
     <Box margin="0 0 20px 20px">
@@ -75,7 +58,7 @@ const AllBlogs = () => {
       >
         All Blogs
       </Typography>
-      {posts.length == 0 ? <h1>There is no posts here</h1> : ""}
+      {posts.length == 0 ? <h1>There is no posts yet</h1> : ""}
 
       {paginatedPosts.map((post) => (
         <Box
@@ -105,10 +88,12 @@ const AllBlogs = () => {
               >
                 {post.title}
               </Typography>
-              <EditIcon
-                sx={{ color: "blue", margin: "0 10px" }}
-                onClick={() => edit()}
-              />
+              <Link to={`/blogs/${post.id}`}>
+                <EditIcon
+                  sx={{ color: "blue", margin: "0 10px" }}
+                  // onClick={() => edit(post.id)}
+                />
+              </Link>
               <DeleteForeverIcon
                 sx={{ color: "red", marginRight: "10px" }}
                 onClick={() => handleDelete(post.id)}
@@ -131,7 +116,7 @@ const AllBlogs = () => {
           sx={{
             "& .Mui-selected": {
               backgroundColor: "#133A5E",
-              color: "white", 
+              color: "white",
             },
           }}
         />

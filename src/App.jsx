@@ -31,7 +31,8 @@ function App() {
               <Route path="/" element={<Overview />} />
               <Route path="/allBlogs" element={<AllBlogs />} />
               <Route path="/addBlog" element={<AddBlog />} />
-              <Route path="/editBlog" element={<EditBlog />} />
+              <Route path="/blogs/:id" element={<EditBlog />} />
+              <Route path="/allBlogs" element={<AllBlogs />} />
               <Route path="/topCategories" element={<TopSelling />} />
               <Route path="/allCategories" element={<AllCategories />} />
               <Route path="/addCategory" element={<AddCategory />} />
