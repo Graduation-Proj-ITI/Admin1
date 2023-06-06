@@ -90,7 +90,7 @@ const AllBlogs = () => {
               </Typography>
               <Link to={`/blogs/${post.id}`}>
                 <EditIcon
-                  sx={{ color: "blue", margin: "0 10px" }}
+                  sx={{ color: "#336CDA", margin: "0 10px" }}
                   // onClick={() => edit(post.id)}
                 />
               </Link>

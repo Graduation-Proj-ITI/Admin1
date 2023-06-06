@@ -34,3 +34,8 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.ql-container {
+  height: fit-content;
+  min-height: 170px;
+}

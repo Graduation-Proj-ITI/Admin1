@@ -1,7 +1,12 @@
 import React from "react";
-import { Box, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  CardMedia,
+  IconButton,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { mockTransactions } from "../utils/data/mockData";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import LineChart from "../components/shapes/LineChart";
 import GeographyChart from "../components/shapes/GeographyChart";
 import PieChart from "../components/shapes/PieChart";
@@ -12,6 +17,7 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
+import { tokens } from "../utils/Theme";
 import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
@@ -32,6 +38,8 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 function Report() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const { categories } = useCategory();
 
   return (
@@ -146,19 +154,19 @@ function Report() {
           </TableContainer>
         </Box>
         <Box
-          gridColumn="span 5"
+          gridColumn="span 6"
           gridRow="span 2"
-          // backgroundColor={colors.primary[400]}
-          // overflow="auto"
+          backgroundColor={colors.primary[400]}
+          overflow="auto"
           width="20vw"
         >
           <Box
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            borderBottom={`1px solid #133A5E`}
+            // borderBottom={`1px solid #133A5E`}
             // colors={colors.grey[100]}
-            p="15px"
+            // p="15px"
           >
             <Typography
               // color={colors.grey[100]}
@@ -174,7 +182,7 @@ function Report() {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              borderBottom={`1px solid #133A5E`}
+              // borderBottom={`1px solid #133A5E`}
               p="15px"
             >
               <Box>
@@ -199,56 +207,79 @@ function Report() {
         {/* ROW 1 */}
 
         <Box
-          gridColumn="span 4"
+          gridColumn="span 3"
           gridRow="span 2"
-          // backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[400]}
           //   overflow="auto"
+          // backgroundColor="#F2F2F2"
+          // marginLeft="100px"
+          height="220px"
           minWidth="25vw"
-          height="400px"
-          marginLeft="120px"
+          display="flex"
+          alignItems="center"
+          flexDirection="column"
         >
           <Box
             display="flex"
-            justifyContent="space-between"
             alignItems="center"
-            borderBottom={`1px solid #133A5E`}
+            flexDirection="column"
+            marginBottom="20px"
+            // borderBottom={`1px solid #133A5E`}
             // colors={colors.grey[100]}
-            p="15px"
+            // p="15px"
           >
-            <Typography
-              // color={colors.grey[100]}
-              variant="h5"
-              fontWeight="600"
-            >
+            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
               Categories
+            </Typography>
+            <Typography
+              color={colors.grey[100]}
+              variant="body"
+              fontWeight="400"
+            >
+              Most loved categories
             </Typography>
           </Box>
           {/* <Box sx={{ marginBottom: "40px" }}> */}
           <PieChart />
           {/* </Box> */}
         </Box>
+
         <Box
-          gridColumn="span 6"
+          gridColumn="span 4"
           gridRow="span 2"
-          // backgroundColor={colors.primary[400]}
-          //   overflow="auto"
+          backgroundColor={colors.primary[400]}
+          // overflow="auto"
           minWidth="25vw"
-          height="400px"
+          display="flex"
+          alignItems="center"
+          flexDirection="column"
+          height="220px"
+          // backgroundColor="#F2F2F2"
         >
           <Box
             display="flex"
-            justifyContent="space-between"
             alignItems="center"
-            borderBottom={`1px solid #133A5E`}
+            flexDirection="column"
+            marginBottom="20px"
+            // justifyContent="space-between"
+            // borderBottom={`1px solid #133A5E`}
             // colors={colors.grey[100]}
-            p="15px"
+            // p="15px"
           >
             <Typography
-              // color={colors.grey[100]}
+              color={colors.grey[100]}
               variant="h5"
               fontWeight="600"
             >
               Product brands
+            </Typography>
+
+            <Typography
+              color={colors.grey[100]}
+              variant="body"
+              fontWeight="400"
+            >
+              percentage of product selling
             </Typography>
           </Box>
           <PieChart />
@@ -256,10 +287,10 @@ function Report() {
 
         {/* ROW 2 */}
         <Box
-          gridColumn="span 7"
+          gridColumn="span 6"
           gridRow="span 2"
-          marginTop="100px"
-          // backgroundColor={colors.primary[400]}
+          // marginTop="100px"
+          backgroundColor={colors.primary[400]}
           maxWidth="60vw"
         >
           <Box
@@ -283,13 +314,13 @@ function Report() {
                 // color={colors.#133A5EAccent[500]}
               ></Typography>
             </Box>
-            <Box>
+            {/* <Box>
               <IconButton>
                 <DownloadOutlinedIcon
                   sx={{ fontSize: "26px", color: "#133A5E" }}
                 />
               </IconButton>
-            </Box>
+            </Box> */}
           </Box>
           <Box height="250px" m="-20px 0 0 0">
             <LineChart isDashboard={true} />
@@ -299,9 +330,9 @@ function Report() {
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          // backgroundColor={colors.primary[400]}
+          backgroundColor={colors.primary[400]}
           padding="30px"
-          marginTop="100px"
+          // marginTop="100px"
           maxWidth="20vw"
         >
           <Typography

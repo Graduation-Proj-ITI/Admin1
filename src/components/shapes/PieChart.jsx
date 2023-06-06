@@ -39,10 +39,10 @@ const PieChart = () => {
           },
         }}
         margin={{
-          top: 40,
-          right: 80,
-          bottom: 80,
-          left: 80,
+          top: 20,
+          // right: 80,
+          // bottom: 150,
+          // left: 80,
         }}
         innerRadius={0.5}
         padAngle={0.7}
@@ -64,15 +64,15 @@ const PieChart = () => {
           modifiers: [["darker", 2]],
         }}
         defs={[
-          {
-            id: "dots",
-            type: "patternDots",
-            background: "inherit",
-            color: "rgba(255, 255, 255, 0.3)",
-            size: 4,
-            padding: 1,
-            stagger: true,
-          },
+          // {
+          //   id: "dots",
+          //   type: "patternDots",
+          //   background: "inherit",
+          //   color: "rgba(255, 255, 255, 0.3)",
+          //   size: 2,
+          //   padding: 1,
+          //   stagger: true,
+          // },
           {
             id: "lines",
             type: "patternLines",
@@ -85,8 +85,8 @@ const PieChart = () => {
         ]}
         legends={[
           {
-            anchor: "bottom",
-            direction: "row",
+            anchor: "right",
+            direction: "column",
             justify: false,
             translateX: 0,
             translateY: 56,
@@ -96,7 +96,7 @@ const PieChart = () => {
             itemTextColor: "#999",
             itemDirection: "left-to-right",
             itemOpacity: 1,
-            symbolSize: 18,
+            symbolSize: 10,
             symbolShape: "circle",
             effects: [
               {

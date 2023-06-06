@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Typography, Box, Button, Breadcrumbs, Link } from "@mui/material";
+import { Typography, Box, Button, Breadcrumbs } from "@mui/material";
+import { Link } from "react-router-dom";
 // import ReactQuill from "react-quill";
 // import "react-quill/dist/quill.snow.css";
 
@@ -50,16 +51,17 @@ const AddProduct = () => {
     >
       <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
         <Link sx={{ textDecoration: "none" }}>Home</Link>
-        <Link sx={{ textDecoration: "none" }}>Products</Link>
-        <Link
+        <Link to="/allProducts">
+          <Typography sx={{ textDecoration: "none" }}>Products</Typography>
+        </Link>
+        <Typography
           // underline="hover"
           sx={{ textDecoration: "none" }}
           color="#FF9934"
-          // href="/material-ui/react-breadcrumbs/"
           aria-current="page"
         >
           Add product
-        </Link>
+        </Typography>
       </Breadcrumbs>
       <Typography
         component="h1"
@@ -325,7 +327,7 @@ const AddProduct = () => {
               p: 2,
               borderRadius: "0 0 10px 10px",
               width: "800px",
-              height: "90px",
+              height: "fit-content",
             }}
           >
             <Box display="flex" mr={3.2}>
@@ -337,14 +339,20 @@ const AddProduct = () => {
               </Typography>
               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: "fit-content",
+              }}
+            >
               <Field
                 as="textarea"
                 id="description"
                 name="description"
                 style={{
                   width: "580px",
-                  height: "50px",
+                  minHeight: "130px",
                   border: "none",
                   borderRadius: "10px",
                   outline: "1px solid lightgrey",
@@ -353,16 +361,18 @@ const AddProduct = () => {
               />
               {/* <ReactQuill
                 theme="snow"
-                name={description}
-                id={description}
-                onChange={setDescription}
+                // name={description}
+                // id={description}
+                // onChange={setDescription}
+                id="description"
+                name="description"
                 style={{
                   width: "600px",
-                  height: "260px",
                   borderRadius: "10px",
                   backgroundColor: "white",
                   padding: "16px",
                   marginBottom: "10px",
+                  type: "text",
                 }}
               /> */}
               <ErrorMessage

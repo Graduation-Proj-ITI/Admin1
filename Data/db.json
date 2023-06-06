@@ -85,9 +85,149 @@
       "amount": "58 pieces",
       "img": "../src/assets/lamp.png",
       "description": ""
+    },
+    {
+      "name": "chair",
+      "description": "title",
+      "img": "C:\\fakepath\\11.PNG",
+      "date": "title",
+      "id": 10
     }
   ],
-  "products": [],
+  "products": [
+    {
+      "productName": "drawer",
+      "price": 32000,
+      "category": 12000,
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "../src/assets/chair.png",
+      "status": "In stock",
+      "id": 1
+    },
+    {
+      "productName": "drawer",
+      "price": 32000,
+      "category": 12000,
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "../src/assets/dec.png",
+      "status": "In stock",
+      "id": 2
+    },
+    {
+      "productName": "Chair",
+      "price": 20000,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "../src/assets/table.png",
+      "status": "Out of stock",
+      "id": 3
+    },
+    {
+      "productName": "Lamb",
+      "price": 20000,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "../src/assets/table.png",
+      "status": "Out of stock",
+      "id": 4
+    },
+    {
+      "productName": "Lamb",
+      "price": 20000,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "C:\\fakepath\\Add.PNG",
+      "status": "Out of stock",
+      "id": 5
+    },
+    {
+      "productName": "Lamb",
+      "price": 15000,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "C:\\fakepath\\Add.PNG",
+      "status": "Out of stock",
+      "id": 6
+    },
+    {
+      "productName": "Sofa",
+      "price": 15000,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "C:\\fakepath\\Add.PNG",
+      "status": "In stock",
+      "id": 7
+    },
+    {
+      "productName": "Sofa",
+      "price": 15000,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "C:\\fakepath\\Add.PNG",
+      "status": "In stock",
+      "id": 8
+    },
+    {
+      "productName": "Sofa",
+      "price": 15000,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "C:\\fakepath\\Add.PNG",
+      "status": "Out of stock",
+      "id": 9
+    },
+    {
+      "productName": "Sofa",
+      "price": 12200,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "C:\\fakepath\\Add.PNG",
+      "status": "Out of stock",
+      "id": 10
+    },
+    {
+      "productName": "Sofa",
+      "price": 12200,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "C:\\fakepath\\Add.PNG",
+      "status": "Out of stock",
+      "id": 11
+    },
+    {
+      "productName": "Sofa",
+      "price": 12200,
+      "category": "sad",
+      "amount": "fsdf",
+      "description": "sxx",
+      "date": "sxx",
+      "img": "C:\\fakepath\\Add.PNG",
+      "status": "Out of stock",
+      "id": 12
+    }
+  ],
   "orders": [],
   "users": []
 }

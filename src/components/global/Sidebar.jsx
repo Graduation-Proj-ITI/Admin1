@@ -1,19 +1,20 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import { Box, useTheme, Typography } from "@mui/material";
-// import { tokens } from "../../utils/Theme";
+import { tokens } from "../../utils/Theme";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 function Side() {
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   return (
-    <Box>
+    <Box height="100vh">
       <Sidebar
-        backgroundColor="#EEEEEE"
+        // backgroundColor="#EEEEEE"
+        backgroundColor={colors.primary[400]}
         style={{
-          height: "100vh",
+          height: "100%",
           bottom: 0,
           display: "flex",
           flexDirection: "column",
@@ -41,8 +42,11 @@ function Side() {
               Overview
             </MenuItem>
             <SubMenu label="Products">
-              <MenuItem component={<Link to="/message" />}>
+              <MenuItem component={<Link to="/allProducts" />}>
                 All products
+              </MenuItem>
+              <MenuItem component={<Link to="/topProducts" />}>
+                Top products
               </MenuItem>
               <MenuItem component={<Link to="/addProduct" />}>
                 Add product
@@ -53,12 +57,15 @@ function Side() {
               <MenuItem> Add Order </MenuItem>
             </SubMenu>
             <SubMenu label="Categories">
+              <MenuItem component={<Link to="/allCategories" />}>
+                All categories
+              </MenuItem>
               <MenuItem
                 component={<Link to="/topCategories" />}
                 style={{
                   ["&.hover"]: {
                     backgroundColor: "#FF9934",
-                    color: "white", 
+                    color: "white",
                   },
                   // [`&.focus`]: {
                   //   backgroundColor: "red",
@@ -67,9 +74,6 @@ function Side() {
                 }}
               >
                 Top categories
-              </MenuItem>
-              <MenuItem component={<Link to="/allCategories" />}>
-                All categories
               </MenuItem>
               <MenuItem component={<Link to="/addCategory" />}>
                 Add category

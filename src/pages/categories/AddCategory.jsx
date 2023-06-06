@@ -196,7 +196,7 @@ const AddCategory = () => {
               p: 2,
               borderRadius: "0 0 10px 10px",
               width: "800px",
-              height: "90px",
+              height: "fit-content",
             }}
           >
             <Box display="flex" mr={3.2}>
@@ -208,14 +208,20 @@ const AddCategory = () => {
               </Typography>
               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: "fit-content",
+              }}
+            >
               <Field
                 as="textarea"
                 id="description"
                 name="description"
                 style={{
                   width: "580px",
-                  height: "50px",
+                  minHeight: "130px",
                   border: "none",
                   borderRadius: "10px",
                   outline: "1px solid lightgrey",
@@ -227,13 +233,15 @@ const AddCategory = () => {
                 name={description}
                 id={description}
                 onChange={setDescription}
+                // id="description"
+                // name="description"
                 style={{
                   width: "600px",
-                  height: "260px",
                   borderRadius: "10px",
                   backgroundColor: "white",
                   padding: "16px",
                   marginBottom: "10px",
+                  type: "text",
                 }}
               /> */}
               <ErrorMessage

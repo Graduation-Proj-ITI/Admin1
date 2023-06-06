@@ -26,7 +26,6 @@ const AddBlog = () => {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       await axios.post("http://localhost:3000/posts", values);
-
       resetForm();
     } catch (error) {
       console.error(error);
@@ -44,7 +43,7 @@ const AddBlog = () => {
     >
       <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
         <Link sx={{ textDecoration: "none" }}>Home</Link>
-        <Link sx={{ textDecoration: "none" }}>Categories</Link>
+        <Link sx={{ textDecoration: "none" }}>Blogs</Link>
         <Link
           // underline="hover"
           sx={{ textDecoration: "none" }}
@@ -52,14 +51,14 @@ const AddBlog = () => {
           // href="/material-ui/react-breadcrumbs/"
           aria-current="page"
         >
-          Add category
+          Add blog
         </Link>
       </Breadcrumbs>
       <Typography
         component="h1"
         sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
       >
-        Add category
+        Add blog
       </Typography>
       <Formik
         initialValues={initialValues}
@@ -196,7 +195,7 @@ const AddBlog = () => {
               p: 2,
               borderRadius: "0 0 10px 10px",
               width: "800px",
-              height: "90px",
+              height: "fit-content",
             }}
           >
             <Box display="flex" mr={3.2}>
@@ -208,14 +207,20 @@ const AddBlog = () => {
               </Typography>
               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: "fit-content",
+              }}
+            >
               <Field
                 as="textarea"
                 id="description"
                 name="description"
                 style={{
                   width: "580px",
-                  height: "50px",
+                  minHeight: "130px",
                   border: "none",
                   borderRadius: "10px",
                   outline: "1px solid lightgrey",
@@ -227,13 +232,15 @@ const AddBlog = () => {
                 name={description}
                 id={description}
                 onChange={setDescription}
+                // id="description"
+                // name="description"
                 style={{
                   width: "600px",
-                  height: "260px",
                   borderRadius: "10px",
                   backgroundColor: "white",
                   padding: "16px",
                   marginBottom: "10px",
+                  type: "text",
                 }}
               /> */}
               <ErrorMessage

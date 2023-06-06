@@ -13,7 +13,7 @@ import CardMedia from "@mui/material/CardMedia";
 import useCategory from "../../hooks/useCategory";
 import StatBox from "../../components/shapes/StatBox";
 
-function TopSelling() {
+function TopCategories() {
   const { categories, topCategories } = useCategory();
   // const [items, setItems] = useState([]);
 
@@ -94,4 +94,4 @@ function TopSelling() {
   );
 }
 
-export default TopSelling;
+export default TopCategories;
