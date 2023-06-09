@@ -70,7 +70,6 @@ function TopProducts() {
         sx={{
           display: "flex",
           //   justifyContent: "center",
-          marginLeft: "10px",
           //   gap: "25px",
         }}
       >

@@ -7,7 +7,7 @@ function Setting() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        marginLeft: "50px",
+        marginLeft: "20px",
       }}
     >
       <Typography

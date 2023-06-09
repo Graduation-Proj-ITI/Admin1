@@ -85,13 +85,6 @@
       "amount": "58 pieces",
       "img": "../src/assets/lamp.png",
       "description": ""
-    },
-    {
-      "name": "chair",
-      "description": "title",
-      "img": "C:\\fakepath\\11.PNG",
-      "date": "title",
-      "id": 10
     }
   ],
   "products": [
@@ -228,6 +221,255 @@
       "id": 12
     }
   ],
-  "orders": [],
-  "users": []
+  "orders": [
+    {
+      "user": "drawer",
+      "product": 32000,
+      "quantity": 12000,
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "In stock",
+      "id": 1
+    },
+    {
+      "user": "drawer",
+      "product": 32000,
+      "quantity": 12000,
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "In stock",
+      "id": 2
+    },
+    {
+      "user": "Chair",
+      "product": 20000,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "Out of stock",
+      "id": 3
+    },
+    {
+      "user": "Lamb",
+      "product": 20000,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "Out of stock",
+      "id": 4
+    },
+    {
+      "user": "Lamb",
+      "product": 20000,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "Out of stock",
+      "id": 5
+    },
+    {
+      "user": "Lamb",
+      "product": 15000,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "Out of stock",
+      "id": 6
+    },
+    {
+      "user": "Sofa",
+      "product": 15000,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "In stock",
+      "id": 7
+    },
+    {
+      "user": "Sofa",
+      "product": 15000,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "In stock",
+      "id": 8
+    },
+    {
+      "user": "Sofa",
+      "product": 15000,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "Out of stock",
+      "id": 9
+    },
+    {
+      "user": "Sofa",
+      "product": 12200,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "Out of stock",
+      "id": 10
+    },
+    {
+      "user": "Sofa",
+      "product": 12200,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "Out of stock",
+      "id": 11
+    },
+    {
+      "user": "Sofa",
+      "product": 12200,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "Out of stock",
+      "id": 12
+    },
+    {
+      "user": "Sofa",
+      "product": 12200,
+      "quantity": "sad",
+      "total": "fsdf",
+      "date": "sxx",
+      "status": "Out of stock",
+      "id": 13
+    }
+  ],
+  "users": [
+    {
+      "img": "../src/assets/user.png",
+      "user": "drawer",
+      "email": 32000,
+      "location": 12000,
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 1
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "drawer",
+      "email": 32000,
+      "location": 12000,
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 2
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Chair",
+      "email": 20000,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 3
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Lamb",
+      "email": 20000,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "inActive",
+      "id": 4
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Lamb",
+      "email": 20000,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 5
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Lamb",
+      "email": 15000,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 6
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Sofa",
+      "email": 15000,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 7
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Sofa",
+      "email": 15000,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 8
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Sofa",
+      "email": 15000,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "inActive",
+      "id": 9
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Sofa",
+      "email": 12200,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 10
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Sofa",
+      "email": 12200,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 11
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Sofa",
+      "email": 12200,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 12
+    },
+    {
+      "img": "../src/assets/user.png",
+      "user": "Sofa",
+      "email": 12200,
+      "location": "sad",
+      "total": "fsdf",
+      "phone": "01234567890",
+      "status": "Active",
+      "id": 13
+    }
+  ]
 }

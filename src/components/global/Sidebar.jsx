@@ -52,10 +52,7 @@ function Side() {
                 Add product
               </MenuItem>
             </SubMenu>
-            <SubMenu label="Orders">
-              <MenuItem component={<Link to="/message" />}>All orders</MenuItem>
-              <MenuItem> Add Order </MenuItem>
-            </SubMenu>
+            <MenuItem component={<Link to="/allOrders" />}>Orders</MenuItem>
             <SubMenu label="Categories">
               <MenuItem component={<Link to="/allCategories" />}>
                 All categories
@@ -79,7 +76,8 @@ function Side() {
                 Add category
               </MenuItem>
             </SubMenu>
-            <MenuItem component={<Link to="/setting" />}> Users</MenuItem>
+            <MenuItem component={<Link to="/users" />}> Users</MenuItem>
+
             <MenuItem component={<Link to="/message" />}> Messages</MenuItem>
             <SubMenu label="Blogs">
               <MenuItem component={<Link to="/allBlogs" />}>All blogs</MenuItem>

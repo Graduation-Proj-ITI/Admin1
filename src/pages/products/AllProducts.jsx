@@ -41,7 +41,7 @@ export default function AllProducts() {
   }
 
   return (
-    <Box sx={{ marginLeft: "30px" }}>
+    <Box sx={{ marginLeft: "20px" }}>
       <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
         <Typography>Home</Typography>
         <Typography>Products</Typography>

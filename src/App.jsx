@@ -19,6 +19,8 @@ import AllProducts from "./pages/products/AllProducts";
 import EditProduct from "./pages/products/EditProduct";
 import TopCategories from "./pages/categories/TopCategories";
 import TopProducts from "./pages/products/TopProducts";
+import AllOrders from "./pages/orders/AllOrders";
+import AllUsers from "./pages/users/AllUsers";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -47,6 +49,10 @@ function App() {
               <Route path="/addProduct" element={<AddProduct />} />
               <Route path="/products/:id" element={<EditProduct />} />
               <Route path="/topProducts" element={<TopProducts />} />
+
+              <Route path="/allOrders" element={<AllOrders />} />
+
+              <Route path="/users" element={<AllUsers />} />
 
               <Route path="/report" element={<Report />} />
 

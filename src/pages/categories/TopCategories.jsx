@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Breadcrumbs, Link } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -35,14 +35,18 @@ function TopCategories() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        marginTop: "20px",
+        margin: "20px 0 0 20px",
       }}
     >
+      <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
+        <Link sx={{ textDecoration: "none" }}>Home</Link>
+        <Link sx={{ textDecoration: "none" }}>Categories</Link>
+      </Breadcrumbs>
       <Typography
         variant="h1"
         fontSize="24px"
         fontWeight="600"
-        margin="0 0 40px 20px"
+        margin="0 0 40px 0"
       >
         Top Selling Categories
       </Typography>
@@ -89,7 +93,7 @@ function TopCategories() {
           </Table>
         </TableContainer> */}
       </Box>
-        <StatBox />
+      <StatBox />
     </Box>
   );
 }

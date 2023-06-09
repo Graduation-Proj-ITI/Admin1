@@ -46,7 +46,7 @@ const AddProduct = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        marginLeft: "50px",
+        marginLeft: "20px",
       }}
     >
       <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>

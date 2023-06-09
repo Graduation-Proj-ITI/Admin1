@@ -68,7 +68,7 @@ const AllBlogs = () => {
             alignItems: "center",
             gap: "20px",
             width: "800px",
-            margin: "0 auto",
+            // margin: "0 auto",
             marginBottom: "40px",
             border: "1px solid lightgrey",
           }}

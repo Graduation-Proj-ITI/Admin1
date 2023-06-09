@@ -60,7 +60,7 @@ function Report() {
           overflow="hidden"
           width="35vw"
           height="300px"
-          marginLeft="50px"
+          // marginLeft="50px"
         >
           <Box
             display="flex"
