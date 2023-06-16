@@ -39,3 +39,16 @@ body,
   height: fit-content;
   min-height: 170px;
 }
+
+.active {
+  background-color: #ff9934;
+  color: white !important;
+}
+
+.active:hover {
+  background-color: #ff9934 !important;
+}
+
+.mainActive {
+  background-color: #133a5e !important;
+}

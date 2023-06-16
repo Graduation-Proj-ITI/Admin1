@@ -34,7 +34,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-function Overview() {
+function Dashboard() {
   const { categories } = useCategory();
 
   return (
@@ -281,4 +281,4 @@ function Overview() {
   );
 }
 
-export default Overview;
+export default Dashboard;

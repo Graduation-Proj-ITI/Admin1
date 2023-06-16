@@ -16,6 +16,12 @@ function TopProducts() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const items = [
+    { id: 1, name: "MayChair", price: "$254", time: "daily" },
+    { id: 2, name: "RamSofa", price: "$175", time: "daily" },
+    { id: 3, name: "RamZein", price: "$884", time: "daily" },
+  ];
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -130,9 +136,11 @@ function TopProducts() {
                         <TableCell align="center">
                           {product.productName}
                         </TableCell>
+                        <TableCell align="center">
+                          {product.productName}
+                        </TableCell>
                         <TableCell align="center">{product.status}</TableCell>
                         <TableCell align="center">{product.amount}</TableCell>
-                        <TableCell align="center">{product.price}</TableCell>
                       </TableRow>
                     );
                   })}
@@ -149,29 +157,87 @@ function TopProducts() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-        <TableContainer component={Paper} sx={{ width: "30%" }}>
-          <Table aria-label="spanning table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="left" colSpan={4}>
-                  <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                    Product Brands
+        <Box
+          sx={{
+            backgroundColor: "#F2F2F2",
+            height: "380px",
+            width: "360px",
+          }}
+        >
+          <Box sx={{ padding: "20px" }}>
+            <Typography variant="h5" fontWeight="550">
+              Categories
+            </Typography>
+            <Typography variant="h6" fontWeight="520">
+              Most loved categories
+            </Typography>
+          </Box>
+
+          <Box>
+            {items.map((item) => (
+              <Box
+                key={item.id}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  borderBottom: "1px solid #5F6D7E",
+                  padding: "8px",
+                }}
+              >
+                <Typography
+                  variant="h5"
+                  sx={{ marginLeft: "10px", fontWeight: 550 }}
+                >
+                  {item.name}
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: "15px",
+                    marginRight: "10px",
+                  }}
+                >
+                  <Typography variant="h5" sx={{ fontWeight: 550 }}>
+                    {item.price}
                   </Typography>
-                  <Typography>percentage of product selling</Typography>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {/* <TableRow> */}
-              {/* <PieChart /> */}
-              {/* </TableRow> */}
-              <TableRow>
-                <TableCell colSpan={2}>Total</TableCell>
-                <TableCell align="right">hi</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+                  <Typography
+                    sx={{
+                      backgroundColor: "#5F6D7E",
+                      color: "white",
+                      borderRadius: "4px",
+                      padding: "0 12px",
+                    }}
+                  >
+                    {item.time}
+                  </Typography>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              height: "80px",
+              alignItems: "center",
+              border: "1px solid lightgray",
+              backgroundColor: "#F8F9FB",
+            }}
+          >
+            <Typography
+              variant="h5"
+              sx={{ marginLeft: "15px", fontWeight: 550 }}
+            >
+              Total of all counterparty balances
+            </Typography>
+            <Typography
+              variant="h5"
+              sx={{ marginRight: "20px", fontWeight: 550 }}
+            >
+              $1400
+            </Typography>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );

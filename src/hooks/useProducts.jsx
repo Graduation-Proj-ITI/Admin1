@@ -14,7 +14,7 @@ const useProducts = () => {
         const data = response.data;
         const allProducts = data;
         const products = data.slice(0, 4);
-        const topProducts = data.slice(0, 4);
+        const topProducts = data.slice(0, 3);
         setProducts(products);
         setTopProducts(topProducts);
         setAllProducts(allProducts);

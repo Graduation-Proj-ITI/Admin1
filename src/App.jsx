@@ -6,7 +6,7 @@ import { ColorModeContext, useMode } from "./utils/Theme";
 import Topbar from "./components/global/Topbar";
 import BottomAppBar from "./pages/Message";
 import Setting from "./pages/Setting";
-import Overview from "./pages/Overview";
+import Dashboard from "./pages/Dashboard";
 import Report from "./pages/Report";
 import AllCategories from "./pages/categories/AllCategories";
 import AllBlogs from "./pages/blogs/AllBlogs";
@@ -34,7 +34,7 @@ function App() {
           <Box className="content">
             <Topbar />
             <Routes>
-              <Route path="/" element={<Overview />} />
+              <Route path="/" element={<Dashboard />} />
 
               <Route path="/allBlogs" element={<AllBlogs />} />
               <Route path="/addBlog" element={<AddBlog />} />
