@@ -9,9 +9,9 @@ const useProducts = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/products")
+      .get("https://furnival.onrender.com/products")
       .then((response) => {
-        const data = response.data;
+        const data = response.data.data;
         const allProducts = data;
         const products = data.slice(0, 4);
         const topProducts = data.slice(0, 3);

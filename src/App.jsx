@@ -1,7 +1,7 @@
 import React from "react";
 import Side from "./components/global/Sidebar";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { ColorModeContext, useMode } from "./utils/Theme";
 import Topbar from "./components/global/Topbar";
 import BottomAppBar from "./pages/Message";
@@ -21,20 +21,30 @@ import TopCategories from "./pages/categories/TopCategories";
 import TopProducts from "./pages/products/TopProducts";
 import AllOrders from "./pages/orders/AllOrders";
 import AllUsers from "./pages/users/AllUsers";
+import Login from "./pages/Login";
+import UserDetails from "./pages/users/userDetails";
 
 function App() {
   const [theme, colorMode] = useMode();
+  const navigate = useNavigate();
+
+  const goToLogin = () => {
+    navigate("/");
+  };
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box className="app">
-          <Side />
+          {localStorage.getItem("token") ? <Side /> : ""}
+          {/* localStorage.setItem("token", data.token); */}
           <Box className="content">
-            <Topbar />
+            {localStorage.getItem("token") ? <Topbar /> : ""}
+            {/* <Topbar /> */}
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
 
               <Route path="/allBlogs" element={<AllBlogs />} />
               <Route path="/addBlog" element={<AddBlog />} />
@@ -53,6 +63,7 @@ function App() {
               <Route path="/allOrders" element={<AllOrders />} />
 
               <Route path="/users" element={<AllUsers />} />
+              <Route path="/users/:id" element={<UserDetails />} />
 
               <Route path="/report" element={<Report />} />
 
@@ -62,8 +73,6 @@ function App() {
             </Routes>
           </Box>
         </Box>
-        {/* <main className="content"> */}
-        {/* </main> */}
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

@@ -6,11 +6,12 @@ const useUsers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users")
+      .get("https://furnival.onrender.com/users", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then((response) => {
-        const data = response.data;
-        const users = data;
-        setUsers(users);
+        const data = response.data.data;
+        setUsers(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

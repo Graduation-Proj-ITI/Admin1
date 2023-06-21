@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Grid, CardMedia, Pagination } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Grid,
+  CardMedia,
+  Pagination,
+  Button,
+} from "@mui/material";
 import axios from "axios";
-import { Link, Breadcrumbs } from "@mui/material";
+import { Breadcrumbs } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function AllCategories() {
   const [categories, setCategories] = useState([]);
@@ -21,9 +29,9 @@ function AllCategories() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/categories")
+      .get("https://furnival.onrender.com/categories")
       .then((response) => {
-        setCategories(response.data);
+        setCategories(response.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -45,20 +53,42 @@ function AllCategories() {
           All categories
         </Link>
       </Breadcrumbs>
-      <Typography
-        variant="h1"
-        fontSize="24px"
-        fontWeight="600"
-        marginBottom="20px"
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
       >
-        All Categories
-      </Typography>
+        <Typography
+          variant="h1"
+          fontSize="24px"
+          fontWeight="600"
+          marginBottom="20px"
+        >
+          All Categories
+        </Typography>
+        <Link to="/addCategory">
+          <Button
+            variant="contained"
+            sx={{
+              margin: "0 375px 15px 0",
+              backgroundColor: "#133A5E",
+              "&:hover": {
+                backgroundColor: "#FF9934",
+              },
+            }}
+          >
+            Add Category
+          </Button>
+        </Link>
+      </Box>
       <Grid container margin="0 auto" width="1000px">
         {paginatedPosts.map((item) => (
-          <Grid key={item.id} sx={{ xs: 4 }} marginBottom="60px">
+          <Grid key={item._id} sx={{ xs: 4 }} marginBottom="60px">
             <CardMedia
               component="img"
-              src={item.img}
+              src={item.image}
               sx={{
                 width: "300px",
                 height: "200px",

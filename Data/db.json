@@ -241,6 +241,16 @@
       "img": "C:\\fakepath\\Add.PNG",
       "status": "Out of stock",
       "id": 14
+    },
+    {
+      "name": "nx",
+      "category": "zx",
+      "price": "zxzx",
+      "amount": "zx",
+      "description": "zxx",
+      "date": "xz",
+      "image": "C:\\fakepath\\logoo.png",
+      "id": 15
     }
   ],
   "orders": [

@@ -3,11 +3,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { Typography, Box, Button, Breadcrumbs, Link } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 // import ReactQuill from "react-quill";
 // import "react-quill/dist/quill.snow.css";
 
 const AddCategory = () => {
   // let [description, setDescription] = useState("");
+  // const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -25,9 +27,13 @@ const AddCategory = () => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      await axios.post("http://localhost:3000/categories", values);
+      await axios.post("https://furnival.onrender.com/categories", values, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
 
       resetForm();
+      // navigate("/allCategories")
+      
     } catch (error) {
       console.error(error);
     }

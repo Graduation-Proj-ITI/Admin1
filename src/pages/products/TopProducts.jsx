@@ -79,11 +79,11 @@ function TopProducts() {
           //   gap: "25px",
         }}
       >
-        {topProducts.map((product) => (
-          <Box key={product.id}>
+        {topProducts.map((product, index) => (
+          <Box key={product._id}>
             <CardMedia
               component="img"
-              src={product.img}
+              src={product.images[index]}
               sx={{
                 width: "280px",
                 height: "200px",
@@ -132,15 +132,13 @@ function TopProducts() {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((product) => {
                     return (
-                      <TableRow hover tabIndex={-1} key={product.id}>
+                      <TableRow hover tabIndex={-1} key={product._id}>
+                        <TableCell align="center">{product.title}</TableCell>
+                        {/* <TableCell align="center">{product.title}</TableCell> */}
                         <TableCell align="center">
-                          {product.productName}
+                          {product.amount === 0 ? "Sold" : "In stock"}
                         </TableCell>
-                        <TableCell align="center">
-                          {product.productName}
-                        </TableCell>
-                        <TableCell align="center">{product.status}</TableCell>
-                        <TableCell align="center">{product.amount}</TableCell>
+                        <TableCell align="center">{product.quantity}</TableCell>
                       </TableRow>
                     );
                   })}

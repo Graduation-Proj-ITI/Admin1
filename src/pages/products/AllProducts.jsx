@@ -32,12 +32,14 @@ export default function AllProducts() {
   };
 
   function handleDelete(productId) {
-    axios.delete(`http://localhost:3000/products/${productId}`).then((res) => {
-      const updatedBlogPosts = allProducts.filter(
-        (product) => product.id !== productId
-      );
-      setAllProducts(updatedBlogPosts);
-    });
+    axios
+      .delete(`https://furnival.onrender.com/products/${productId}`)
+      .then((res) => {
+        const updatedBlogPosts = allProducts.filter(
+          (product) => product.id !== productId
+        );
+        setAllProducts(updatedBlogPosts);
+      });
   }
 
   return (
@@ -66,7 +68,7 @@ export default function AllProducts() {
           <Button
             variant="contained"
             sx={{
-              margin: "0 250px 15px 0",
+              margin: "0 375px 15px 0",
               backgroundColor: "#133A5E",
               "&:hover": {
                 backgroundColor: "#FF9934",
@@ -77,7 +79,7 @@ export default function AllProducts() {
           </Button>
         </Link>
       </Box>
-      <Paper sx={{ width: "80%", overflow: "hidden", marginBottom: "30px" }}>
+      <Paper sx={{ width: "70%", overflow: "hidden", marginBottom: "30px" }}>
         <TableContainer sx={{ maxHeight: 640, overflow: "hidden" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -94,21 +96,22 @@ export default function AllProducts() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((product) => {
                   return (
-                    <TableRow hover tabIndex={-1} key={product.id}>
-                      <TableCell align="center">
-                        {product.productName}
-                      </TableCell>
+                    <TableRow hover tabIndex={-1} key={product._id}>
+                      <TableCell align="center">{product.title}</TableCell>
                       <TableCell align="center">{product.price}</TableCell>
-                      <TableCell align="center">{product.status}</TableCell>
+                      {/* <TableCell align="center">{product.status}</TableCell> */}
                       <TableCell align="center">
-                        <Link to={`/products/${product.id}`}>
+                        {product.amount === 0 ? "Sold" : "In stock"}
+                      </TableCell>
+                      <TableCell align="center">
+                        <Link to={`/products/${product._id}`}>
                           <EditIcon sx={{ color: "#336CDA" }} />
                         </Link>
                       </TableCell>
                       <TableCell align="center">
                         <DeleteForeverIcon
                           sx={{ color: "#DA2121" }}
-                          onClick={() => handleDelete(product.id)}
+                          onClick={() => handleDelete(product._id)}
                         />
                       </TableCell>
                     </TableRow>

@@ -114,13 +114,13 @@ function Dashboard() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {categories.map((category) => (
+              {categories.map((category, index) => (
                 <TableRow
-                  key={category.id}
+                  key={category._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {category.id}
+                    #{index + 1}
                   </TableCell>
                   <TableCell
                     align="center"

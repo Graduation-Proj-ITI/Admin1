@@ -68,10 +68,10 @@ function TopCategories() {
       </Typography>
       <Box sx={{ display: "flex", gap: "25px" }}>
         {topCategories.map((category) => (
-          <Box key={category.id}>
+          <Box key={category._id}>
             <CardMedia
               component="img"
-              src={category.img}
+              src={category.image}
               sx={{
                 width: "280px",
                 height: "200px",
@@ -118,7 +118,7 @@ function TopCategories() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((product) => {
                       return (
-                        <TableRow hover tabIndex={-1} key={product.id}>
+                        <TableRow hover tabIndex={-1} key={product._id}>
                           <TableCell align="center">{product.name}</TableCell>
                           <TableCell align="center">{product.status}</TableCell>
                           <TableCell align="center">{product.amount}</TableCell>
@@ -178,7 +178,7 @@ function TopCategories() {
                 Most loved categories
               </Typography>
             </Box>
-            
+
             <Box>
               {items.map((item) => (
                 <Box

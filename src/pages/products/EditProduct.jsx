@@ -21,7 +21,7 @@ function EditPost() {
 
   useEffect(() => {
     async function fetchPostById() {
-      const { data } = await axios.get(`http://localhost:3000/products/${id}`);
+      const { data } = await axios.get(`https://furnival.onrender.com/products/${id}`);
       setForm({
         productName: data.productName,
         description: data.description,
@@ -41,14 +41,14 @@ function EditPost() {
   const handleEditPost = () => {
     {
       products.map((product) =>
-        product.id === product.id ? { ...product } : product
+        product._id === product.id ? { ...product } : product
       );
     }
   };
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    const { data } = await axios.put(`http://localhost:3000/products/${id}`, {
+    const { data } = await axios.put(`https://furnival.onrender.com/products/${id}`, {
       productName: form.productName,
       description: form.description,
       price: form.price,

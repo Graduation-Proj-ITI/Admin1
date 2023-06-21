@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
 import { Box, Button, Typography, Breadcrumbs, Link  } from "@mui/material";
 import { Formik, Form, Field } from "formik";
@@ -8,8 +8,6 @@ import { Formik, Form, Field } from "formik";
 function EditPost() {
   const { posts } = useBlogs();
   const { id } = useParams();
-
-  const navigate = useNavigate(); 
 
   const [form, setForm] = useState({
     title: "",

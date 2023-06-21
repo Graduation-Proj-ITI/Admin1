@@ -6,11 +6,13 @@ const useOrders = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/orders")
+      .get("https://furnival.onrender.com/orders", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then((response) => {
-        const data = response.data;
-        const allOrders = data;
-        setAllOrders(allOrders);
+        const data = response.data.data;
+        // console.log(data);
+        setAllOrders(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

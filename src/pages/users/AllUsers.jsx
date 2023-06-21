@@ -14,7 +14,6 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -37,13 +36,16 @@ function AllUsers() {
     setPage(0);
   };
 
-  function handleDelete(productId) {
-    axios.delete(`http://localhost:3000/users/${productId}`).then((res) => {
-      const updatedBlogPosts = users.filter(
-        (product) => product.id !== productId
-      );
-      setUsers(updatedBlogPosts);
-    });
+  // console.log(users);
+  function handleDelete(userId) {
+    axios
+      .delete(`https://furnival.onrender.com/users/${userId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => {
+        const updatedBlogPosts = users.filter((user) => user._id !== userId);
+        setUsers(updatedBlogPosts);
+      });
   }
   return (
     <Box>
@@ -170,7 +172,7 @@ function AllUsers() {
             />
           </Box>
         </Box>
-        <Box
+        {/* <Box
           gridColumn="span 3"
           marginRight="30px"
           gridRow="span 2"
@@ -190,7 +192,7 @@ function AllUsers() {
           <Box height="200px">
             <GeographyChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box> */}
         <Box
           sx={{ gridColumn: "span 12", gridRow: "span 5", marginTop: "40px" }}
         >
@@ -215,35 +217,40 @@ function AllUsers() {
                 </TableHead>
                 <TableBody>
                   {users
+
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((product) => {
+                    .map((user, index) => {
                       return (
-                        <TableRow hover tabIndex={-1} key={product.id}>
-                          <TableCell align="center">#{product.id}</TableCell>
+                        <TableRow hover tabIndex={-1} key={user._id}>
+                          <TableCell align="center">#{index + 1}</TableCell>
                           <TableCell align="center">
                             <CardMedia
                               component="img"
-                              src={product.img}
+                              src={user.img}
                               sx={{ width: "40px" }}
                             />
                           </TableCell>
-                          <TableCell align="center">{product.user}</TableCell>
-                          <TableCell align="center">{product.email}</TableCell>
+                          <TableCell align="center">{user.name}</TableCell>
+                          <TableCell align="center">{user.email}</TableCell>
                           <TableCell align="center">
-                            {product.location}
+                            {/* {user.addresses[postalCode]} */}
                           </TableCell>
-                          <TableCell align="center">{product.phone}</TableCell>
-                          <TableCell align="center">{product.status}</TableCell>
+                          <TableCell align="center">{user.phone}</TableCell>
+                          <TableCell align="center">{user.status}</TableCell>
                           <TableCell>
-                            <RemoveRedEyeIcon sx={{ color: "#8FC83D" }} />
-                            <Link to={`/products/${product.id}`}>
+                            <Link to={`/users/${user._id}`}>
+                              <RemoveRedEyeIcon
+                                sx={{ color: "#8FC83D", marginRight: "25px" }}
+                              />
+                            </Link>
+                            {/* <Link to={`/users/${user.id}`}>
                               <EditIcon
                                 sx={{ color: "#336CDA", margin: "0 15px" }}
                               />
-                            </Link>
+                            </Link> */}
                             <DeleteForeverIcon
                               sx={{ color: "#DA2121" }}
-                              onClick={() => handleDelete(product.id)}
+                              onClick={() => handleDelete(user._id)}
                             />
                           </TableCell>
                         </TableRow>

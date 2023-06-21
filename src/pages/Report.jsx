@@ -266,11 +266,7 @@ function Report() {
             // colors={colors.grey[100]}
             // p="15px"
           >
-            <Typography
-              color={colors.grey[100]}
-              variant="h5"
-              fontWeight="600"
-            >
+            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
               Product brands
             </Typography>
 

@@ -2,17 +2,28 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Typography, Box, Button, Breadcrumbs } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Breadcrumbs,
+  FormControl,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { Link } from "react-router-dom";
+import useCategory from "../../hooks/useCategory";
 // import ReactQuill from "react-quill";
 // import "react-quill/dist/quill.snow.css";
 
 const AddProduct = () => {
   // let [description, setDescription] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
+  const { allCategories } = useCategory();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    category: Yup.string().required("Category is required"),
+    selectedValue: Yup.string().required("Category is required"),
     price: Yup.string().required("Price is required"),
     amount: Yup.string().required("Amount is required"),
     description: Yup.string().required("Description is required"),
@@ -22,7 +33,7 @@ const AddProduct = () => {
 
   const initialValues = {
     name: "",
-    category: "",
+    selectedValue: "",
     price: "",
     amount: "",
     description: "",
@@ -30,14 +41,28 @@ const AddProduct = () => {
     image: "",
   };
 
+  console.log(allCategories);
+  console.log(selectedValue);
+
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      await axios.post("http://localhost:3000/products", values);
-
+      console.log(values);
+      const { data } = await axios.post(
+        "https://furnival.onrender.com/products",
+        values,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      console.log(data);
       resetForm();
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
   };
 
   return (
@@ -138,7 +163,7 @@ const AddProduct = () => {
               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <Field
+              {/* <Field
                 type="text"
                 id="category"
                 name="category"
@@ -150,7 +175,38 @@ const AddProduct = () => {
                   outline: "1px solid lightgrey",
                   padding: "16px",
                 }}
-              />
+              /> */}
+              <FormControl
+                sx={{
+                  // m: 1,
+                  width: "580px",
+                  height: "50px",
+                  // border: "none",
+                  borderRadius: "10px",
+                  background: "white",
+                  // outline: "1px solid lightgrey",
+                }}
+              >
+                <Select
+                  // value={selectedValue}
+                  onChange={handleChange}
+                  id="selectedValue"
+                  name="selectedValue"
+                  value={selectedValue}
+                  inputProps={{ "aria-label": "Without label" }}
+                  sx={{
+                    borderRadius: "10px",
+                    height: "50px",
+                    "&:hover": { outline: "none" },
+                  }}
+                >
+                  {allCategories.map((category) => (
+                    <MenuItem value={category._id} key={category._id}>
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               <ErrorMessage
                 name="category"
                 component="div"

@@ -37,14 +37,15 @@ function AllOrders() {
     setPage(0);
   };
 
-  function handleDelete(productId) {
-    axios.delete(`http://localhost:3000/orders/${productId}`).then((res) => {
-      const updatedBlogPosts = allOrders.filter(
-        (product) => product.id !== productId
-      );
-      setAllOrders(updatedBlogPosts);
-    });
-  }
+  // function handleDelete(productId) {
+  //   axios.delete(`http://localhost:3000/orders/${productId}`).then((res) => {
+  //     const updatedBlogPosts = allOrders.filter(
+  //       (product) => product.id !== productId
+  //     );
+  //     setAllOrders(updatedBlogPosts);
+  //   });
+  // }
+
   return (
     <Box>
       <Breadcrumbs aria-label="breadcrumb" sx={{ margin: "0 0 0 20px" }}>
@@ -215,10 +216,10 @@ function AllOrders() {
                 <TableBody>
                   {allOrders
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((product) => {
+                    .map((product, index) => {
                       return (
-                        <TableRow hover tabIndex={-1} key={product.id}>
-                          <TableCell align="center">#{product.id}</TableCell>
+                        <TableRow hover tabIndex={-1} key={product._id}>
+                          <TableCell align="center">#{index + 1}</TableCell>
                           <TableCell align="center">{product.user}</TableCell>
                           <TableCell align="center">
                             {product.product}
@@ -226,7 +227,9 @@ function AllOrders() {
                           <TableCell align="center">
                             {product.quantity}
                           </TableCell>
-                          <TableCell align="center">{product.total}</TableCell>
+                          <TableCell align="center">
+                            {product.totalOrderPrice}
+                          </TableCell>
                           <TableCell align="center">{product.date}</TableCell>
                           <TableCell align="center">{product.status}</TableCell>
                           <TableCell sx={{ display: "flex", gap: "20px" }}>
@@ -234,10 +237,10 @@ function AllOrders() {
                             <Link to={`/products/${product.id}`}>
                               <EditIcon sx={{ color: "#336CDA" }} />
                             </Link>
-                            <DeleteForeverIcon
+                            {/* <DeleteForeverIcon
                               sx={{ color: "#DA2121" }}
                               onClick={() => handleDelete(product.id)}
-                            />
+                            /> */}
                           </TableCell>
                         </TableRow>
                       );
