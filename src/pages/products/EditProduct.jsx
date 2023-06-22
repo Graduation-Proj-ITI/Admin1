@@ -48,7 +48,7 @@ function EditPost() {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    const { data } = await axios.put(`https://furnival.onrender.com/products/${id}`, {
+    const { data } = await axios.put(`https://furnival.onrender.com/products/${product._id}`, {
       productName: form.productName,
       description: form.description,
       price: form.price,

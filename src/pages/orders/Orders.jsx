@@ -13,7 +13,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -22,8 +21,8 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-function AllOrders() {
-  const { allOrders, setAllOrders } = useOrders();
+function Orders() {
+  const { Orders, setOrders } = useOrders();
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -39,10 +38,10 @@ function AllOrders() {
 
   // function handleDelete(productId) {
   //   axios.delete(`http://localhost:3000/orders/${productId}`).then((res) => {
-  //     const updatedBlogPosts = allOrders.filter(
+  //     const updatedBlogPosts = Orders.filter(
   //       (product) => product.id !== productId
   //     );
-  //     setAllOrders(updatedBlogPosts);
+  //     setOrders(updatedBlogPosts);
   //   });
   // }
 
@@ -214,44 +213,49 @@ function AllOrders() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allOrders
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((product, index) => {
-                      return (
-                        <TableRow hover tabIndex={-1} key={product._id}>
-                          <TableCell align="center">#{index + 1}</TableCell>
-                          <TableCell align="center">{product.user}</TableCell>
-                          <TableCell align="center">
-                            {product.product}
-                          </TableCell>
-                          <TableCell align="center">
-                            {product.quantity}
-                          </TableCell>
-                          <TableCell align="center">
-                            {product.totalOrderPrice}
-                          </TableCell>
-                          <TableCell align="center">{product.date}</TableCell>
-                          <TableCell align="center">{product.status}</TableCell>
-                          <TableCell sx={{ display: "flex", gap: "20px" }}>
+                  {Orders.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  ).map((order, index) => {
+                    return (
+                      <TableRow hover tabIndex={-1} key={order._id}>
+                        <TableCell align="center">#{index + 1}</TableCell>
+                        <TableCell align="center">{order.user}</TableCell>
+                        <TableCell align="center">{order.product}</TableCell>
+                        <TableCell align="center">{order.quantity}</TableCell>
+                        <TableCell align="center">
+                          {order.totalOrderPrice}
+                        </TableCell>
+                        <TableCell align="center">{order.date}</TableCell>
+                        <TableCell align="center">{order.status}</TableCell>
+                        <TableCell sx={{ display: "flex", gap: "20px" }}>
+                          <Link to={`/orders/${order._id}`}>
                             <RemoveRedEyeIcon sx={{ color: "#8FC83D" }} />
-                            <Link to={`/products/${product.id}`}>
+                          </Link>
+
+                          {/* {order.status === "pending" ? (
+                            <Link to={`/orders/${order._id}`}>
                               <EditIcon sx={{ color: "#336CDA" }} />
                             </Link>
-                            {/* <DeleteForeverIcon
+                          ) : (
+                            ""
+                          )} */}
+
+                          {/* <DeleteForeverIcon
                               sx={{ color: "#DA2121" }}
                               onClick={() => handleDelete(product.id)}
                             /> */}
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
             </TableContainer>
             <TablePagination
               rowsPerPageOptions={[5, 10]}
               component="div"
-              count={allOrders.length}
+              count={Orders.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
@@ -264,4 +268,4 @@ function AllOrders() {
   );
 }
 
-export default AllOrders;
+export default Orders;

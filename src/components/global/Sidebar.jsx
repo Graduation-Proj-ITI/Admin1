@@ -1,6 +1,6 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Box, useTheme, Typography, CardMedia } from "@mui/material";
+import { Box, useTheme, Typography, CardMedia, Button } from "@mui/material";
 import { tokens } from "../../utils/Theme";
 import LogoutIcon from "@mui/icons-material/Logout";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
@@ -33,7 +33,7 @@ function Side() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          width: "270px",
+          width: "260px",
           borderRight: "none",
         }}
       >
@@ -106,7 +106,7 @@ function Side() {
               </MenuItem> */}
               </SubMenu>
 
-              <MenuItem component={<Link to="/allOrders" />}>
+              <MenuItem component={<Link to="/orders" />}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
                 >
@@ -182,7 +182,7 @@ function Side() {
           </Box>
         </Menu>
 
-        <Box
+        <Button
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -209,7 +209,7 @@ function Side() {
           >
             Logout
           </Typography>
-        </Box>
+        </Button>
       </Sidebar>
     </Box>
   );

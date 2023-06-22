@@ -8,6 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import CardMedia from "@mui/material/CardMedia";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Button, Typography } from "@mui/material";
@@ -31,15 +32,38 @@ export default function AllProducts() {
     setPage(0);
   };
 
+  // function handleDelete(productId) {
+  //   axios
+  //     .delete(`https://furnival.onrender.com/products/${productId}`)
+  //     .then((res) => {
+  //       const updatedBlogPosts = allProducts.filter(
+  //         (product) => product._id !== productId
+  //       );
+  //       setAllProducts(updatedBlogPosts);
+  //     });
+  // }
+
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+
   function handleDelete(productId) {
-    axios
-      .delete(`https://furnival.onrender.com/products/${productId}`)
-      .then((res) => {
-        const updatedBlogPosts = allProducts.filter(
-          (product) => product.id !== productId
-        );
-        setAllProducts(updatedBlogPosts);
-      });
+    try {
+      axios
+        .delete(`https://furnival.onrender.com/products/${productId}`, config)
+        .then((res) => {
+          const updatedBlogPosts = allProducts.filter(
+            (product) => product._id !== productId
+          );
+          setAllProducts(updatedBlogPosts);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -85,6 +109,7 @@ export default function AllProducts() {
             <TableHead>
               <TableRow>
                 <TableCell align="center">Product</TableCell>
+                <TableCell align="center">Image</TableCell>
                 <TableCell align="center">Price</TableCell>
                 <TableCell align="center">Status</TableCell>
                 <TableCell align="center">Edit</TableCell>
@@ -94,10 +119,22 @@ export default function AllProducts() {
             <TableBody>
               {allProducts
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((product) => {
+                .map((product, index) => {
                   return (
                     <TableRow hover tabIndex={-1} key={product._id}>
                       <TableCell align="center">{product.title}</TableCell>
+                      <TableCell>
+                        <CardMedia
+                          component="img"
+                          align="center"
+                          src={product.images[index]}
+                          sx={{
+                            width: "62px",
+                            height: "62px",
+                            borderRadius: "10px",
+                          }}
+                        />
+                      </TableCell>
                       <TableCell align="center">{product.price}</TableCell>
                       {/* <TableCell align="center">{product.status}</TableCell> */}
                       <TableCell align="center">
@@ -111,6 +148,7 @@ export default function AllProducts() {
                       <TableCell align="center">
                         <DeleteForeverIcon
                           sx={{ color: "#DA2121" }}
+                          // onClick={() => DeletePost(product._id)}
                           onClick={() => handleDelete(product._id)}
                         />
                       </TableCell>

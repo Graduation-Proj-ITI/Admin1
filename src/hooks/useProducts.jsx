@@ -30,6 +30,7 @@ const useProducts = () => {
     setProducts,
     allProducts,
     // allCategories,
+    setAllProducts,
   };
 };
 

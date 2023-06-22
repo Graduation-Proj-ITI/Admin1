@@ -31,6 +31,14 @@ const AddProduct = () => {
     image: Yup.string().required("Image is required"),
   });
 
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  };
+
   const initialValues = {
     name: "",
     selectedValue: "",
@@ -41,18 +49,18 @@ const AddProduct = () => {
     image: "",
   };
 
-  console.log(allCategories);
-  console.log(selectedValue);
+  // console.log(allCategories);
+  // console.log(selectedValue);
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      console.log(values);
-      const { data } = await axios.post(
+      // console.log(initialValues);
+      console.log("ello");
+      // console.log(values);
+      const data = await axios.post(
         "https://furnival.onrender.com/products",
         values,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
+        config
       );
       console.log(data);
       resetForm();
@@ -97,7 +105,9 @@ const AddProduct = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={(values) => {
+          console.log(values);
+        }}
       >
         <Form>
           <Box
@@ -163,19 +173,6 @@ const AddProduct = () => {
               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
-              {/* <Field
-                type="text"
-                id="category"
-                name="category"
-                style={{
-                  width: "580px",
-                  height: "50px",
-                  border: "none",
-                  borderRadius: "10px",
-                  outline: "1px solid lightgrey",
-                  padding: "16px",
-                }}
-              /> */}
               <FormControl
                 sx={{
                   // m: 1,
@@ -415,22 +412,6 @@ const AddProduct = () => {
                   padding: "16px",
                 }}
               />
-              {/* <ReactQuill
-                theme="snow"
-                // name={description}
-                // id={description}
-                // onChange={setDescription}
-                id="description"
-                name="description"
-                style={{
-                  width: "600px",
-                  borderRadius: "10px",
-                  backgroundColor: "white",
-                  padding: "16px",
-                  marginBottom: "10px",
-                  type: "text",
-                }}
-              /> */}
               <ErrorMessage
                 name="description"
                 component="div"

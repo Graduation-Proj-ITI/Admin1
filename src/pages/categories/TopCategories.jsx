@@ -17,11 +17,6 @@ function TopCategories() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const items = [
-    { id: 1, name: "kitchen", price: "$254", time: "daily" },
-    { id: 2, name: "Bed", price: "$175", time: "daily" },
-    { id: 3, name: "Sofa", price: "$884", time: "daily" },
-  ];
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -163,7 +158,7 @@ function TopCategories() {
               </TableBody>
             </Table>
           </TableContainer> */}
-          <Box
+          {/* <Box
             sx={{
               backgroundColor: "#F2F2F2",
               height: "380px",
@@ -243,7 +238,7 @@ function TopCategories() {
                 $1400
               </Typography>
             </Box>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
     </Box>

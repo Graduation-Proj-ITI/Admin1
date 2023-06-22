@@ -16,11 +16,11 @@ function TopProducts() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const items = [
-    { id: 1, name: "MayChair", price: "$254", time: "daily" },
-    { id: 2, name: "RamSofa", price: "$175", time: "daily" },
-    { id: 3, name: "RamZein", price: "$884", time: "daily" },
-  ];
+  // const items = [
+  //   { id: 1, name: "MayChair", price: "$254", time: "daily" },
+  //   { id: 2, name: "RamSofa", price: "$175", time: "daily" },
+  //   { id: 3, name: "RamZein", price: "$884", time: "daily" },
+  // ];
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -33,9 +33,9 @@ function TopProducts() {
 
   const TAX_RATE = 0.07;
 
-  function ccyFormat(num) {
-    return `${num.toFixed(2)}`;
-  }
+  // function ccyFormat(num) {
+  //   return `${num.toFixed(2)}`;
+  // }
 
   function priceRow(qty, unit) {
     return qty * unit;
@@ -155,7 +155,7 @@ function TopProducts() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-        <Box
+        {/* <Box
           sx={{
             backgroundColor: "#F2F2F2",
             height: "380px",
@@ -235,7 +235,7 @@ function TopProducts() {
               $1400
             </Typography>
           </Box>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

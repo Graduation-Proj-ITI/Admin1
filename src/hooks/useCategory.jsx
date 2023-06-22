@@ -11,7 +11,7 @@ const useCategory = () => {
       .get("https://furnival.onrender.com/categories")
       .then((response) => {
         const allCategories = response.data.data;
-        // console.log(data);
+        // console.log(response);
         // const allCategories = data;
         const categories = allCategories.slice(0, 4);
         // const categories = allCategories;

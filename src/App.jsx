@@ -1,7 +1,7 @@
 import React from "react";
 import Side from "./components/global/Sidebar";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ColorModeContext, useMode } from "./utils/Theme";
 import Topbar from "./components/global/Topbar";
 import BottomAppBar from "./pages/Message";
@@ -19,18 +19,15 @@ import AllProducts from "./pages/products/AllProducts";
 import EditProduct from "./pages/products/EditProduct";
 import TopCategories from "./pages/categories/TopCategories";
 import TopProducts from "./pages/products/TopProducts";
-import AllOrders from "./pages/orders/AllOrders";
+import Orders from "./pages/orders/Orders";
 import AllUsers from "./pages/users/AllUsers";
 import Login from "./pages/Login";
 import UserDetails from "./pages/users/userDetails";
+import EditOrder from "./pages/orders/EditOrder";
+import OrderDetails from "./pages/orders/OrderDetails";
 
 function App() {
   const [theme, colorMode] = useMode();
-  const navigate = useNavigate();
-
-  const goToLogin = () => {
-    navigate("/");
-  };
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -60,10 +57,12 @@ function App() {
               <Route path="/products/:id" element={<EditProduct />} />
               <Route path="/topProducts" element={<TopProducts />} />
 
-              <Route path="/allOrders" element={<AllOrders />} />
+              <Route path="/orders" element={<Orders />} />
+              {/* <Route path="/orders/:orderId" element={<EditOrder />} /> */}
+              <Route path="/orders/:orderDetailsId" element={<OrderDetails />} />
 
               <Route path="/users" element={<AllUsers />} />
-              <Route path="/users/:id" element={<UserDetails />} />
+              <Route path="/users/:userId" element={<UserDetails />} />
 
               <Route path="/report" element={<Report />} />
 

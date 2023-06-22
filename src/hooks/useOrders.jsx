@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useOrders = () => {
-  const [allOrders, setAllOrders] = useState([]);
+  const [Orders, setOrders] = useState([]);
 
   useEffect(() => {
     axios
@@ -12,7 +12,7 @@ const useOrders = () => {
       .then((response) => {
         const data = response.data.data;
         // console.log(data);
-        setAllOrders(data);
+        setOrders(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -20,8 +20,8 @@ const useOrders = () => {
   }, []);
 
   return {
-    allOrders,
-    setAllOrders,
+    Orders,
+    setOrders,
   };
 };
 
