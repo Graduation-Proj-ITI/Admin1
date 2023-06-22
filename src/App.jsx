@@ -54,12 +54,15 @@ function App() {
 
               <Route path="/allProducts" element={<AllProducts />} />
               <Route path="/addProduct" element={<AddProduct />} />
-              <Route path="/products/:id" element={<EditProduct />} />
+              <Route path="/products/:productId" element={<EditProduct />} />
               <Route path="/topProducts" element={<TopProducts />} />
 
               <Route path="/orders" element={<Orders />} />
               {/* <Route path="/orders/:orderId" element={<EditOrder />} /> */}
-              <Route path="/orders/:orderDetailsId" element={<OrderDetails />} />
+              <Route
+                path="/orders/:orderDetailsId"
+                element={<OrderDetails />}
+              />
 
               <Route path="/users" element={<AllUsers />} />
               <Route path="/users/:userId" element={<UserDetails />} />

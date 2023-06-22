@@ -14,22 +14,22 @@ import {
 import { Link } from "react-router-dom";
 import useCategory from "../../hooks/useCategory";
 // import ReactQuill from "react-quill";
-// import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.snow.css";
 
 const AddProduct = () => {
   // let [description, setDescription] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
   const { allCategories } = useCategory();
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
-    selectedValue: Yup.string().required("Category is required"),
-    price: Yup.string().required("Price is required"),
-    amount: Yup.string().required("Amount is required"),
-    description: Yup.string().required("Description is required"),
-    date: Yup.string().required("Date is required"),
-    image: Yup.string().required("Image is required"),
-  });
+  // const validationSchema = Yup.object().shape({
+  //   name: Yup.string().required("Name is required"),
+  //   selectedValue: Yup.string().required("Category is required"),
+  //   price: Yup.string().required("Price is required"),
+  //   quantity: Yup.string().required("quantity is required"),
+  //   description: Yup.string().required("Description is required"),
+  //   date: Yup.string().required("Date is required"),
+  //   imageCover: Yup.string().required("imageCover is required"),
+  // });
 
   const token = localStorage.getItem("token");
   const config = {
@@ -40,13 +40,13 @@ const AddProduct = () => {
   };
 
   const initialValues = {
-    name: "",
+    title: "",
     selectedValue: "",
     price: "",
-    amount: "",
+    quantity: "",
     description: "",
-    date: "",
-    image: "",
+    // date: "",
+    imageCover: "",
   };
 
   // console.log(allCategories);
@@ -57,12 +57,12 @@ const AddProduct = () => {
       // console.log(initialValues);
       console.log("ello");
       // console.log(values);
-      const data = await axios.post(
+      await axios.post(
         "https://furnival.onrender.com/products",
         values,
         config
       );
-      console.log(data);
+      // console.log(data);
       resetForm();
     } catch (error) {
       console.error(error);
@@ -71,7 +71,10 @@ const AddProduct = () => {
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    console.log(event);
   };
+
+  console.log(selectedValue);
 
   return (
     <Box
@@ -104,10 +107,8 @@ const AddProduct = () => {
       </Typography>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        // validationSchema={validationSchema}
+        onSubmit={handleSubmit}
       >
         <Form>
           <Box
@@ -125,17 +126,17 @@ const AddProduct = () => {
             <Box display="flex" mr={9.5}>
               <Typography
                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="name"
+                htmlFor="title"
               >
-                Name
+                title
               </Typography>
               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Field
                 type="text"
-                id="name"
-                name="name"
+                id="title"
+                name="title"
                 style={{
                   width: "580px",
                   height: "50px",
@@ -146,7 +147,7 @@ const AddProduct = () => {
                 }}
               />
               <ErrorMessage
-                name="name"
+                name="title"
                 component="div"
                 style={{ color: "red", fontSize: "16px" }}
               />
@@ -185,9 +186,8 @@ const AddProduct = () => {
                 }}
               >
                 <Select
-                  // value={selectedValue}
                   onChange={handleChange}
-                  id="selectedValue"
+                  id={selectedValue}
                   name="selectedValue"
                   value={selectedValue}
                   inputProps={{ "aria-label": "Without label" }}
@@ -252,6 +252,47 @@ const AddProduct = () => {
               />
             </Box>
           </Box>
+          {/* <Box
+            sx={{
+              backgroundColor: "#F8F7F6",
+              display: "flex",
+              alignItems: "center",
+              p: 2,
+              width: "800px",
+              height: "90px",
+              marginBottom: "20px",
+            }}
+          >
+            <Box display="flex" mr={10.2}>
+              <Typography
+                sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                htmlFor="price"
+              >
+                category
+              </Typography>
+              <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
+            </Box>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Field
+                type="text"
+                id="selectedValue"
+                name="selectedValue"
+                style={{
+                  width: "580px",
+                  height: "50px",
+                  border: "none",
+                  borderRadius: "10px",
+                  outline: "1px solid lightgrey",
+                  padding: "16px",
+                }}
+              />
+              <ErrorMessage
+                name="selectedValue"
+                component="div"
+                style={{ color: "red", fontSize: "16px" }}
+              />
+            </Box>
+          </Box> */}
           <Box
             sx={{
               backgroundColor: "#F8F7F6",
@@ -266,17 +307,17 @@ const AddProduct = () => {
             <Box display="flex" mr={7.2}>
               <Typography
                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="amount"
+                htmlFor="quantity"
               >
-                Amount
+                quantity
               </Typography>
               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Field
                 type="text"
-                id="amount"
-                name="amount"
+                id="quantity"
+                name="quantity"
                 style={{
                   width: "580px",
                   height: "50px",
@@ -287,13 +328,13 @@ const AddProduct = () => {
                 }}
               />
               <ErrorMessage
-                name="amount"
+                name="quantity"
                 component="div"
                 style={{ color: "red", fontSize: "16px" }}
               />
             </Box>
           </Box>
-          <Box
+          {/* <Box
             sx={{
               backgroundColor: "#F8F7F6",
               display: "flex",
@@ -332,7 +373,7 @@ const AddProduct = () => {
                 style={{ color: "red", fontSize: "16px" }}
               />
             </Box>
-          </Box>
+          </Box> */}
           <Box
             sx={{
               backgroundColor: "#F8F7F6",
@@ -346,17 +387,17 @@ const AddProduct = () => {
             <Box display="flex" mr={8}>
               <Typography
                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="image"
+                htmlFor="imageCover"
               >
-                Image
+                imageCover
               </Typography>
               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Field
                 type="file"
-                id="image"
-                name="image"
+                id="imageCover"
+                name="imageCover"
                 style={{
                   width: "580px",
                   height: "50px",
@@ -367,7 +408,7 @@ const AddProduct = () => {
                 }}
               />
               <ErrorMessage
-                name="image"
+                name="imageCover"
                 component="div"
                 style={{ color: "red", fontSize: "16px" }}
               />
@@ -448,3 +489,467 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+
+// function AddProduct() {
+//   const [selectedValue, setSelectedValue] = useState("");
+//   const { allCategories } = useCategory();
+
+//   // const validationSchema = Yup.object().shape({
+//   //   name: Yup.string().required("Name is required"),
+//   //   selectedValue: Yup.string().required("Category is required"),
+//   //   price: Yup.string().required("Price is required"),
+//   //   quantity: Yup.string().required("quantity is required"),
+//   //   description: Yup.string().required("Description is required"),
+//   //   date: Yup.string().required("Date is required"),
+//   //   imageCover: Yup.string().required("imageCover is required"),
+//   // });
+
+//   //   const token = localStorage.getItem("token");
+//   //   const config = {
+//   //     headers: {
+//   //       Authorization: `Bearer ${token}`,
+//   //       "Content-Type": "multipart/form-data",
+//   //     },
+//   //   };
+
+//   const initialValues = {
+//     name: "",
+//     selectedValue: "",
+//     // price: "",
+//     // quantity: "",
+//     // description: "",
+//     // date: "",
+//     // imageCover: "",
+//   };
+
+//   //   // console.log(allCategories);
+//   //   // console.log(selectedValue);
+
+//   //   const handleSubmit = async (values, { resetForm }) => {
+//   //     try {
+//   //       // console.log(initialValues);
+//   //       console.log("ello");
+//   //       // console.log(values);
+//   //       await axios.post(
+//   //         "https://furnival.onrender.com/products",
+//   //         values,
+//   //         config
+//   //       );
+//   //       console.log(data);
+//   //       resetForm();
+//   //     } catch (error) {
+//   //       console.error(error);
+//   //     }
+//   //   };
+
+//   const handleChange = (event) => {
+//     setSelectedValue(event.target.value);
+//   };
+
+//   const handleSubmit = async (values, { resetForm }) => {
+//     // try {
+//     //   // console.log(initialValues);
+//     //   console.log("ello");
+//     //   // console.log(values);
+//     //   await axios.post(
+//     //     "https://furnival.onrender.com/products",
+//     //     values,
+//     //     config
+//     //   );
+//     //   console.log(data);
+//     //   resetForm();
+//     // } catch (error) {
+//     //   console.error(error);
+//     // }
+//     console.log("Hello");
+//   };
+
+//   // const handleChange = (event) => {
+//   //   setSelectedValue(event.target.value);
+//   // };
+
+//   return (
+//     <Box>
+//       <Formik
+//         initialValues={initialValues}
+//         validationSchema={validationSchema}
+//         onSubmit={handleSubmit}
+//       >
+//         <Form>
+//           <Box
+//             sx={{
+//               backgroundColor: "#F8F7F6",
+//               display: "flex",
+//               alignItems: "center",
+//               p: 2,
+//               borderRadius: "10px 10px 0 0",
+//               width: "800px",
+//               height: "90px",
+//               marginBottom: "20px",
+//             }}
+//           >
+//             <Box display="flex" mr={9.5}>
+//               <Typography
+//                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+//                 htmlFor="name"
+//               >
+//                 Name
+//               </Typography>
+//               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
+//             </Box>
+//             <Box sx={{ display: "flex", flexDirection: "column" }}>
+//               <Field
+//                 type="text"
+//                 id="name"
+//                 name="name"
+//                 style={{
+//                   width: "580px",
+//                   height: "50px",
+//                   border: "none",
+//                   borderRadius: "10px",
+//                   outline: "1px solid lightgrey",
+//                   padding: "16px",
+//                 }}
+//               />
+//               <ErrorMessage
+//                 name="name"
+//                 component="div"
+//                 style={{ color: "red", fontSize: "16px" }}
+//               />
+//             </Box>
+//           </Box>
+//           {/* <Box sx={{ display: "flex", flexDirection: "column" }}>
+//             <FormControl
+//               sx={{
+//                 // m: 1,
+//                 width: "580px",
+//                 height: "50px",
+//                 // border: "none",
+//                 borderRadius: "10px",
+//                 background: "white",
+//                 // outline: "1px solid lightgrey",
+//               }}
+//             >
+//               <Select
+//                 // value={selectedValue}
+//                 onChange={handleChange}
+//                 id="selectedValue"
+//                 name="selectedValue"
+//                 value={selectedValue}
+//                 inputProps={{ "aria-label": "Without label" }}
+//                 sx={{
+//                   borderRadius: "10px",
+//                   height: "50px",
+//                   "&:hover": { outline: "none" },
+//                 }}
+//               >
+//                 {allCategories.map((category) => (
+//                   <MenuItem value={category._id} key={category._id}>
+//                     {category.name}
+//                   </MenuItem>
+//                 ))}
+//               </Select>
+//             </FormControl>
+//             <ErrorMessage
+//               name="category"
+//               component="div"
+//               style={{ color: "red", fontSize: "16px" }}
+//             />
+//           </Box> */}
+
+//           {/* <Box
+//             sx={{
+//               backgroundColor: "#F8F7F6",
+//               display: "flex",
+//               alignItems: "center",
+//               p: 2,
+//               width: "800px",
+//               height: "90px",
+//               marginBottom: "20px",
+//             }}
+//           >
+//             <Box display="flex" mr={6.5}>
+//               <Typography
+//                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+//                 htmlFor="category"
+//               >
+//                 Category
+//               </Typography>
+//               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
+//             </Box>
+//             <Box sx={{ display: "flex", flexDirection: "column" }}>
+//               <FormControl
+//                 sx={{
+//                   // m: 1,
+//                   width: "580px",
+//                   height: "50px",
+//                   // border: "none",
+//                   borderRadius: "10px",
+//                   background: "white",
+//                   // outline: "1px solid lightgrey",
+//                 }}
+//               >
+//                 <Select
+//                   // value={selectedValue}
+//                   onChange={handleChange}
+//                   id="selectedValue"
+//                   name="selectedValue"
+//                   value={selectedValue}
+//                   inputProps={{ "aria-label": "Without label" }}
+//                   sx={{
+//                     borderRadius: "10px",
+//                     height: "50px",
+//                     "&:hover": { outline: "none" },
+//                   }}
+//                 >
+//                   {allCategories.map((category) => (
+//                     <MenuItem value={category._id} key={category._id}>
+//                       {category.name}
+//                     </MenuItem>
+//                   ))}
+//                 </Select>
+//               </FormControl>
+//               <ErrorMessage
+//                 name="category"
+//                 component="div"
+//                 style={{ color: "red", fontSize: "16px" }}
+//               />
+//             </Box>
+//           </Box>
+//           <Box
+//             sx={{
+//               backgroundColor: "#F8F7F6",
+//               display: "flex",
+//               alignItems: "center",
+//               p: 2,
+//               width: "800px",
+//               height: "90px",
+//               marginBottom: "20px",
+//             }}
+//           >
+//             <Box display="flex" mr={10.2}>
+//               <Typography
+//                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+//                 htmlFor="price"
+//               >
+//                 price
+//               </Typography>
+//               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
+//             </Box>
+//             <Box sx={{ display: "flex", flexDirection: "column" }}>
+//               <Field
+//                 type="text"
+//                 id="price"
+//                 name="price"
+//                 style={{
+//                   width: "580px",
+//                   height: "50px",
+//                   border: "none",
+//                   borderRadius: "10px",
+//                   outline: "1px solid lightgrey",
+//                   padding: "16px",
+//                 }}
+//               />
+//               <ErrorMessage
+//                 name="price"
+//                 component="div"
+//                 style={{ color: "red", fontSize: "16px" }}
+//               />
+//             </Box>
+//           </Box>
+//           <Box
+//             sx={{
+//               backgroundColor: "#F8F7F6",
+//               display: "flex",
+//               alignItems: "center",
+//               p: 2,
+//               width: "800px",
+//               height: "90px",
+//               marginBottom: "20px",
+//             }}
+//           >
+//             <Box display="flex" mr={7.2}>
+//               <Typography
+//                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+//                 htmlFor="quantity"
+//               >
+//                 quantity
+//               </Typography>
+//               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
+//             </Box>
+//             <Box sx={{ display: "flex", flexDirection: "column" }}>
+//               <Field
+//                 type="text"
+//                 id="quantity"
+//                 name="quantity"
+//                 style={{
+//                   width: "580px",
+//                   height: "50px",
+//                   border: "none",
+//                   borderRadius: "10px",
+//                   outline: "1px solid lightgrey",
+//                   padding: "16px",
+//                 }}
+//               />
+//               <ErrorMessage
+//                 name="quantity"
+//                 component="div"
+//                 style={{ color: "red", fontSize: "16px" }}
+//               />
+//             </Box>
+//           </Box>
+//           <Box
+//             sx={{
+//               backgroundColor: "#F8F7F6",
+//               display: "flex",
+//               p: 2,
+//               marginBottom: "20px",
+//               width: "800px",
+//               height: "90px",
+//             }}
+//           >
+//             <Box display="flex" mr={10.2}>
+//               <Typography
+//                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+//                 htmlFor="date"
+//               >
+//                 Date
+//               </Typography>
+//               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
+//             </Box>
+//             <Box sx={{ display: "flex", flexDirection: "column" }}>
+//               <Field
+//                 type="text"
+//                 id="date"
+//                 name="date"
+//                 style={{
+//                   width: "580px",
+//                   height: "50px",
+//                   border: "none",
+//                   borderRadius: "10px",
+//                   outline: "1px solid lightgrey",
+//                   padding: "16px",
+//                 }}
+//               />
+//               <ErrorMessage
+//                 name="date"
+//                 component="div"
+//                 style={{ color: "red", fontSize: "16px" }}
+//               />
+//             </Box>
+//           </Box>
+//           <Box
+//             sx={{
+//               backgroundColor: "#F8F7F6",
+//               display: "flex",
+//               p: 2,
+//               marginBottom: "20px",
+//               width: "800px",
+//               height: "90px",
+//             }}
+//           >
+//             <Box display="flex" mr={8}>
+//               <Typography
+//                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+//                 htmlFor="imageCover"
+//               >
+//                 imageCover
+//               </Typography>
+//               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
+//             </Box>
+//             <Box sx={{ display: "flex", flexDirection: "column" }}>
+//               <Field
+//                 type="file"
+//                 id="imageCover"
+//                 name="imageCover"
+//                 style={{
+//                   width: "580px",
+//                   height: "50px",
+//                   border: "none",
+//                   borderRadius: "10px",
+//                   outline: "1px solid lightgrey",
+//                   padding: "16px",
+//                 }}
+//               />
+//               <ErrorMessage
+//                 name="imageCover"
+//                 component="div"
+//                 style={{ color: "red", fontSize: "16px" }}
+//               />
+//             </Box>
+//           </Box>
+//           <Box
+//             sx={{
+//               backgroundColor: "#F8F7F6",
+//               display: "flex",
+//               p: 2,
+//               borderRadius: "0 0 10px 10px",
+//               width: "800px",
+//               height: "fit-content",
+//             }}
+//           >
+//             <Box display="flex" mr={3.2}>
+//               <Typography
+//                 sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+//                 htmlFor="description"
+//               >
+//                 Description
+//               </Typography>
+//               <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
+//             </Box>
+//             <Box
+//               sx={{
+//                 display: "flex",
+//                 flexDirection: "column",
+//                 height: "fit-content",
+//               }}
+//             >
+//               <Field
+//                 as="textarea"
+//                 id="description"
+//                 name="description"
+//                 style={{
+//                   width: "580px",
+//                   minHeight: "130px",
+//                   border: "none",
+//                   borderRadius: "10px",
+//                   outline: "1px solid lightgrey",
+//                   padding: "16px",
+//                 }}
+//               />
+//               <ErrorMessage
+//                 name="description"
+//                 component="div"
+//                 style={{ color: "red", fontSize: "16px" }}
+//               />
+//             </Box>
+//           </Box> */}
+//           <Box
+//             sx={{
+//               display: "flex",
+//               justifyContent: "center",
+//               margin: " 0 0 30px 220px",
+//             }}
+//           >
+//             <Button
+//               variant="contained"
+//               type="submit"
+//               sx={{
+//                 width: "150px",
+//                 fontSize: "16px",
+//                 textTransform: "capitalize",
+//                 marginTop: "30px",
+//                 background: "#133A5E",
+//                 "&:hover": { backgroundColor: "#FF9934" },
+//               }}
+//             >
+//               Save
+//             </Button>
+//           </Box>
+//         </Form>
+//       </Formik>
+//     </Box>
+//   );
+// }
+
+// export default AddProduct;

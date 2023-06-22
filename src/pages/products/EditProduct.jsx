@@ -5,9 +5,9 @@ import useProducts from "../../hooks/useProducts";
 import { Formik, Form, Field } from "formik";
 import { Typography, Box, Button } from "@mui/material";
 
-function EditPost() {
+function EditProduct() {
   const { products } = useProducts();
-  const { id } = useParams();
+  const { productId } = useParams();
 
   const [form, setForm] = useState({
     productName: "",
@@ -19,44 +19,49 @@ function EditPost() {
     // img: "",
   });
 
-  useEffect(() => {
-    async function fetchPostById() {
-      const { data } = await axios.get(`https://furnival.onrender.com/products/${id}`);
-      setForm({
-        productName: data.productName,
-        description: data.description,
-        price: data.price,
-        amount: data.amount,
-        category: data.category,
-        date: data.date,
-      });
-    }
-    fetchPostById();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchPostById() {
+  //     const { data } = await axios.get(
+  //       `https://furnival.onrender.com/products/${productId}`
+  //     );
+  //     setForm({
+  //       productName: data.productName,
+  //       description: data.description,
+  //       price: data.price,
+  //       amount: data.amount,
+  //       category: data.category,
+  //       date: data.date,
+  //     });
+  //   }
+  //   fetchPostByproductId();
+  // }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleEditPost = () => {
+  const handleEditProduct = () => {
     {
       products.map((product) =>
-        product._id === product.id ? { ...product } : product
+        product._Id === product.id ? { ...product } : product
       );
     }
   };
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    const { data } = await axios.put(`https://furnival.onrender.com/products/${product._id}`, {
-      productName: form.productName,
-      description: form.description,
-      price: form.price,
-      amount: form.amount,
-      category: form.category,
-      date: form.date,
-    });
-    handleEditPost(data);
+    const { data } = await axios.put(
+      `https://furnival.onrender.com/products/${product._id}`,
+      {
+        productName: form.productName,
+        description: form.description,
+        price: form.price,
+        amount: form.amount,
+        category: form.category,
+        date: form.date,
+      }
+    );
+    handleEditProduct(data);
   };
 
   return (
@@ -338,4 +343,4 @@ function EditPost() {
   );
 }
 
-export default EditPost;
+export default EditProduct;
