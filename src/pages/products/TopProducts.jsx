@@ -10,6 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import GeographyChart from "../../components/shapes/GeographyChart";
+import Topbar from "../../components/global/Topbar";
 
 function TopProducts() {
   const { topProducts } = useProducts();
@@ -57,105 +58,109 @@ function TopProducts() {
   const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        marginTop: "20px",
-      }}
-    >
-      <Typography
-        variant="h1"
-        fontSize="24px"
-        fontWeight="600"
-        margin="0 0 40px 20px"
-      >
-        Top Selling Products
-      </Typography>
+    <Box>
+      <Topbar />
       <Box
         sx={{
           display: "flex",
-          //   justifyContent: "center",
-          //   gap: "25px",
+          flexDirection: "column",
+          marginTop: "20px",
         }}
       >
-        {topProducts.map((product, index) => (
-          <Box key={product._id}>
-            <CardMedia
-              component="img"
-              src={product.images[index]}
-              sx={{
-                width: "280px",
-                height: "200px",
-              }}
+        <Typography
+          variant="h1"
+          fontSize="24px"
+          fontWeight="600"
+          margin="0 0 40px 20px"
+        >
+          Top Selling Products
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            //   justifyContent: "center",
+            //   gap: "25px",
+          }}
+        >
+          {topProducts.map((product, index) => (
+            <Box key={product._id}>
+              <CardMedia
+                component="img"
+                src={product.images[index]}
+                sx={{
+                  width: "280px",
+                  height: "200px",
+                }}
+              />
+            </Box>
+          ))}
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "60px",
+            marginTop: "50px",
+            height: "370px",
+          }}
+        >
+          <Paper sx={{ width: "50%", marginLeft: "20px" }}>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left" colSpan={8}>
+                      <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                        Sold Products
+                      </Typography>
+                      <Typography>your guide for products</Typography>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell align="center" sx={{ fontWeight: 600 }}>
+                      Product
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: 600 }}>
+                      Status
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: 600 }}>
+                      ِAmount
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: 600 }}>
+                      Price
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {topProducts
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((product) => {
+                      return (
+                        <TableRow hover tabIndex={-1} key={product._id}>
+                          <TableCell align="center">{product.title}</TableCell>
+                          {/* <TableCell align="center">{product.title}</TableCell> */}
+                          <TableCell align="center">
+                            {product.amount === 0 ? "Sold" : "In stock"}
+                          </TableCell>
+                          <TableCell align="center">
+                            {product.quantity}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10]}
+              component="div"
+              count={topProducts.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
             />
-          </Box>
-        ))}
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "60px",
-          marginTop: "50px",
-          height: "370px",
-        }}
-      >
-        <Paper sx={{ width: "50%", marginLeft: "20px" }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left" colSpan={8}>
-                    <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                      Sold Products
-                    </Typography>
-                    <Typography>your guide for products</Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell align="center" sx={{ fontWeight: 600 }}>
-                    Product
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: 600 }}>
-                    Status
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: 600 }}>
-                    ِAmount
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: 600 }}>
-                    Price
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {topProducts
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((product) => {
-                    return (
-                      <TableRow hover tabIndex={-1} key={product._id}>
-                        <TableCell align="center">{product.title}</TableCell>
-                        {/* <TableCell align="center">{product.title}</TableCell> */}
-                        <TableCell align="center">
-                          {product.amount === 0 ? "Sold" : "In stock"}
-                        </TableCell>
-                        <TableCell align="center">{product.quantity}</TableCell>
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10]}
-            component="div"
-            count={topProducts.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Paper>
-        {/* <Box
+          </Paper>
+          {/* <Box
           sx={{
             backgroundColor: "#F2F2F2",
             height: "380px",
@@ -236,6 +241,7 @@ function TopProducts() {
             </Typography>
           </Box>
         </Box> */}
+        </Box>
       </Box>
     </Box>
   );

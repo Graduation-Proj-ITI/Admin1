@@ -8,9 +8,8 @@ import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
 import MailIcon from "@mui/icons-material/Mail";
 import SettingsIcon from "@mui/icons-material/Settings";
-import ShowChartIcon from "@mui/icons-material/ShowChart";
-import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
-import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
+import CategoryIcon from "@mui/icons-material/Category";
 
 function Side() {
   const theme = useTheme();
@@ -33,7 +32,7 @@ function Side() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          width: "260px",
+          width: "250px",
           borderRight: "none",
         }}
       >
@@ -81,37 +80,60 @@ function Side() {
               </Typography>
             </Box>
             <Box sx={{ marginLeft: "5px" }}>
-              <MenuItem component={<Link to="/dashboard" />}>
+              <MenuItem component={<NavLink to="/dashboard"></NavLink>}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
                 >
                   <GridViewRoundedIcon />
-                  <Typography>Overview</Typography>
+                  <Typography
+                    variant="h5"
+                    sx={{ fontWeight: 500, fontSize: "16px" }}
+                  >
+                    Overview
+                  </Typography>
                 </Box>
               </MenuItem>
               {/* </Box> */}
-              <SubMenu label="Products">
-                {/* <NavLink exact to="/allProducts" activeClassName="active">
+              {/* <SubMenu
+                label="Products"
+                style={{ fontWeight: 500, fontSize: "16px" }}
+              > */}
+              {/* <NavLink exact to="/allProducts" activeClassName="active">
                   All products
                 </NavLink> */}
-                {/* </MenuItem> */}
-                <MenuItem component={<NavLink to="/allProducts"></NavLink>}>
-                  All Products
-                </MenuItem>
-                <MenuItem component={<NavLink to="/topProducts"></NavLink>}>
+              {/* </MenuItem> */}
+              <MenuItem
+                component={<NavLink to="/allProducts"></NavLink>}
+                style={{ fontWeight: 500, fontSize: "16px" }}
+              >
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: "20px" }}
+                >
+                  <LocalMallIcon />
+                  <Typography style={{ fontWeight: 500, fontSize: "18px" }}>
+                    All Products
+                  </Typography>
+                </Box>
+              </MenuItem>
+              {/* <MenuItem
+                  component={<NavLink to="/topProducts"></NavLink>}
+                  style={{ fontWeight: 500, fontSize: "16px" }}
+                >
                   Top products
-                </MenuItem>
-                {/* <MenuItem component={<NavLink to="/addProduct"></NavLink>}>
+                </MenuItem> */}
+              {/* <MenuItem component={<NavLink to="/addProduct"></NavLink>}>
                 Add product
               </MenuItem> */}
-              </SubMenu>
+              {/* </SubMenu> */}
 
-              <MenuItem component={<Link to="/orders" />}>
+              <MenuItem component={<NavLink to="/orders"></NavLink>}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
                 >
                   <LocalShippingRoundedIcon />
-                  <Typography>Orders</Typography>
+                  <Typography style={{ fontWeight: 500, fontSize: "18px" }}>
+                    Orders
+                  </Typography>
                 </Box>
               </MenuItem>
               <Box
@@ -123,41 +145,68 @@ function Side() {
                 }}
               >
                 {/* <CategoryRoundedIcon /> */}
-                <SubMenu label="Categories">
-                  <MenuItem component={<NavLink to="/allCategories"></NavLink>}>
-                    All categories
-                  </MenuItem>
-                  <MenuItem component={<NavLink to="/topCategories"></NavLink>}>
+                {/* <SubMenu
+                  label="Categories"
+                  style={{ fontWeight: 500, fontSize: "16px" }}
+                > */}
+                {/* <CategoryIcon /> */}
+                <MenuItem
+                  component={<NavLink to="/allCategories"></NavLink>}
+                  style={{ fontWeight: 500, fontSize: "18px" }}
+                >
+                  <Box
+                    sx={{ display: "flex", alignItems: "center", gap: "20px" }}
+                  >
+                    <CategoryIcon />
+                    <Typography style={{ fontWeight: 500, fontSize: "18px" }}>
+                      All categories
+                    </Typography>
+                  </Box>
+                </MenuItem>
+                {/* <MenuItem component={<NavLink to="/topCategories"></NavLink>}>
                     Top categories
-                  </MenuItem>
-                  {/* <MenuItem component={<NavLink to="/addCategory"></NavLink>}>
+                  </MenuItem> */}
+                {/* <MenuItem component={<NavLink to="/addCategory"></NavLink>}>
                 Add category
               </MenuItem> */}
-                </SubMenu>
+                {/* </SubMenu> */}
               </Box>
-              <MenuItem component={<Link to="/users" />}>
+              <MenuItem component={<NavLink to="/users"></NavLink>}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
                 >
                   <PeopleAltRoundedIcon />
-                  <Typography>Users</Typography>
+                  <Typography style={{ fontWeight: 500, fontSize: "16px" }}>
+                    Users
+                  </Typography>
                 </Box>
               </MenuItem>
-              <MenuItem component={<Link to="/message" />}>
+              {/* <MenuItem component={<Link to="/message" />}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
                 >
                   <MailIcon />
-                  <Typography>Messages</Typography>
+                  <Typography style={{ fontWeight: 500, fontSize: "16px" }}>
+                    Messages
+                  </Typography>
                 </Box>
-              </MenuItem>
-              <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
-                {/* <PhotoAlbumIcon /> */}
-                <SubMenu label="Blogs">
-                  <MenuItem component={<NavLink to="/allBlogs"></NavLink>}>
+              </MenuItem> */}
+              {/* <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
+             
+                <SubMenu
+                  label="Blogs"
+                  style={{ fontWeight: 500, fontSize: "16px" }}
+                >
+                  <MenuItem
+                    component={<NavLink to="/allBlogs"></NavLink>}
+                    style={{ fontWeight: 500, fontSize: "16px" }}
+                  >
                     All blogs
                   </MenuItem>
-                  <MenuItem component={<NavLink to="/addBlog"></NavLink>}>
+                  <MenuItem
+                    component={<NavLink to="/addBlog"></NavLink>}
+                    style={{ fontWeight: 500, fontSize: "16px" }}
+                  >
                     Add blog
                   </MenuItem>
                 </SubMenu>
@@ -167,15 +216,19 @@ function Side() {
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
                 >
                   <ShowChartIcon />
-                  <Typography>Report</Typography>
+                  <Typography style={{ fontWeight: 500, fontSize: "16px" }}>
+                    Report
+                  </Typography>
                 </Box>
-              </MenuItem>
-              <MenuItem component={<Link to="/setting" />}>
+              </MenuItem> */}
+              <MenuItem component={<NavLink to="/setting"></NavLink>}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
                 >
                   <SettingsIcon />
-                  <Typography>Setting</Typography>
+                  <Typography style={{ fontWeight: 500, fontSize: "16px" }}>
+                    Setting
+                  </Typography>
                 </Box>
               </MenuItem>
             </Box>
@@ -190,7 +243,7 @@ function Side() {
             gap: "10px",
             cursor: "pointer",
             margin: "0 auto",
-            marginTop: "100px",
+            marginTop: "250px",
             "&:hover": { backgroundColor: "none" },
           }}
           onClick={logOut}

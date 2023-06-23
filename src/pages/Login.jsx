@@ -15,6 +15,7 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Profile from "./Profile";
 
 function Login() {
   const navigate = useNavigate();
@@ -42,6 +43,10 @@ function Login() {
         login
       );
       localStorage.setItem("token", data.token);
+      localStorage.setItem("name", data.data.name);
+      localStorage.setItem("email", data.data.email);
+      localStorage.setItem("profileImg", data.data.profileImg);
+      console.log(data.data);
 
       navigate("/dashboard", { replace: true });
     } catch (e) {
@@ -82,7 +87,7 @@ function Login() {
           // backgroundColor: "white",
           borderRadius: "15px",
           width: "42vw",
-          height: "65vh",
+          height: "55vh",
           boxShadow: "0px 10px 15px 0px #052440",
         }}
       >
@@ -202,14 +207,14 @@ function Login() {
               >
                 {loading ? <CircularProgress color="inherit" /> : "Sign in"}
               </Button>
-              <Typography
+              {/* <Typography
                 variant="body"
                 sx={{
                   fontSize: "15px",
                 }}
               >
                 Forget you password?
-              </Typography>
+              </Typography> */}
             </Box>
           </Box>
         </Box>

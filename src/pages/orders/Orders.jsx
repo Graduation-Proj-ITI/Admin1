@@ -20,8 +20,15 @@ import useOrders from "../../hooks/useOrders";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import { useTheme } from "@mui/material";
+import { tokens } from "../../utils/Theme";
+import Side from "../../components/global/Sidebar";
+import Topbar from "../../components/global/Topbar";
 
 function Orders() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const { Orders, setOrders } = useOrders();
 
   const [page, setPage] = React.useState(0);
@@ -36,6 +43,8 @@ function Orders() {
     setPage(0);
   };
 
+  console.log(Orders);
+
   // function handleDelete(productId) {
   //   axios.delete(`http://localhost:3000/orders/${productId}`).then((res) => {
   //     const updatedBlogPosts = Orders.filter(
@@ -46,28 +55,41 @@ function Orders() {
   // }
 
   return (
-    <Box>
-      <Breadcrumbs aria-label="breadcrumb" sx={{ margin: "0 0 0 20px" }}>
-        <Typography>Home</Typography>
-        <Typography color="#FF9934" aria-current="page">
-          Orders
-        </Typography>
-      </Breadcrumbs>
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="140px"
-        // gap="20px"
-        marginLeft="20px"
-      >
-        <Box
-          display="grid"
-          gridTemplateColumns="repeat(12, 1fr)"
-          gridColumn="span 9"
-          gridRow="span 2"
-          gap="20px"
-        >
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(12, 1fr)",
+        gridAutoRows: "45px",
+        // gap:"20px"
+      }}
+    >
+      <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
+        <Side />
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column", width: "80vw" }}>
+        <Topbar />
+        <Box>
+          <Breadcrumbs aria-label="breadcrumb" sx={{ margin: "0 0 0 20px" }}>
+            <Typography>Home</Typography>
+            <Typography color="#FF9934" aria-current="page">
+              Orders
+            </Typography>
+          </Breadcrumbs>
           <Box
+            display="grid"
+            gridTemplateColumns="repeat(12, 1fr)"
+            gridAutoRows="45px"
+            // gap="20px"
+            marginLeft="20px"
+          >
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(12, 1fr)"
+              gridColumn="span 9"
+              gridRow="span 2"
+              gap="20px"
+            >
+              {/* <Box
             gridColumn="span 3"
             gridRow="span 1"
             // backgroundColor={colors.primary[400]}
@@ -135,42 +157,44 @@ function Orders() {
                 <PersonAddIcon sx={{ fontSize: "26px", color: "#133A5E" }} />
               }
             />
-          </Box>
-          <Box
-            // display="flex"
-            gridColumn="span 9"
-            gridRow="span 1"
-            // backgroundColor={colors.primary[400]}
-            position="relative"
-          >
-            <SearchIcon
-              sx={{
-                // color: colors.greenAccent[600],
-                p: 1,
-                fontSize: "40px",
-                // ml: 1,
-                position: "absolute",
-                top: "6px",
-                right: "100px",
-                zIndex: 2,
-                color: "#133A5E",
-                marginRight: "30px",
-              }}
-            />
-            <InputBase
-              sx={{
-                flex: 1,
-                width: "750px",
-                p: 1.2,
-                border: "1px solid lightgrey",
-                backgroundColor: "#F5F5F5",
-                borderRadius: "10px",
-              }}
-              placeholder="Search here..."
-            />
-          </Box>
-        </Box>
-        <Box
+          </Box> */}
+              <Box
+                // display="flex"
+                gridColumn="span 9"
+                gridRow="span 1"
+                marginTop="20px"
+                // backgroundColor={colors.primary[400]}
+                position="relative"
+              >
+                <SearchIcon
+                  sx={{
+                    // color: colors.greenAccent[600],
+                    p: 1,
+                    fontSize: "40px",
+                    // ml: 1,
+                    position: "absolute",
+                    top: "6px",
+                    right: "100px",
+                    zIndex: 2,
+                    color: "#133A5E",
+                    marginRight: "-150px",
+                  }}
+                />
+                <InputBase
+                  // backgroundColor={colors.primary[400]}
+                  sx={{
+                    flex: 1,
+                    width: "750px",
+                    p: 1.2,
+                    border: "1px solid lightgrey",
+                    // backgroundColor: "#F5F5F5",
+                    borderRadius: "10px",
+                  }}
+                  placeholder="Search here..."
+                />
+              </Box>
+            </Box>
+            {/* <Box
           gridColumn="span 3"
           marginRight="30px"
           gridRow="span 2"
@@ -190,50 +214,54 @@ function Orders() {
           <Box height="200px">
             <GeographyChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box> */}
 
-        <Box
-          sx={{ gridColumn: "span 12", gridRow: "span 5", marginTop: "40px" }}
-        >
-          <Paper
-            sx={{ width: "80%", overflow: "hidden", marginBottom: "30px" }}
-          >
-            <TableContainer sx={{ maxHeight: 640, overflow: "hidden" }}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="center">Id</TableCell>
-                    <TableCell align="center">User</TableCell>
-                    <TableCell align="center">Product</TableCell>
-                    <TableCell align="center">Quantity</TableCell>
-                    <TableCell align="center">Total</TableCell>
-                    <TableCell align="center">Date</TableCell>
-                    <TableCell align="center">Status</TableCell>
-                    <TableCell align="center"></TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {Orders.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  ).map((order, index) => {
-                    return (
-                      <TableRow hover tabIndex={-1} key={order._id}>
-                        <TableCell align="center">#{index + 1}</TableCell>
-                        <TableCell align="center">{order.user}</TableCell>
-                        <TableCell align="center">{order.product}</TableCell>
-                        <TableCell align="center">{order.quantity}</TableCell>
-                        <TableCell align="center">
-                          {order.totalOrderPrice}
-                        </TableCell>
-                        <TableCell align="center">{order.date}</TableCell>
-                        <TableCell align="center">{order.status}</TableCell>
-                        <TableCell sx={{ display: "flex", gap: "20px" }}>
-                          <Link to={`/orders/${order._id}`}>
-                            <RemoveRedEyeIcon sx={{ color: "#8FC83D" }} />
-                          </Link>
+            <Box sx={{ gridColumn: "span 12", gridRow: "span 5" }}>
+              <Paper
+                sx={{ width: "80%", overflow: "hidden", marginBottom: "30px" }}
+              >
+                <TableContainer sx={{ maxHeight: 640, overflow: "hidden" }}>
+                  <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="center">Id</TableCell>
+                        <TableCell align="center">User</TableCell>
+                        <TableCell align="center">Product</TableCell>
+                        <TableCell align="center">Quantity</TableCell>
+                        <TableCell align="center">Total</TableCell>
+                        <TableCell align="center">Date</TableCell>
+                        <TableCell align="center">Status</TableCell>
+                        <TableCell align="center"></TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {Orders.slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      ).map((order, index) => {
+                        return (
+                          <TableRow hover tabIndex={-1} key={order._id}>
+                            <TableCell align="center">#{index + 1}</TableCell>
+                            <TableCell align="center">{order.user}</TableCell>
+                            <TableCell align="center">
+                              {order.product}
+                            </TableCell>
+                            <TableCell align="center">
+                              {order.quantity}
+                            </TableCell>
+                            <TableCell align="center">
+                              {order.totalOrderPrice}
+                            </TableCell>
+                            <TableCell align="center">
+                              {order.deliveredAt}
+                            </TableCell>
+                            <TableCell align="center">{order.status}</TableCell>
+                            <TableCell sx={{ display: "flex", gap: "20px" }}>
+                              <Link to={`/orders/${order._id}`}>
+                                <RemoveRedEyeIcon sx={{ color: "#8FC83D" }} />
+                              </Link>
 
-                          {/* {order.status === "pending" ? (
+                              {/* {order.status === "pending" ? (
                             <Link to={`/orders/${order._id}`}>
                               <EditIcon sx={{ color: "#336CDA" }} />
                             </Link>
@@ -241,27 +269,29 @@ function Orders() {
                             ""
                           )} */}
 
-                          {/* <DeleteForeverIcon
+                              {/* <DeleteForeverIcon
                               sx={{ color: "#DA2121" }}
                               onClick={() => handleDelete(product.id)}
                             /> */}
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[5, 10]}
-              component="div"
-              count={Orders.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Paper>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10]}
+                  component="div"
+                  count={Orders.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </Paper>
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>

@@ -11,12 +11,12 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import CardMedia from "@mui/material/CardMedia";
 import useCategory from "../../hooks/useCategory";
+import Topbar from "../../components/global/Topbar";
 
 function TopCategories() {
   const { topCategories } = useCategory();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -44,96 +44,117 @@ function TopCategories() {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        margin: "20px 0 0 20px",
+        display: "grid",
+        gridTemplateColumns: "repeat(12, 1fr)",
+        gridAutoRows: "45px",
+        // gap:"20px"
       }}
     >
-      <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-        <Link sx={{ textDecoration: "none" }}>Home</Link>
-        <Link sx={{ textDecoration: "none" }}>Categories</Link>
-      </Breadcrumbs>
-      <Typography
-        variant="h1"
-        fontSize="24px"
-        fontWeight="600"
-        margin="0 0 40px 0"
-      >
-        Top Selling Categories
-      </Typography>
-      <Box sx={{ display: "flex", gap: "25px" }}>
-        {topCategories.map((category) => (
-          <Box key={category._id}>
-            <CardMedia
-              component="img"
-              src={category.image}
-              sx={{
-                width: "280px",
-                height: "200px",
-              }}
-            />
-          </Box>
-        ))}
+      <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
+        <Side />
       </Box>
-      <Box>
-        <Box
-          sx={{
-            display: "flex",
-            gap: "60px",
-            marginTop: "50px",
-            height: "370px",
-          }}
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Topbar />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          margin: "20px 0 0 20px",
+        }}
+      >
+        <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
+          <Link sx={{ textDecoration: "none" }}>Home</Link>
+          <Link sx={{ textDecoration: "none" }}>Categories</Link>
+        </Breadcrumbs>
+        <Typography
+          variant="h1"
+          fontSize="24px"
+          fontWeight="600"
+          margin="0 0 40px 0"
         >
-          <Paper sx={{ width: "50%", marginLeft: "20px" }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="left" colSpan={8}>
-                      <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                        Categories
-                      </Typography>
-                      <Typography>your guide for categories</Typography>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell align="center" sx={{ fontWeight: 600 }}>
-                      Product
-                    </TableCell>
-                    <TableCell align="center" sx={{ fontWeight: 600 }}>
-                      Status
-                    </TableCell>
-                    <TableCell align="center" sx={{ fontWeight: 600 }}>
-                      ِAmount
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {topCategories
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((product) => {
-                      return (
-                        <TableRow hover tabIndex={-1} key={product._id}>
-                          <TableCell align="center">{product.name}</TableCell>
-                          <TableCell align="center">{product.status}</TableCell>
-                          <TableCell align="center">{product.amount}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[5, 10]}
-              component="div"
-              count={topCategories.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Paper>
-          {/* <TableContainer component={Paper} sx={{ width: "30%" }}>
+          Top Selling Categories
+        </Typography>
+        <Box sx={{ display: "flex", gap: "25px" }}>
+          {topCategories.map((category) => (
+            <Box key={category._id}>
+              <CardMedia
+                component="img"
+                src={category.image}
+                sx={{
+                  width: "280px",
+                  height: "200px",
+                }}
+              />
+            </Box>
+          ))}
+        </Box>
+        <Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "60px",
+              marginTop: "50px",
+              height: "370px",
+            }}
+          >
+            <Paper sx={{ width: "50%", marginLeft: "20px" }}>
+              <TableContainer sx={{ maxHeight: 440 }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="left" colSpan={8}>
+                        <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                          Categories
+                        </Typography>
+                        <Typography>your guide for categories</Typography>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell align="center" sx={{ fontWeight: 600 }}>
+                        Product
+                      </TableCell>
+                      <TableCell align="center" sx={{ fontWeight: 600 }}>
+                        Status
+                      </TableCell>
+                      <TableCell align="center" sx={{ fontWeight: 600 }}>
+                        ِAmount
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {topCategories
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((product) => {
+                        return (
+                          <TableRow hover tabIndex={-1} key={product._id}>
+                            <TableCell align="center">{product.name}</TableCell>
+                            <TableCell align="center">
+                              {product.status}
+                            </TableCell>
+                            <TableCell align="center">
+                              {product.amount}
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[5, 10]}
+                component="div"
+                count={topCategories.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Paper>
+            {/* <TableContainer component={Paper} sx={{ width: "30%" }}>
             <Table aria-label="spanning table">
               <TableHead>
                 <TableRow>
@@ -158,7 +179,7 @@ function TopCategories() {
               </TableBody>
             </Table>
           </TableContainer> */}
-          {/* <Box
+            {/* <Box
             sx={{
               backgroundColor: "#F2F2F2",
               height: "380px",
@@ -239,6 +260,7 @@ function TopCategories() {
               </Typography>
             </Box>
           </Box> */}
+          </Box>
         </Box>
       </Box>
     </Box>

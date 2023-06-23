@@ -1,9 +1,7 @@
 import React from "react";
-import Side from "./components/global/Sidebar";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import { ColorModeContext, useMode } from "./utils/Theme";
-import Topbar from "./components/global/Topbar";
 import BottomAppBar from "./pages/Message";
 import Setting from "./pages/Setting";
 import Dashboard from "./pages/Dashboard";
@@ -23,8 +21,8 @@ import Orders from "./pages/orders/Orders";
 import AllUsers from "./pages/users/AllUsers";
 import Login from "./pages/Login";
 import UserDetails from "./pages/users/userDetails";
-import EditOrder from "./pages/orders/EditOrder";
 import OrderDetails from "./pages/orders/OrderDetails";
+import Profile from "./pages/Profile";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -34,10 +32,10 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box className="app">
-          {localStorage.getItem("token") ? <Side /> : ""}
+          {/* {localStorage.getItem("token") ? <Side /> : ""} */}
           {/* localStorage.setItem("token", data.token); */}
           <Box className="content">
-            {localStorage.getItem("token") ? <Topbar /> : ""}
+            {/* {localStorage.getItem("token") ? <Topbar /> : ""} */}
             {/* <Topbar /> */}
             <Routes>
               <Route path="/" element={<Login />} />
@@ -72,6 +70,8 @@ function App() {
               <Route path="/setting" element={<Setting />} />
 
               <Route path="/message" element={<BottomAppBar />} />
+
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </Box>
         </Box>

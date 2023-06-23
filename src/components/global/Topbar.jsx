@@ -8,12 +8,18 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Header from "../global/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+
+  const navigate = useNavigate();
+
+  const goToProfile = () => {
+    navigate("/profile");
+  };
 
   return (
     <Box display="flex" flexDirection="column" p={2}>
@@ -54,10 +60,7 @@ const Topbar = () => {
               <LightModeOutlinedIcon />
             )}
           </IconButton>
-          <IconButton>
-            <NotificationsOutlinedIcon />
-          </IconButton>
-          <IconButton>
+          <IconButton onClick={goToProfile}>
             {/* <Link  to="/setting" /> */}
             <PersonOutlinedIcon />
             {/* </Link> */}

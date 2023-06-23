@@ -15,15 +15,17 @@ import { Link } from "react-router-dom";
 import useCategory from "../../hooks/useCategory";
 // import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Topbar from "../../components/global/Topbar";
+import Side from "../../components/global/Sidebar";
 
 const AddProduct = () => {
   // let [description, setDescription] = useState("");
-  const [selectedValue, setSelectedValue] = useState("");
+  const [category, setCategory] = useState("");
   const { allCategories } = useCategory();
 
   // const validationSchema = Yup.object().shape({
   //   name: Yup.string().required("Name is required"),
-  //   selectedValue: Yup.string().required("Category is required"),
+  //   category: Yup.string().required("Category is required"),
   //   price: Yup.string().required("Price is required"),
   //   quantity: Yup.string().required("quantity is required"),
   //   description: Yup.string().required("Description is required"),
@@ -41,7 +43,7 @@ const AddProduct = () => {
 
   const initialValues = {
     title: "",
-    selectedValue: "",
+    category: "",
     price: "",
     quantity: "",
     description: "",
@@ -50,7 +52,7 @@ const AddProduct = () => {
   };
 
   // console.log(allCategories);
-  // console.log(selectedValue);
+  // console.log(category);
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -67,114 +69,131 @@ const AddProduct = () => {
     } catch (error) {
       console.error(error);
     }
+    console.log(values);
   };
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-    console.log(event);
-  };
+  // const handleChange = (event) => {
+  //   setCategory(event.target.value);
+  //   console.log(event);
+  // };
 
-  console.log(selectedValue);
+  // console.log(category);
 
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        marginLeft: "20px",
+        display: "grid",
+        gridTemplateColumns: "repeat(12, 1fr)",
+        gridAutoRows: "45px",
       }}
     >
-      <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-        <Link sx={{ textDecoration: "none" }}>Home</Link>
-        <Link to="/allProducts">
-          <Typography sx={{ textDecoration: "none" }}>Products</Typography>
-        </Link>
-        <Typography
-          // underline="hover"
-          sx={{ textDecoration: "none" }}
-          color="#FF9934"
-          aria-current="page"
+      <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
+        <Side />
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column", width: "82vw" }}>
+        <Topbar />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            marginLeft: "20px",
+          }}
         >
-          Add product
-        </Typography>
-      </Breadcrumbs>
-      <Typography
-        component="h1"
-        sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
-      >
-        Add product
-      </Typography>
-      <Formik
-        initialValues={initialValues}
-        // validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <Box
-            sx={{
-              backgroundColor: "#F8F7F6",
-              display: "flex",
-              alignItems: "center",
-              p: 2,
-              borderRadius: "10px 10px 0 0",
-              width: "800px",
-              height: "90px",
-              marginBottom: "20px",
-            }}
+          <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
+            <Link sx={{ textDecoration: "none" }}>Home</Link>
+            <Link to="/allProducts">
+              <Typography sx={{ textDecoration: "none" }}>Products</Typography>
+            </Link>
+            <Typography
+              // underline="hover"
+              sx={{ textDecoration: "none" }}
+              color="#FF9934"
+              aria-current="page"
+            >
+              Add product
+            </Typography>
+          </Breadcrumbs>
+          <Typography
+            component="h1"
+            sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
           >
-            <Box display="flex" mr={9.5}>
-              <Typography
-                sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="title"
-              >
-                title
-              </Typography>
-              <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <Field
-                type="text"
-                id="title"
-                name="title"
-                style={{
-                  width: "580px",
-                  height: "50px",
-                  border: "none",
-                  borderRadius: "10px",
-                  outline: "1px solid lightgrey",
-                  padding: "16px",
+            Add product
+          </Typography>
+          <Formik
+            initialValues={initialValues}
+            // validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            <Form>
+              <Box
+                sx={{
+                  backgroundColor: "#F8F7F6",
+                  display: "flex",
+                  alignItems: "center",
+                  p: 2,
+                  borderRadius: "10px 10px 0 0",
+                  width: "800px",
+                  height: "90px",
+                  marginBottom: "20px",
                 }}
-              />
-              <ErrorMessage
-                name="title"
-                component="div"
-                style={{ color: "red", fontSize: "16px" }}
-              />
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: "#F8F7F6",
-              display: "flex",
-              alignItems: "center",
-              p: 2,
-              width: "800px",
-              height: "90px",
-              marginBottom: "20px",
-            }}
-          >
-            <Box display="flex" mr={6.5}>
-              <Typography
-                sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="category"
               >
-                Category
-              </Typography>
-              <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <FormControl
+                <Box display="flex" mr={9.5}>
+                  <Typography
+                    sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                    htmlFor="title"
+                  >
+                    title
+                  </Typography>
+                  <Typography sx={{ fontSize: "24px", color: "red" }}>
+                    *
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Field
+                    type="text"
+                    id="title"
+                    name="title"
+                    style={{
+                      width: "580px",
+                      height: "50px",
+                      border: "none",
+                      borderRadius: "10px",
+                      outline: "1px solid lightgrey",
+                      padding: "16px",
+                    }}
+                  />
+                  <ErrorMessage
+                    name="title"
+                    component="div"
+                    style={{ color: "red", fontSize: "16px" }}
+                  />
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  backgroundColor: "#F8F7F6",
+                  display: "flex",
+                  alignItems: "center",
+                  p: 2,
+                  width: "800px",
+                  height: "90px",
+                  marginBottom: "20px",
+                }}
+              >
+                <Box display="flex" mr={6.5}>
+                  <Typography
+                    sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                    htmlFor="category"
+                  >
+                    Category
+                  </Typography>
+                  <Typography sx={{ fontSize: "24px", color: "red" }}>
+                    *
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  {/* <FormControl
                 sx={{
                   // m: 1,
                   width: "580px",
@@ -186,10 +205,10 @@ const AddProduct = () => {
                 }}
               >
                 <Select
-                  onChange={handleChange}
-                  id={selectedValue}
-                  name="selectedValue"
-                  value={selectedValue}
+                  // onChange={handleChange}
+                  id="category"
+                  name="category"
+                  // value={category}
                   inputProps={{ "aria-label": "Without label" }}
                   sx={{
                     borderRadius: "10px",
@@ -203,56 +222,65 @@ const AddProduct = () => {
                     </MenuItem>
                   ))}
                 </Select>
-              </FormControl>
-              <ErrorMessage
-                name="category"
-                component="div"
-                style={{ color: "red", fontSize: "16px" }}
-              />
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: "#F8F7F6",
-              display: "flex",
-              alignItems: "center",
-              p: 2,
-              width: "800px",
-              height: "90px",
-              marginBottom: "20px",
-            }}
-          >
-            <Box display="flex" mr={10.2}>
-              <Typography
-                sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="price"
-              >
-                price
-              </Typography>
-              <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <Field
-                type="text"
-                id="price"
-                name="price"
-                style={{
-                  width: "580px",
-                  height: "50px",
-                  border: "none",
-                  borderRadius: "10px",
-                  outline: "1px solid lightgrey",
-                  padding: "16px",
+              </FormControl> */}
+                  <Field name="category" as="select">
+                    {allCategories.map((category) => (
+                      <option value={category._id} key={category._id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </Field>
+                  <ErrorMessage
+                    name="category"
+                    component="div"
+                    style={{ color: "red", fontSize: "16px" }}
+                  />
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  backgroundColor: "#F8F7F6",
+                  display: "flex",
+                  alignItems: "center",
+                  p: 2,
+                  width: "800px",
+                  height: "90px",
+                  marginBottom: "20px",
                 }}
-              />
-              <ErrorMessage
-                name="price"
-                component="div"
-                style={{ color: "red", fontSize: "16px" }}
-              />
-            </Box>
-          </Box>
-          {/* <Box
+              >
+                <Box display="flex" mr={10.2}>
+                  <Typography
+                    sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                    htmlFor="price"
+                  >
+                    price
+                  </Typography>
+                  <Typography sx={{ fontSize: "24px", color: "red" }}>
+                    *
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Field
+                    type="text"
+                    id="price"
+                    name="price"
+                    style={{
+                      width: "580px",
+                      height: "50px",
+                      border: "none",
+                      borderRadius: "10px",
+                      outline: "1px solid lightgrey",
+                      padding: "16px",
+                    }}
+                  />
+                  <ErrorMessage
+                    name="price"
+                    component="div"
+                    style={{ color: "red", fontSize: "16px" }}
+                  />
+                </Box>
+              </Box>
+              {/* <Box
             sx={{
               backgroundColor: "#F8F7F6",
               display: "flex",
@@ -275,8 +303,8 @@ const AddProduct = () => {
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Field
                 type="text"
-                id="selectedValue"
-                name="selectedValue"
+                id="category"
+                name="category"
                 style={{
                   width: "580px",
                   height: "50px",
@@ -287,54 +315,56 @@ const AddProduct = () => {
                 }}
               />
               <ErrorMessage
-                name="selectedValue"
+                name="category"
                 component="div"
                 style={{ color: "red", fontSize: "16px" }}
               />
             </Box>
           </Box> */}
-          <Box
-            sx={{
-              backgroundColor: "#F8F7F6",
-              display: "flex",
-              alignItems: "center",
-              p: 2,
-              width: "800px",
-              height: "90px",
-              marginBottom: "20px",
-            }}
-          >
-            <Box display="flex" mr={7.2}>
-              <Typography
-                sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="quantity"
-              >
-                quantity
-              </Typography>
-              <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <Field
-                type="text"
-                id="quantity"
-                name="quantity"
-                style={{
-                  width: "580px",
-                  height: "50px",
-                  border: "none",
-                  borderRadius: "10px",
-                  outline: "1px solid lightgrey",
-                  padding: "16px",
+              <Box
+                sx={{
+                  backgroundColor: "#F8F7F6",
+                  display: "flex",
+                  alignItems: "center",
+                  p: 2,
+                  width: "800px",
+                  height: "90px",
+                  marginBottom: "20px",
                 }}
-              />
-              <ErrorMessage
-                name="quantity"
-                component="div"
-                style={{ color: "red", fontSize: "16px" }}
-              />
-            </Box>
-          </Box>
-          {/* <Box
+              >
+                <Box display="flex" mr={7.2}>
+                  <Typography
+                    sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                    htmlFor="quantity"
+                  >
+                    quantity
+                  </Typography>
+                  <Typography sx={{ fontSize: "24px", color: "red" }}>
+                    *
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Field
+                    type="text"
+                    id="quantity"
+                    name="quantity"
+                    style={{
+                      width: "580px",
+                      height: "50px",
+                      border: "none",
+                      borderRadius: "10px",
+                      outline: "1px solid lightgrey",
+                      padding: "16px",
+                    }}
+                  />
+                  <ErrorMessage
+                    name="quantity"
+                    component="div"
+                    style={{ color: "red", fontSize: "16px" }}
+                  />
+                </Box>
+              </Box>
+              {/* <Box
             sx={{
               backgroundColor: "#F8F7F6",
               display: "flex",
@@ -374,116 +404,122 @@ const AddProduct = () => {
               />
             </Box>
           </Box> */}
-          <Box
-            sx={{
-              backgroundColor: "#F8F7F6",
-              display: "flex",
-              p: 2,
-              marginBottom: "20px",
-              width: "800px",
-              height: "90px",
-            }}
-          >
-            <Box display="flex" mr={8}>
-              <Typography
-                sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="imageCover"
-              >
-                imageCover
-              </Typography>
-              <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <Field
-                type="file"
-                id="imageCover"
-                name="imageCover"
-                style={{
-                  width: "580px",
-                  height: "50px",
-                  border: "none",
-                  borderRadius: "10px",
-                  outline: "1px solid lightgrey",
-                  padding: "16px",
+              <Box
+                sx={{
+                  backgroundColor: "#F8F7F6",
+                  display: "flex",
+                  p: 2,
+                  marginBottom: "20px",
+                  width: "800px",
+                  height: "90px",
                 }}
-              />
-              <ErrorMessage
-                name="imageCover"
-                component="div"
-                style={{ color: "red", fontSize: "16px" }}
-              />
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: "#F8F7F6",
-              display: "flex",
-              p: 2,
-              borderRadius: "0 0 10px 10px",
-              width: "800px",
-              height: "fit-content",
-            }}
-          >
-            <Box display="flex" mr={3.2}>
-              <Typography
-                sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="description"
               >
-                Description
-              </Typography>
-              <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                height: "fit-content",
-              }}
-            >
-              <Field
-                as="textarea"
-                id="description"
-                name="description"
-                style={{
-                  width: "580px",
-                  minHeight: "130px",
-                  border: "none",
-                  borderRadius: "10px",
-                  outline: "1px solid lightgrey",
-                  padding: "16px",
+                <Box display="flex" mr={8}>
+                  <Typography
+                    sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                    htmlFor="imageCover"
+                  >
+                    imageCover
+                  </Typography>
+                  <Typography sx={{ fontSize: "24px", color: "red" }}>
+                    *
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Field
+                    type="file"
+                    id="imageCover"
+                    name="imageCover"
+                    style={{
+                      width: "580px",
+                      height: "50px",
+                      border: "none",
+                      borderRadius: "10px",
+                      outline: "1px solid lightgrey",
+                      padding: "16px",
+                    }}
+                  />
+                  <ErrorMessage
+                    name="imageCover"
+                    component="div"
+                    style={{ color: "red", fontSize: "16px" }}
+                  />
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  backgroundColor: "#F8F7F6",
+                  display: "flex",
+                  p: 2,
+                  borderRadius: "0 0 10px 10px",
+                  width: "800px",
+                  height: "fit-content",
                 }}
-              />
-              <ErrorMessage
-                name="description"
-                component="div"
-                style={{ color: "red", fontSize: "16px" }}
-              />
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              margin: " 0 0 30px 220px",
-            }}
-          >
-            <Button
-              variant="contained"
-              type="submit"
-              sx={{
-                width: "150px",
-                fontSize: "16px",
-                textTransform: "capitalize",
-                marginTop: "30px",
-                background: "#133A5E",
-                "&:hover": { backgroundColor: "#FF9934" },
-              }}
-            >
-              Save
-            </Button>
-          </Box>
-        </Form>
-      </Formik>
+              >
+                <Box display="flex" mr={3.2}>
+                  <Typography
+                    sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                    htmlFor="description"
+                  >
+                    Description
+                  </Typography>
+                  <Typography sx={{ fontSize: "24px", color: "red" }}>
+                    *
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "fit-content",
+                  }}
+                >
+                  <Field
+                    as="textarea"
+                    id="description"
+                    name="description"
+                    style={{
+                      width: "580px",
+                      minHeight: "130px",
+                      border: "none",
+                      borderRadius: "10px",
+                      outline: "1px solid lightgrey",
+                      padding: "16px",
+                    }}
+                  />
+                  <ErrorMessage
+                    name="description"
+                    component="div"
+                    style={{ color: "red", fontSize: "16px" }}
+                  />
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: " 0 0 30px 220px",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{
+                    width: "150px",
+                    fontSize: "16px",
+                    textTransform: "capitalize",
+                    marginTop: "30px",
+                    background: "#133A5E",
+                    "&:hover": { backgroundColor: "#FF9934" },
+                  }}
+                >
+                  Save
+                </Button>
+              </Box>
+            </Form>
+          </Formik>
+        </Box>
+      </Box>
     </Box>
   );
 };
@@ -491,12 +527,12 @@ const AddProduct = () => {
 export default AddProduct;
 
 // function AddProduct() {
-//   const [selectedValue, setSelectedValue] = useState("");
+//   const [category, setCategory] = useState("");
 //   const { allCategories } = useCategory();
 
 //   // const validationSchema = Yup.object().shape({
 //   //   name: Yup.string().required("Name is required"),
-//   //   selectedValue: Yup.string().required("Category is required"),
+//   //   category: Yup.string().required("Category is required"),
 //   //   price: Yup.string().required("Price is required"),
 //   //   quantity: Yup.string().required("quantity is required"),
 //   //   description: Yup.string().required("Description is required"),
@@ -514,7 +550,7 @@ export default AddProduct;
 
 //   const initialValues = {
 //     name: "",
-//     selectedValue: "",
+//     category: "",
 //     // price: "",
 //     // quantity: "",
 //     // description: "",
@@ -523,7 +559,7 @@ export default AddProduct;
 //   };
 
 //   //   // console.log(allCategories);
-//   //   // console.log(selectedValue);
+//   //   // console.log(category);
 
 //   //   const handleSubmit = async (values, { resetForm }) => {
 //   //     try {
@@ -543,7 +579,7 @@ export default AddProduct;
 //   //   };
 
 //   const handleChange = (event) => {
-//     setSelectedValue(event.target.value);
+//     setCategory(event.target.value);
 //   };
 
 //   const handleSubmit = async (values, { resetForm }) => {
@@ -565,7 +601,7 @@ export default AddProduct;
 //   };
 
 //   // const handleChange = (event) => {
-//   //   setSelectedValue(event.target.value);
+//   //   setCategory(event.target.value);
 //   // };
 
 //   return (
@@ -631,11 +667,11 @@ export default AddProduct;
 //               }}
 //             >
 //               <Select
-//                 // value={selectedValue}
+//                 // value={category}
 //                 onChange={handleChange}
-//                 id="selectedValue"
-//                 name="selectedValue"
-//                 value={selectedValue}
+//                 id="category"
+//                 name="category"
+//                 value={category}
 //                 inputProps={{ "aria-label": "Without label" }}
 //                 sx={{
 //                   borderRadius: "10px",
@@ -690,11 +726,11 @@ export default AddProduct;
 //                 }}
 //               >
 //                 <Select
-//                   // value={selectedValue}
+//                   // value={category}
 //                   onChange={handleChange}
-//                   id="selectedValue"
-//                   name="selectedValue"
-//                   value={selectedValue}
+//                   id="category"
+//                   name="category"
+//                   value={category}
 //                   inputProps={{ "aria-label": "Without label" }}
 //                   sx={{
 //                     borderRadius: "10px",

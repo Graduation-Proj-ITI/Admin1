@@ -37,10 +37,11 @@ body,
 .active {
   background-color: #ff9934;
   color: white !important;
+  width: "100%";
 }
 
 .active:hover {
-  background-color: #ff9934 !important;
+  background-color: #133a5e !important;
 }
 
 .mainActive {
