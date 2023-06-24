@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -13,11 +14,44 @@ import Topbar from "../components/global/Topbar";
 import Side from "../components/global/Sidebar";
 
 function Profile() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+  });
+
+  const [admin, setAdmin] = useState({});
+
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  };
+
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate("/setting");
   };
+
+  useEffect(() => {
+    const getUser = () => {
+      axios
+        .get("https://furnival.onrender.com/users/getMe", config)
+        .then((response) => {
+          setAdmin(response.data.data);
+          setForm({
+            name: response.data.data.name,
+            email: response.data.data.email,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getUser();
+  }, []);
   return (
     <>
       <Box
@@ -25,7 +59,6 @@ function Profile() {
           display: "grid",
           gridTemplateColumns: "repeat(12, 1fr)",
           gridAutoRows: "45px",
-          // gap:"20px"
         }}
       >
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
@@ -38,8 +71,7 @@ function Profile() {
               <Link sx={{ textDecoration: "none" }}>Home</Link>
               <Link
                 sx={{ textDecoration: "none" }}
-                color="#FF9934"
-                // href="/material-ui/react-breadcrumbs/"
+                color="#FF9934"s
                 aria-current="page"
               >
                 Profile
@@ -73,7 +105,6 @@ function Profile() {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  // gap: "30px",
                 }}
               >
                 <Typography
@@ -91,9 +122,7 @@ function Profile() {
                   }}
                 >
                   <Typography sx={{ fontSize: "16px" }}>Name:</Typography>
-                  <Typography sx={{ fontSize: "16px" }}>
-                    {localStorage.getItem("name")}
-                  </Typography>
+                  <Typography sx={{ fontSize: "16px" }}>{form.name}</Typography>
                 </Box>
                 <Box
                   sx={{
@@ -104,7 +133,7 @@ function Profile() {
                 >
                   <Typography sx={{ fontSize: "16px" }}>Email:</Typography>
                   <Typography sx={{ fontSize: "16px" }}>
-                    {localStorage.getItem("email")}
+                    {form.email}
                   </Typography>
                 </Box>
 

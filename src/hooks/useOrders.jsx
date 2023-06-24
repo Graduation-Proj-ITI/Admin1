@@ -11,7 +11,6 @@ const useOrders = () => {
       })
       .then((response) => {
         const data = response.data.data;
-        // console.log(data);
         setOrders(data);
       })
       .catch((error) => {

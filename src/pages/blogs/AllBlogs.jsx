@@ -6,17 +6,21 @@ import {
   Typography,
   Pagination,
   Breadcrumbs,
+  Button,
 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import useBlogs from "../../hooks/useBlogs";
+import Side from "../../components/global/Sidebar";
+import Topbar from "../../components/global/Topbar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const AllBlogs = () => {
   const { posts, setPosts } = useBlogs();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const postsPerPage = 6;
+  const postsPerPage = 2;
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const startIndex = (currentPage - 1) * postsPerPage;
@@ -29,97 +33,146 @@ const AllBlogs = () => {
   };
 
   function handleDelete(postId) {
-    axios.delete(`http://localhost:3000/posts/${postId}`).then((res) => {
-      const updatedBlogPosts = posts.filter((post) => post.id !== postId);
-      setPosts(updatedBlogPosts);
-    });
+    axios
+      .delete(`https://furnival.onrender.com/blogs/${postId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => {
+        const updatedBlogPosts = posts.filter((post) => post._id !== postId);
+        setPosts(updatedBlogPosts);
+      });
   }
 
   return (
-    <Box margin="0 0 20px 20px">
-      <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-        <Link sx={{ textDecoration: "none" }}>Home</Link>
-        <Link sx={{ textDecoration: "none" }}>Categories</Link>
-        <Link
-          // underline="hover"
-          sx={{ textDecoration: "none" }}
-          color="#FF9934"
-          // href="/material-ui/react-breadcrumbs/"
-          aria-current="page"
-        >
-          All blogs
-        </Link>
-      </Breadcrumbs>
-      <Typography
-        variant="h1"
-        fontSize="24px"
-        fontWeight="600"
-        marginBottom="20px"
-      >
-        All Blogs
-      </Typography>
-      {posts.length == 0 ? <h1>There is no posts yet</h1> : ""}
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(12, 1fr)",
+        gridAutoRows: "45px",
+        // gap:"20px"
+      }}
+    >
+      <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
+        <Side />
+      </Box>
 
-      {paginatedPosts.map((post) => (
-        <Box
-          key={post.id}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: "20px",
-            width: "800px",
-            // margin: "0 auto",
-            marginBottom: "40px",
-            border: "1px solid lightgrey",
-          }}
-        >
-          <Box>
-            <CardMedia
-              component="img"
-              src={post.img}
-              sx={{ width: "300px", height: "220px" }}
+      <Box sx={{ display: "flex", flexDirection: "column", width: "80vw" }}>
+        <Topbar />
+        <Box margin="0 0 20px 20px">
+          <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
+            <Link sx={{ textDecoration: "none" }}>Home</Link>
+            <Link sx={{ textDecoration: "none" }}>Categories</Link>
+            <Link
+              // underline="hover"
+              sx={{ textDecoration: "none" }}
+              color="#FF9934"
+              // href="/material-ui/react-breadcrumbs/"
+              aria-current="page"
+            >
+              All blogs
+            </Link>
+          </Breadcrumbs>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography
+              component="h1"
+              sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "20px" }}
+            >
+              All Blogs
+            </Typography>
+            <Link to="/addBlog">
+              <Button
+                variant="contained"
+                sx={{
+                  margin: "0 410px 15px 0",
+                  backgroundColor: "#133A5E",
+                  "&:hover": {
+                    backgroundColor: "#FF9934",
+                  },
+                }}
+              >
+                Add Blog
+              </Button>
+            </Link>
+          </Box>
+          {/* {posts.length == 0 ? <h1>There is no posts yet</h1> : ""} */}
+
+          {paginatedPosts.map((post) => (
+            <Box
+              key={post._id}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "20px",
+                width: "800px",
+                // margin: "0 auto",
+                marginBottom: "40px",
+                border: "1px solid lightgrey",
+              }}
+            >
+              <Box>
+                <CardMedia
+                  component="img"
+                  src={post.images[0]}
+                  sx={{ width: "300px", height: "220px" }}
+                />
+              </Box>
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Box sx={{ display: "flex" }}>
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontSize: "22px",
+                      fontWeight: 600,
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {post.title}
+                  </Typography>
+                  <Link to={`/blogs/${post._id}`}>
+                    <EditIcon
+                      sx={{ color: "#336CDA", margin: "0 10px" }}
+                      // onClick={() => edit(post.id)}
+                    />
+                  </Link>
+                  <DeleteForeverIcon
+                    sx={{ color: "red", marginRight: "10px" }}
+                    onClick={() => handleDelete(post._id)}
+                  />
+                </Box>
+                <Box>
+                  <Typography
+                    variant="body"
+                    sx={{ fontSize: "16px", fontWeight: 200 }}
+                  >
+                    {post.content}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography>{post.createdAt.slice(0, 10)}</Typography>
+                </Box>
+              </Box>
+            </Box>
+          ))}
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              sx={{
+                "& .Mui-selected": {
+                  backgroundColor: "#FF9934",
+                  color: "white",
+                },
+              }}
             />
           </Box>
-          <Box>
-            <Box sx={{ display: "flex" }}>
-              <Typography
-                variant="h4"
-                sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "20px" }}
-              >
-                {post.title}
-              </Typography>
-              <Link to={`/blogs/${post.id}`}>
-                <EditIcon
-                  sx={{ color: "#336CDA", margin: "0 10px" }}
-                  // onClick={() => edit(post.id)}
-                />
-              </Link>
-              <DeleteForeverIcon
-                sx={{ color: "red", marginRight: "10px" }}
-                onClick={() => handleDelete(post.id)}
-              />
-            </Box>
-            <Typography
-              variant="body"
-              sx={{ fontSize: "16px", fontWeight: 200 }}
-            >
-              {post.description}
-            </Typography>
-          </Box>
         </Box>
-      ))}
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={handlePageChange}
-          sx={{
-            "& .Mui-selected": {
-              backgroundColor: "#133A5E",
-              color: "white",
-            },
-          }}
-        />
       </Box>
     </Box>
   );

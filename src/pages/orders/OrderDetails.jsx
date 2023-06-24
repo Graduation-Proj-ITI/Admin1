@@ -20,10 +20,10 @@ function OrderDetails() {
   const { orderDetailsId } = useParams();
   const [cartItems, setCartItems] = useState([]);
   const [selectedValue, setSelectedValue] = useState([
-    { id: 1, status: "pending" },
-    { id: 2, status: "canceled" },
-    { id: 3, status: "delivered" },
+    { id: 1, status: "Pending" },
+    { id: 3, status: "Delivered" },
   ]);
+
   const [form, setForm] = useState({
     image: "",
     name: "",
@@ -46,25 +46,6 @@ function OrderDetails() {
     },
   };
 
-  // const changeStatus = () => {
-  //   setStatus("delivered");
-  //   // setForm({
-  //   //   status: data.data.status,
-  //   // });
-  // };
-
-  const handleSelectChange = async (event) => {
-    const selectedValue = event.target.value;
-    try {
-      await axios.post(`https://furnival.onrender.com/orders/${productId}`, {
-        selectedValue,
-      }); // Replace with your backend API endpoint and payload structure
-      // Handle success
-    } catch (error) {
-      // Handle error
-    }
-  };
-
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -78,7 +59,9 @@ function OrderDetails() {
         config
       );
       console.log(data);
-      setCartItems(data.data.cartItems);
+      setCartItems(data.data.cartItems[0].product.imageCover);
+      console.log(data.data.cartItems[0].product.title);
+      console.log(data.data.cartItems[0].product.imageCover);
       setForm({
         user: data.data.user,
         image: data.data.image,
@@ -91,73 +74,26 @@ function OrderDetails() {
         createdAt: data.data.createdAt,
       });
     }
-    // console.log(data.data.cartItems);
     fetchPostById();
   }, [orderDetailsId]);
-  // console.log(cartItems.length);
-
-  // function handleChange(event) {
-  //   setSelectedValue(event.target.value);
-  //   console.log(selectedValue);
-  // }
-
-  // console.log(selectedValue);
-
   const initialValues = {
     status: "",
   };
 
-  // console.log(allCategories);
-  // console.log(category);
-
-  const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = async (values) => {
     try {
-      // console.log(initialValues);
-      console.log("ello");
-      // console.log(values);
-      await axios.post("https://furnival.onrender.com/orders", values, config);
-      // console.log(data);
-      resetForm();
+      const res = await axios.put(
+        `https://furnival.onrender.com/orders/${orderDetailsId}/deliver`,
+        {
+          values,
+        },
+        config
+      );
+      // console.log(res);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
-    console.log(values);
   };
-
-  // useEffect(() => {
-  //   async function fetchPostById() {
-  //     const { data } = await axios.get(
-  //       `https://furnival.onrender.com/orders/${orderDetailsId}`,
-  //       config
-  //     );
-  //     console.log(data);
-  //     setForm({
-  //       image: data.data.image,
-  //       name: data.data.name,
-  //       email: data.data.email,
-  //       phone: data.data.phone,
-  //       location: data.data.location,
-  //       status: data.data.status,
-  //     });
-  //   }
-  //   fetchPostById();
-  // }, [orderDetailsId]);
-
-  //   const handleEdit = async (e) => {
-  //     e.preventDefault();
-  //     const { data } = await axios.put(
-  //       `https://furnival.onrender.com/orders/${orderDetailsId}/deliver`,
-  // {
-
-  // },
-  // config
-  //       // {
-  //         //   status: "delivered",
-  //         // },
-  //         );
-  //         setStatus(data);
-  //     console.log(data);
-  //   };
 
   return (
     <Box
@@ -178,16 +114,13 @@ function OrderDetails() {
             <Link sx={{ textDecoration: "none" }}>Home</Link>
             <Link sx={{ textDecoration: "none" }}>Orders</Link>
             <Link
-              // underline="hover"
               sx={{ textDecoration: "none" }}
               color="#FF9934"
-              // href="/material-ui/react-breadcrumbs/"
               aria-current="page"
             >
               Order Details
             </Link>
           </Breadcrumbs>
-          {/* {cartItems?.map((order) => { */}
           <Box
             sx={{
               width: "650px",
@@ -203,7 +136,7 @@ function OrderDetails() {
             <Box>
               <CardMedia
                 component="img"
-                src="../src/assets/lambb.avif"
+                src={cartItems}
                 sx={{
                   width: "170px",
                   marginLeft: "40px",
@@ -226,19 +159,6 @@ function OrderDetails() {
                 {form.product}
               </Typography>
               <Divider sx={{ margin: "10px 0 20px" }} />
-
-              {/* <Box
-              sx={{
-                display: "flex",
-                gap: "80px",
-                marginBottom: "10px",
-              }}
-            >
-              <Typography sx={{ fontSize: "16px" }}>product:</Typography>
-              <Typography sx={{ fontSize: "16px" }}>
-                {order.product._id}
-              </Typography>
-            </Box> */}
               <Box
                 sx={{
                   display: "flex",
@@ -254,7 +174,7 @@ function OrderDetails() {
               <Box
                 sx={{
                   display: "flex",
-                  gap: "80px",
+                  gap: "55px",
                   marginBottom: "10px",
                 }}
               >
@@ -287,79 +207,45 @@ function OrderDetails() {
                   {form.createdAt.slice(0, 10)}
                 </Typography>
               </Box>
-              {/* <Box
-            sx={{
-              display: "flex",
-              gap: "80px",
-            }}
-          >
-            <Typography sx={{ fontSize: "16px" }}>status:</Typography>
-            {
-              form.isDelivered && (
-                <Box>
-                  <select name={form.status}>
-                    <option value={form.status}>Canceled</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Delivered">Delivered</option>
-                  </select>
-                  <Typography sx={{ fontSize: "16px" }}>{form.status}</Typography>
-                  <Button>
-                    <Link to={`/orders/${orderDetailsId}`}>
-                      <EditIcon sx={{ color: "#336CDA" }} />
-                    </Link>
-                  </Button>
-                </Box>
-              )
-              // ?
-              //   console.log("Hello")
-              // : console.log("Deliered")}
-            }
-          </Box> */}
-              {/* <select
-          value={selectedValue}
-          onChange={(event) => handleChange(event)}
-          >
-            {selectedValue.map((val) => (
-              <option value={val.status} key={val.id}>
-                {val.status}
-              </option>
-            ))} 
-          </select>*/}
-              <Formik>
-                <Form onSubmit={handleSubmit}>
-                  <Field
-                    name={selectedValue.status}
-                    id={selectedValue.status}
-                    as="select"
-                  >
-                    {selectedValue.map((val) => (
-                      <option value={val.status} key={val.id}>
-                        {val.status}
-                      </option>
-                    ))}
-                    {/* <option value="accepted">accepted</option>
-                <option value="delivered">delivered</option> */}
-                  </Field>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    sx={{
-                      width: "20px",
-                      // fontSize: "14px",
-                      // textTransform: "capitalize",
-                      marginTop: "30px",
-                      background: "#133A5E",
-                      "&:hover": { backgroundColor: "#FF9934" },
-                    }}
-                  >
-                    change
-                    {/* <EditIcon /> */}
-                  </Button>
-                </Form>
-              </Formik>
-              {/* {selectedValue.map((valuee) => (
-              <option>{valuee.status}</option>
-            ))} */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  // marginBottom: "10px",
+                  gap: "70px",
+                }}
+              >
+                <Typography sx={{ fontSize: "16px" }}>status:</Typography>
+                <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                  <Form>
+                    <select
+                      name={selectedValue.status}
+                      id={selectedValue.status}
+                      style={{ width: "120px", height: "35px", border: "none" }}
+                    >
+                      {selectedValue.map((val) => (
+                        <option value={val.status} key={val.id}>
+                          {val.status}
+                        </option>
+                      ))}
+                    </select>
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                      sx={{
+                        width: "5px",
+                        // marginTop: "30px",
+                        marginLeft: "20px",
+                        // background: "#133A5E",
+                        "&:hover": { backgroundColor: "#FF9934" },
+                      }}
+                    >
+                      {/* change */}
+                      <EditIcon />
+                    </Button>
+                  </Form>
+                </Formik>
+              </Box>
               <Button
                 onClick={goBack}
                 sx={{
@@ -380,7 +266,6 @@ function OrderDetails() {
               </Button>
             </Box>
           </Box>
-          {/* })}} */}
         </Box>
       </Box>
     </Box>

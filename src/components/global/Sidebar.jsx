@@ -10,6 +10,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import CategoryIcon from "@mui/icons-material/Category";
+import BookIcon from "@mui/icons-material/Book";
 
 function Side() {
   const theme = useTheme();
@@ -28,10 +29,10 @@ function Side() {
         backgroundColor={colors.primary[400]}
         style={{
           height: "100vh",
-          // bottom: 0,
+          bottom: 0,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
+          // justifyContent: "space-between",
           width: "250px",
           borderRight: "none",
         }}
@@ -181,6 +182,16 @@ function Side() {
                   </Typography>
                 </Box>
               </MenuItem>
+              <MenuItem component={<NavLink to="/allBlogs"></NavLink>}>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: "20px" }}
+                >
+                  <BookIcon />
+                  <Typography style={{ fontWeight: 500, fontSize: "16px" }}>
+                    Blogs
+                  </Typography>
+                </Box>
+              </MenuItem>
               {/* <MenuItem component={<Link to="/message" />}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
@@ -191,27 +202,26 @@ function Side() {
                   </Typography>
                 </Box>
               </MenuItem> */}
-              {/* <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
-             
-                <SubMenu
+              <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
+                {/* <SubMenu
                   label="Blogs"
                   style={{ fontWeight: 500, fontSize: "16px" }}
-                >
-                  <MenuItem
+                > */}
+                {/* <MenuItem
                     component={<NavLink to="/allBlogs"></NavLink>}
                     style={{ fontWeight: 500, fontSize: "16px" }}
                   >
-                    All blogs
-                  </MenuItem>
-                  <MenuItem
+                    Blogs
+                  </MenuItem> */}
+                {/* <MenuItem
                     component={<NavLink to="/addBlog"></NavLink>}
                     style={{ fontWeight: 500, fontSize: "16px" }}
                   >
                     Add blog
                   </MenuItem>
-                </SubMenu>
+                </SubMenu> */}
               </Box>
-              <MenuItem component={<Link to="/report" />}>
+              {/* <MenuItem component={<Link to="/report" />}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
                 >
@@ -243,7 +253,7 @@ function Side() {
             gap: "10px",
             cursor: "pointer",
             margin: "0 auto",
-            marginTop: "250px",
+            marginTop: "200px",
             "&:hover": { backgroundColor: "none" },
           }}
           onClick={logOut}

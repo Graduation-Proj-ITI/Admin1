@@ -14,6 +14,33 @@ import Side from "../../components/global/Sidebar";
 import Topbar from "../../components/global/Topbar";
 
 function AllCategories() {
+  const useStyles = {
+    card: {
+      position: "relative",
+      "&:hover $overlay": {
+        opacity: 1,
+      },
+    },
+    overlay: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      opacity: 0,
+      transition: "opacity 0.3s ease-in-out",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    overlayText: {
+      color: "white",
+      fontSize: 24,
+      fontWeight: "bold",
+    },
+  };
+
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -88,7 +115,7 @@ function AllCategories() {
               <Button
                 variant="contained"
                 sx={{
-                  margin: "0 375px 15px 0",
+                  margin: "0 260px 15px 0",
                   backgroundColor: "#133A5E",
                   "&:hover": {
                     backgroundColor: "#FF9934",
@@ -99,29 +126,71 @@ function AllCategories() {
               </Button>
             </Link>
           </Box>
-          <Grid container margin="0 auto" width="1000px">
+          <Grid container width="1000px">
             {paginatedPosts.map((item) => (
-              <Grid key={item._id} sx={{ xs: 4 }} marginBottom="60px">
+              <Grid
+                key={item._id}
+                sx={{ xs: 4, width: "300px" }}
+                marginBottom="30px"
+                marginRight="30px"
+                position="relative"
+                className="thisGrid"
+              >
                 <CardMedia
                   component="img"
                   src={item.image}
                   sx={{
-                    width: "300px",
                     height: "200px",
+                    borderRadius: "10px",
                   }}
                 />
+                <Box
+                  sx={{
+                    display: "none",
+                    textAlign: "center",
+                  }}
+                  className="thisEffect"
+                >
+                  <CardMedia
+                    component="img"
+                    src={item.icon}
+                    sx={{
+                      width: "30px",
+                      height: "20px",
+                      borderRadius: "10px",
+                      marginBottom: "20px",
+                      position: "absolute",
+                      top: "30%",
+                      left: "46%",
+                    }}
+                  />
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontWeight: 450,
+                      color: "white",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      fontSize: "24px",
+                    }}
+                  >
+                    {item.name}
+                  </Typography>
+                </Box>
               </Grid>
             ))}
           </Grid>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+          <Box sx={{ ml: 50, mt: 2 }}>
             <Pagination
               count={totalPages}
               page={currentPage}
               onChange={handlePageChange}
               sx={{
                 "& .Mui-selected": {
-                  backgroundColor: "#133A5E",
-                  color: "white", // Change this to the desired color
+                  backgroundColor: "#ff9934",
+                  color: "white",
                 },
               }}
             />

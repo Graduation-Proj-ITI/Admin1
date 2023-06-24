@@ -10,19 +10,23 @@ import TableRow from "@mui/material/TableRow";
 import CardMedia from "@mui/material/CardMedia";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@mui/material";
 import axios from "axios";
 import useProducts from "../../hooks/useProducts";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
+import { tokens } from "../../utils/Theme";
 
 export default function AllProducts() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const { allProducts, setAllProducts } = useProducts();
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(4);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -32,17 +36,6 @@ export default function AllProducts() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  // function handleDelete(productId) {
-  //   axios
-  //     .delete(`https://furnival.onrender.com/products/${productId}`)
-  //     .then((res) => {
-  //       const updatedBlogPosts = allProducts.filter(
-  //         (product) => product._id !== productId
-  //       );
-  //       setAllProducts(updatedBlogPosts);
-  //     });
-  // }
 
   const token = localStorage.getItem("token");
   const config = {
@@ -124,18 +117,72 @@ export default function AllProducts() {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Product</TableCell>
-                    <TableCell align="center">Image</TableCell>
-                    <TableCell align="center">Price</TableCell>
-                    <TableCell align="center">Status</TableCell>
-                    <TableCell align="center">Edit</TableCell>
-                    <TableCell align="center">Delete</TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 550,
+                      }}
+                      color={colors.primary[400]}
+                    >
+                      Product
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 550,
+                      }}
+                      color={colors.primary[400]}
+                    >
+                      Image
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 550,
+                      }}
+                      color={colors.primary[400]}
+                    >
+                      Price
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 550,
+                      }}
+                      color={colors.primary[400]}
+                    >
+                      Status
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 550,
+                      }}
+                      color={colors.primary[400]}
+                    >
+                      Edit
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 550,
+                      }}
+                      color={colors.primary[400]}
+                    >
+                      Delete
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {allProducts
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((product, index) => {
+                    .map((product) => {
                       return (
                         <TableRow hover tabIndex={-1} key={product._id}>
                           <TableCell align="center">{product.title}</TableCell>
@@ -143,28 +190,38 @@ export default function AllProducts() {
                             <CardMedia
                               component="img"
                               align="center"
-                              src={product.images[index]}
+                              src={product.imageCover}
                               sx={{
                                 width: "62px",
                                 height: "62px",
                                 borderRadius: "10px",
+                                margin: "0 auto",
                               }}
                             />
                           </TableCell>
                           <TableCell align="center">{product.price}</TableCell>
-                          {/* <TableCell align="center">{product.status}</TableCell> */}
                           <TableCell align="center">
                             {product.amount === 0 ? "Sold" : "In stock"}
                           </TableCell>
                           <TableCell align="center">
                             <Link to={`/products/${product._id}`}>
-                              <EditIcon sx={{ color: "#336CDA" }} />
+                              <EditIcon
+                                sx={{
+                                  color: "white",
+                                  backgroundColor: "#133a5e",
+                                  borderRadius: "4px",
+                                  padding: "2px",
+                                }}
+                              />
                             </Link>
                           </TableCell>
                           <TableCell align="center">
                             <DeleteForeverIcon
-                              sx={{ color: "#DA2121" }}
-                              // onClick={() => DeletePost(product._id)}
+                              sx={{
+                                color: "white",
+                                backgroundColor: "#DA2121",
+                                borderRadius: "4px",
+                              }}
                               onClick={() => handleDelete(product._id)}
                             />
                           </TableCell>
@@ -175,7 +232,7 @@ export default function AllProducts() {
               </Table>
             </TableContainer>
             <TablePagination
-              rowsPerPageOptions={[5, 10]}
+              rowsPerPageOptions={[2, 4]}
               component="div"
               count={allProducts.length}
               rowsPerPage={rowsPerPage}

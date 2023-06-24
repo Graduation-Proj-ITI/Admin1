@@ -16,7 +16,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { tokens } from "../utils/Theme";
-
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
@@ -48,7 +47,6 @@ function Dashboard() {
         display: "grid",
         gridTemplateColumns: "repeat(12, 1fr)",
         gridAutoRows: "45px",
-        // gap:"20px"
       }}
     >
       <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
@@ -69,7 +67,6 @@ function Dashboard() {
           <Box
             gridColumn="span 4"
             gridRow="span 2"
-            // backgroundColor={colors.primary[400]}
             overflow="hidden"
             width="35vw"
             height="500px"
@@ -78,8 +75,6 @@ function Dashboard() {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              // borderBottom={`1px solid ${colors.primary[500]}`}
-              // colors={colors.grey[100]}
               p="15px"
             >
               <Typography
@@ -102,33 +97,40 @@ function Dashboard() {
                 sx={{
                   width: 528,
                   height: 50,
-                  // backgroundColor: colors.primary[400],
+                  backgroundColor: colors.primary[400],
                 }}
                 aria-label="simple table"
               >
                 <TableHead>
                   <TableRow>
-                    <TableCell># </TableCell>
+                    <TableCell
+                      style={{
+                        fontWeight: 550,
+                        fontSize: "16px",
+                      }}
+                    >
+                      #
+                    </TableCell>
                     <TableCell
                       align="center"
                       style={{
-                        fontWeight: 500,
-                        fontSize: "14px",
+                        fontWeight: 550,
+                        fontSize: "16px",
                       }}
                     >
                       Name
                     </TableCell>
                     <TableCell
                       align="center"
-                      style={{ fontWeight: 500, fontSize: "14px" }}
+                      style={{ fontWeight: 550, fontSize: "16px" }}
                     >
                       Popularity
                     </TableCell>
                     <TableCell
                       align="center"
-                      style={{ fontWeight: 500, fontSize: "14px" }}
+                      style={{ fontWeight: 550, fontSize: "16px" }}
                     >
-                      Sales
+                      Date
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -151,16 +153,35 @@ function Dashboard() {
                         align="center"
                         style={{ fontWeight: 500, fontSize: "12px" }}
                       >
-                        <BorderLinearProgress
-                          variant="determinate"
-                          value={75}
-                        />
+                        {index === 0 ? (
+                          <BorderLinearProgress
+                            variant="determinate"
+                            value={60}
+                          />
+                        ) : index === 1 ? (
+                          <BorderLinearProgress
+                            variant="determinate"
+                            value={40}
+                          />
+                        ) : index === 2 ? (
+                          <BorderLinearProgress
+                            variant="determinate"
+                            value={80}
+                          />
+                        ) : index === 3 ? (
+                          <BorderLinearProgress
+                            variant="determinate"
+                            value={90}
+                          />
+                        ) : (
+                          ""
+                        )}
                       </TableCell>
                       <TableCell
                         align="center"
                         style={{ fontWeight: 500, fontSize: "12px" }}
                       >
-                        {category.amount}
+                        {category.createdAt.slice(0, 10)}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -170,7 +191,7 @@ function Dashboard() {
           </Box>
           <Box
             gridColumn="span 3"
-            // backgroundColor={colors.primary[400]}
+            backgroundColor={colors.primary[400]}
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -191,7 +212,7 @@ function Dashboard() {
           </Box>
           <Box
             gridColumn="span 3"
-            // backgroundColor={colors.primary[400]}
+            backgroundColor={colors.primary[400]}
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -212,7 +233,7 @@ function Dashboard() {
           </Box>
           <Box
             gridColumn="span 3"
-            // backgroundColor={colors.primary[400]}
+            backgroundColor={colors.primary[400]}
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -237,7 +258,7 @@ function Dashboard() {
           </Box>
           <Box
             gridColumn="span 3"
-            // backgroundColor={colors.primary[400]}
+            backgroundColor={colors.primary[400]}
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -252,7 +273,10 @@ function Dashboard() {
               progress="0.75"
               increase="+14%"
               icon={
-                <PersonAddIcon sx={{ fontSize: "26px", color: "#133A5E" }} />
+                <PersonAddIcon
+                  color={colors.greenAccent[900]}
+                  sx={{ fontSize: "26px" }}
+                />
               }
             />
           </Box>
@@ -260,9 +284,9 @@ function Dashboard() {
           <Box
             gridColumn="span 7"
             gridRow="span 2"
-            // backgroundColor={colors.primary[400]}
+            backgroundColor={colors.primary[400]}
             maxWidth="60vw"
-            marginTop="30px"
+            marginTop="5px"
           >
             <Box
               mt="25px"
@@ -275,14 +299,14 @@ function Dashboard() {
                 <Typography
                   variant="h5"
                   fontWeight="600"
-                  // color={colors.grey[100]}
+                  color={colors.grey[100]}
                 >
                   Revenue Generated
                 </Typography>
                 <Typography
                   variant="h3"
                   fontWeight="bold"
-                  // color={colors.greenAccent[500]}
+                  color={colors.greenAccent[500]}
                 ></Typography>
               </Box>
             </Box>
@@ -294,10 +318,10 @@ function Dashboard() {
           <Box
             gridColumn="span 3"
             gridRow="span 2"
-            // backgroundColor={colors.primary[400]}
+            backgroundColor={colors.primary[400]}
             padding="30px"
             maxWidth="20vw"
-            marginTop="30px"
+            marginTop="5px"
           >
             <Typography
               variant="h5"

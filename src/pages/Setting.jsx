@@ -3,12 +3,18 @@ import { Typography, InputBase, Box, Button } from "@mui/material";
 import Side from "../components/global/Sidebar";
 import Topbar from "../components/global/Topbar";
 import { Formik, Form, Field } from "formik";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Setting() {
   const [form, setForm] = useState({
     name: "",
     email: "",
   });
+
+  const navigate = useNavigate();
+
+  const [admin, setAdmin] = useState({});
 
   const token = localStorage.getItem("token");
   const config = {
@@ -19,37 +25,50 @@ function Setting() {
   };
 
   useEffect(() => {
-    async function EditProfile() {
-      setForm({
-        name: localStorage.getItem("name"),
-        email: localStorage.getItem("email"),
-      });
-    }
-    EditProfile();
+    const getUser = () => {
+      axios
+        .get("https://furnival.onrender.com/users/getMe", config)
+        .then((response) => {
+          setAdmin(response.data.data);
+          // console.log(response.data.data);
+          setForm({
+            name: response.data.data.name,
+            email: response.data.data.email,
+          });
+          // setUserData(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getUser();
   }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleEditProduct = () => {
-    {
-      products.map((product) =>
-        product._Id === product.id ? { ...product } : product
-      );
-    }
-  };
-
   const handleEdit = async (e) => {
-    e.preventDefault();
-    await axios.put(
-      {
+    let formData = {};
+    if (form.email.trim() == admin.email.trim()) {
+      formData = {
+        name: form.name,
+      };
+    } else {
+      formData = {
         name: form.name,
         email: form.email,
-      },
-      config
-    );
-    handleEditProduct();
+      };
+    }
+    axios
+      .put("https://furnival.onrender.com/users/updateMe", formData, config)
+      .then((response) => {
+        setAdmin(response.data.data);
+        navigate("/setting");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -82,7 +101,7 @@ function Setting() {
             Update information
           </Typography>
           <Formik>
-            <Form onSubmit={handleEdit}>
+            <Form>
               <Box
                 backgroundColor="#F8F7F6"
                 sx={{
@@ -152,34 +171,6 @@ function Setting() {
                   />
                 </Box>
               </Box>
-              {/* <Box
-            backgroundColor="#F8F7F6"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "15px",
-              borderRadius: "0 0 12px 12px",
-              width: "750px",
-            }}
-            p={3}
-          >
-            <Typography sx={{ ml: 2, mr: 5, fontSize: "16px" }}>
-              Address
-            </Typography>
-            <Box backgroundColor="#F8F7F6" sx={{ ml: 3, borderRadius: "12px" }}>
-              <InputBase
-                sx={{
-                  width: "500px",
-                  height: "45px",
-                  ml: 2,
-                  backgroundColor: "white",
-                  borderRadius: "10px",
-                  padding: "16px",
-                }}
-                value="Egypt"
-              />
-            </Box>
-          </Box> */}
               <Box
                 sx={{
                   display: "flex",
@@ -197,6 +188,7 @@ function Setting() {
                     background: "#133A5E",
                     "&:hover": { backgroundColor: "#FF9934" },
                   }}
+                  onClick={(e) => handleEdit(e)}
                 >
                   Update
                 </Button>

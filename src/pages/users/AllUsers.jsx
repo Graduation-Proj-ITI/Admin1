@@ -1,5 +1,11 @@
 import React from "react";
-import { Box, Typography, Breadcrumbs, CardMedia } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Breadcrumbs,
+  CardMedia,
+  useTheme,
+} from "@mui/material";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import FilterFramesIcon from "@mui/icons-material/FilterFrames";
@@ -22,12 +28,16 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
+import { tokens } from "../../utils/Theme";
 
 function AllUsers() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const { users, setUsers } = useUsers();
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(4);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -39,6 +49,7 @@ function AllUsers() {
   };
 
   // console.log(users);
+
   function handleDelete(userId) {
     axios
       .delete(`https://furnival.onrender.com/users/${userId}`, {
@@ -55,7 +66,7 @@ function AllUsers() {
         sx={{
           display: "grid",
           gridTemplateColumns: "repeat(12, 1fr)",
-          gridAutoRows: "45px",
+          gridAutoRows: "10px",
           // gap:"20px"
         }}
       >
@@ -74,7 +85,7 @@ function AllUsers() {
             <Box
               display="grid"
               gridTemplateColumns="repeat(12, 1fr)"
-              gridAutoRows="140px"
+              gridAutoRows="90px"
               // gap="20px"
               marginLeft="20px"
             >
@@ -94,7 +105,7 @@ function AllUsers() {
                   justifyContent="center"
                   width="18vw"
                   height="150px"
-                  marginTop="40px"
+                  marginTop="15px"
                   border="1px solid lightgrey"
                 >
                   <StatBox
@@ -118,7 +129,7 @@ function AllUsers() {
                   justifyContent="center"
                   width="18vw"
                   height="150px"
-                  marginTop="40px"
+                  marginTop="15px"
                   border="1px solid lightgrey"
                   // boxShadow="10px 10px 20px 0px #B9B9B9"
                 >
@@ -143,7 +154,7 @@ function AllUsers() {
                   justifyContent="center"
                   width="18vw"
                   height="150px"
-                  marginTop="40px"
+                  marginTop="15px"
                   border="1px solid lightgrey"
                 >
                   <StatBox
@@ -158,7 +169,7 @@ function AllUsers() {
                     }
                   />
                 </Box>
-                <Box
+                {/* <Box
                   // display="flex"
                   gridColumn="span 9"
                   gridRow="span 1"
@@ -169,7 +180,7 @@ function AllUsers() {
                     sx={{
                       // color: colors.greenAccent[600],
                       p: 1,
-                      fontSize: "40px",
+                      fontSize: "15px",
                       // ml: 1,
                       position: "absolute",
                       top: "6px",
@@ -190,7 +201,7 @@ function AllUsers() {
                     }}
                     placeholder="Search here..."
                   />
-                </Box>
+                </Box> */}
               </Box>
               {/* <Box
           gridColumn="span 3"
@@ -217,7 +228,7 @@ function AllUsers() {
                 sx={{
                   gridColumn: "span 12",
                   gridRow: "span 5",
-                  marginTop: "40px",
+                  marginTop: "10px",
                 }}
               >
                 <Paper
@@ -231,13 +242,82 @@ function AllUsers() {
                     <Table stickyHeader aria-label="sticky table">
                       <TableHead>
                         <TableRow>
-                          <TableCell align="center">Id</TableCell>
-                          <TableCell align="center">Image</TableCell>
-                          <TableCell align="center">User</TableCell>
-                          <TableCell align="center">Email</TableCell>
-                          <TableCell align="center">Location</TableCell>
-                          <TableCell align="center">Phone</TableCell>
-                          <TableCell align="center">Status</TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Id
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Image
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            User
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Email
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Location
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Phone
+                          </TableCell>
+                          {/* <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              color: "#133a5e",
+                            }}
+                          >
+                            Status
+                          </TableCell> */}
                           <TableCell align="center"></TableCell>
                           {/* <TableCell align="center"></TableCell>
                   <TableCell align="center"></TableCell> */}
@@ -270,20 +350,20 @@ function AllUsers() {
                                   {user.email}
                                 </TableCell>
                                 <TableCell align="center">
-                                  {user.addresses.details}
+                                  {/* {user.addresses} */}
                                 </TableCell>
                                 <TableCell align="center">
                                   {user.phone}
                                 </TableCell>
-                                <TableCell align="center">
+                                {/* <TableCell align="center">
                                   {user.status}
-                                </TableCell>
+                                </TableCell> */}
                                 <TableCell>
                                   <Link to={`/users/${user._id}`}>
                                     <RemoveRedEyeIcon
                                       sx={{
                                         color: "#8FC83D",
-                                        marginRight: "25px",
+                                        marginRight: "15px",
                                       }}
                                     />
                                   </Link>
@@ -304,7 +384,7 @@ function AllUsers() {
                     </Table>
                   </TableContainer>
                   <TablePagination
-                    rowsPerPageOptions={[5, 10]}
+                    rowsPerPageOptions={[2, 4]}
                     component="div"
                     count={users.length}
                     rowsPerPage={rowsPerPage}

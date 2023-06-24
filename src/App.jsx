@@ -43,7 +43,7 @@ function App() {
 
               <Route path="/allBlogs" element={<AllBlogs />} />
               <Route path="/addBlog" element={<AddBlog />} />
-              <Route path="/blogs/:id" element={<EditBlog />} />
+              <Route path="/blogs/:blogId" element={<EditBlog />} />
 
               <Route path="/allCategories" element={<AllCategories />} />
               <Route path="/topCategories" element={<TopCategories />} />

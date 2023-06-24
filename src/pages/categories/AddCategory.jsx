@@ -10,6 +10,7 @@ const AddCategory = () => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     image: Yup.string().required("Image is required"),
+    icon: Yup.string().required("Icon is required"),
   });
 
   const token = localStorage.getItem("token");
@@ -23,7 +24,8 @@ const AddCategory = () => {
 
   const initialValues = {
     name: "",
-    image: "",
+    image: null,
+    icon: null,
   };
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -88,52 +90,53 @@ const AddCategory = () => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            <Form>
-              <Box
-                sx={{
-                  backgroundColor: "#F8F7F6",
-                  display: "flex",
-                  alignItems: "center",
-                  p: 2,
-                  borderRadius: "10px 10px 0 0",
-                  width: "800px",
-                  height: "90px",
-                  marginBottom: "20px",
-                }}
-              >
-                <Box display="flex" mr={8}>
-                  <Typography
-                    sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                    htmlFor="name"
-                  >
-                    Name
-                  </Typography>
-                  <Typography sx={{ fontSize: "24px", color: "red" }}>
-                    *
-                  </Typography>
+            {({ setFieldValue }) => (
+              <Form>
+                <Box
+                  sx={{
+                    backgroundColor: "#F8F7F6",
+                    display: "flex",
+                    alignItems: "center",
+                    p: 2,
+                    borderRadius: "10px 10px 0 0",
+                    width: "800px",
+                    height: "90px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <Box display="flex" mr={8}>
+                    <Typography
+                      sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                      htmlFor="name"
+                    >
+                      Name
+                    </Typography>
+                    <Typography sx={{ fontSize: "24px", color: "red" }}>
+                      *
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Field
+                      type="text"
+                      id="name"
+                      name="name"
+                      style={{
+                        width: "580px",
+                        height: "50px",
+                        border: "none",
+                        borderRadius: "10px",
+                        outline: "1px solid lightgrey",
+                        padding: "16px",
+                      }}
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="div"
+                      style={{ color: "red", fontSize: "16px" }}
+                    />
+                  </Box>
                 </Box>
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    style={{
-                      width: "580px",
-                      height: "50px",
-                      border: "none",
-                      borderRadius: "10px",
-                      outline: "1px solid lightgrey",
-                      padding: "16px",
-                    }}
-                  />
-                  <ErrorMessage
-                    name="name"
-                    component="div"
-                    style={{ color: "red", fontSize: "16px" }}
-                  />
-                </Box>
-              </Box>
-              {/* <Box
+                {/* <Box
             sx={{
               backgroundColor: "#F8F7F6",
               display: "flex",
@@ -174,72 +177,97 @@ const AddCategory = () => {
             </Box>
           </Box> */}
 
-              <Box
-                sx={{
-                  backgroundColor: "#F8F7F6",
-                  display: "flex",
-                  p: 2,
-                  marginBottom: "20px",
-                  width: "800px",
-                  height: "90px",
-                }}
-              >
-                <Box display="flex" mr={8}>
-                  <Typography
-                    sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                    htmlFor="image"
-                  >
-                    Image
-                  </Typography>
-                  <Typography sx={{ fontSize: "24px", color: "red" }}>
-                    *
-                  </Typography>
-                </Box>
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <Field
-                    type="file"
-                    id="image"
-                    name="image"
-                    style={{
-                      width: "580px",
-                      height: "50px",
-                      border: "none",
-                      borderRadius: "10px",
-                      outline: "1px solid lightgrey",
-                      padding: "16px",
-                    }}
-                  />
-                  <ErrorMessage
-                    name="image"
-                    component="div"
-                    style={{ color: "red", fontSize: "16px" }}
-                  />
-                </Box>
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  margin: " 0 0 30px 220px",
-                }}
-              >
-                <Button
-                  variant="contained"
-                  type="submit"
+                <Box
                   sx={{
-                    width: "150px",
-                    fontSize: "16px",
-                    textTransform: "capitalize",
-                    marginTop: "30px",
-                    background: "#133A5E",
-                    "&:hover": { backgroundColor: "#FF9934" },
+                    backgroundColor: "#F8F7F6",
+                    display: "flex",
+                    p: 2,
+                    marginBottom: "20px",
+                    width: "800px",
+                    height: "90px",
                   }}
                 >
-                  Save
-                </Button>
-              </Box>
-            </Form>
+                  <Box display="flex" mr={8}>
+                    <Typography
+                      sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                      htmlFor="image"
+                    >
+                      Image
+                    </Typography>
+                    <Typography sx={{ fontSize: "24px", color: "red" }}>
+                      *
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Field name="image">
+                      {({ field, form }) => (
+                        <div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(event) => {
+                              const file = event.currentTarget.files[0];
+                              form.setFieldValue(field.name, file);
+                            }}
+                          />
+                          <ErrorMessage name="image" component="div" />
+                        </div>
+                      )}
+                    </Field>
+                    <ErrorMessage
+                      name="image"
+                      component="div"
+                      style={{ color: "red", fontSize: "16px" }}
+                    />
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Field name="icon">
+                      {({ field, form }) => (
+                        <div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(event) => {
+                              const file = event.currentTarget.files[0];
+                              form.setFieldValue(field.name, file);
+                            }}
+                          />
+                          <ErrorMessage name="icon" component="div" />
+                        </div>
+                      )}
+                    </Field>
+                    <ErrorMessage
+                      name="icon"
+                      component="div"
+                      style={{ color: "red", fontSize: "16px" }}
+                    />
+                  </Box>
+                </Box>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    margin: " 0 0 30px 220px",
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    sx={{
+                      width: "150px",
+                      fontSize: "16px",
+                      textTransform: "capitalize",
+                      marginTop: "30px",
+                      background: "#133A5E",
+                      "&:hover": { backgroundColor: "#FF9934" },
+                    }}
+                  >
+                    Save
+                  </Button>
+                </Box>
+              </Form>
+            )}
           </Formik>
         </Box>
       </Box>

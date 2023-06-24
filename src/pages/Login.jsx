@@ -87,7 +87,7 @@ function Login() {
           // backgroundColor: "white",
           borderRadius: "15px",
           width: "42vw",
-          height: "55vh",
+          height: "58vh",
           boxShadow: "0px 10px 15px 0px #052440",
         }}
       >
@@ -207,14 +207,6 @@ function Login() {
               >
                 {loading ? <CircularProgress color="inherit" /> : "Sign in"}
               </Button>
-              {/* <Typography
-                variant="body"
-                sx={{
-                  fontSize: "15px",
-                }}
-              >
-                Forget you password?
-              </Typography> */}
             </Box>
           </Box>
         </Box>

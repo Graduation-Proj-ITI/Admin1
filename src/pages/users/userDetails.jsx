@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
+import { tokens } from "../../utils/Theme";
 
 function UserDetails() {
   const { userId } = useParams();
@@ -23,6 +24,8 @@ function UserDetails() {
     location: "",
     phone: "",
     status: "",
+    profileImg: "",
+    active: "",
   });
 
   const navigate = useNavigate();
@@ -53,6 +56,8 @@ function UserDetails() {
         phone: data.data.phone,
         location: data.data.location,
         status: data.data.status,
+        profileImg: data.data.profileImg,
+        active: data.data.active,
       });
     }
     fetchPostById();
@@ -101,7 +106,7 @@ function UserDetails() {
             <Box>
               <CardMedia
                 component="img"
-                src="../src/assets/person.avif"
+                src={form.profileImg}
                 sx={{
                   width: "170px",
                   marginLeft: "40px",
@@ -166,7 +171,9 @@ function UserDetails() {
                 }}
               >
                 <Typography sx={{ fontSize: "16px" }}>status:</Typography>
-                <Typography sx={{ fontSize: "16px" }}>{form.status}</Typography>
+                <Typography sx={{ fontSize: "16px" }}>
+                  {form.active === "true" ? "Active" : "InActive"}
+                </Typography>
               </Box>
               <Button
                 onClick={goBack}

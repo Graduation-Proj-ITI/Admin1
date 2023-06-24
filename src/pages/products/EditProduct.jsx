@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useProducts from "../../hooks/useProducts";
 import { Formik, Form, Field } from "formik";
-import { Typography, Box, Button } from "@mui/material";
+import { Typography, Box, Button, Breadcrumbs } from "@mui/material";
 import useCategory from "../../hooks/useCategory";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
@@ -60,7 +60,7 @@ function EditProduct() {
     fetchCategory();
   }, []);
 
-  console.log(categories);
+  // console.log(categories);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -89,7 +89,7 @@ function EditProduct() {
     );
     handleEditProduct(data);
   };
-  console.log(categories.find((item) => item.name === form.category));
+  // console.log(categories.find((item) => item.name === form.category));
 
   return (
     <>
@@ -104,9 +104,23 @@ function EditProduct() {
           <Side />
         </Box>
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", width: "82vw", margin: " -20px 0 0 280px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          width: "82vw",
+          margin: " -40px 0 0 260px",
+        }}
+      >
         <Topbar />
-        <Box>
+        <Box sx={{ marginLeft: "20px" }}>
+          <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "20px" }}>
+            <Typography>Home</Typography>
+            <Typography>Products</Typography>
+            <Typography color="#FF9934" aria-current="page">
+              Edit product
+            </Typography>
+          </Breadcrumbs>
           <Formik>
             <Form onSubmit={handleEdit}>
               <Box
