@@ -38,7 +38,6 @@ const AddCategory = () => {
       );
 
       resetForm();
-      // navigate("/allCategories")
     } catch (error) {
       console.error(error);
     }
@@ -50,7 +49,6 @@ const AddCategory = () => {
         display: "grid",
         gridTemplateColumns: "repeat(12, 1fr)",
         gridAutoRows: "45px",
-        // gap:"20px"
       }}
     >
       <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
@@ -104,7 +102,7 @@ const AddCategory = () => {
                     marginBottom: "20px",
                   }}
                 >
-                  <Box display="flex" mr={8}>
+                  <Box display="flex" mr={11}>
                     <Typography
                       sx={{ ml: 1, mr: 0, fontSize: "18px" }}
                       htmlFor="name"
@@ -136,47 +134,6 @@ const AddCategory = () => {
                     />
                   </Box>
                 </Box>
-                {/* <Box
-            sx={{
-              backgroundColor: "#F8F7F6",
-              display: "flex",
-              p: 2,
-              marginBottom: "20px",
-              width: "800px",
-              height: "90px",
-            }}
-          >
-            <Box display="flex" mr={9.2}>
-              <Typography
-                sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                htmlFor="date"
-              >
-                Date
-              </Typography>
-              <Typography sx={{ fontSize: "24px", color: "red" }}>*</Typography>
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <Field
-                type="text"
-                id="date"
-                name="date"
-                style={{
-                  width: "580px",
-                  height: "50px",
-                  border: "none",
-                  borderRadius: "10px",
-                  outline: "1px solid lightgrey",
-                  padding: "16px",
-                }}
-              />
-              <ErrorMessage
-                name="date"
-                component="div"
-                style={{ color: "red", fontSize: "16px" }}
-              />
-            </Box>
-          </Box> */}
-
                 <Box
                   sx={{
                     backgroundColor: "#F8F7F6",
@@ -187,7 +144,7 @@ const AddCategory = () => {
                     height: "90px",
                   }}
                 >
-                  <Box display="flex" mr={8}>
+                  <Box display="flex" mr={10.5}>
                     <Typography
                       sx={{ ml: 1, mr: 0, fontSize: "18px" }}
                       htmlFor="image"
@@ -209,6 +166,15 @@ const AddCategory = () => {
                               const file = event.currentTarget.files[0];
                               form.setFieldValue(field.name, file);
                             }}
+                            style={{
+                              width: "580px",
+                              height: "50px",
+                              border: "none",
+                              borderRadius: "10px",
+                              outline: "1px solid lightgrey",
+                              padding: "16px",
+                              backgroundColor: "white",
+                            }}
                           />
                           <ErrorMessage name="image" component="div" />
                         </div>
@@ -220,6 +186,29 @@ const AddCategory = () => {
                       style={{ color: "red", fontSize: "16px" }}
                     />
                   </Box>
+                </Box>
+                <Box
+                  sx={{
+                    backgroundColor: "#F8F7F6",
+                    display: "flex",
+                    p: 2,
+                    marginBottom: "20px",
+                    borderRadius: "0 0 10px 10px",
+                    width: "800px",
+                    height: "90px",
+                  }}
+                >
+                  <Box display="flex" mr={6}>
+                    <Typography
+                      sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                      htmlFor="image"
+                    >
+                      Image icon
+                    </Typography>
+                    <Typography sx={{ fontSize: "24px", color: "red" }}>
+                      *
+                    </Typography>
+                  </Box>
                   <Box sx={{ display: "flex", flexDirection: "column" }}>
                     <Field name="icon">
                       {({ field, form }) => (
@@ -230,6 +219,15 @@ const AddCategory = () => {
                             onChange={(event) => {
                               const file = event.currentTarget.files[0];
                               form.setFieldValue(field.name, file);
+                            }}
+                            style={{
+                              width: "580px",
+                              height: "50px",
+                              border: "none",
+                              borderRadius: "10px",
+                              outline: "1px solid lightgrey",
+                              padding: "16px",
+                              backgroundColor: "white",
                             }}
                           />
                           <ErrorMessage name="icon" component="div" />

@@ -77,10 +77,12 @@ export default function AllProducts() {
         <Box sx={{ marginLeft: "20px" }}>
           <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
             <Typography>Home</Typography>
-            <Typography>Products</Typography>
             <Typography color="#FF9934" aria-current="page">
               All products
             </Typography>
+            {/* <Typography color="#FF9934" aria-current="page">
+              All products
+            </Typography> */}
           </Breadcrumbs>
           <Box
             sx={{
@@ -185,7 +187,12 @@ export default function AllProducts() {
                     .map((product) => {
                       return (
                         <TableRow hover tabIndex={-1} key={product._id}>
-                          <TableCell align="center">{product.title}</TableCell>
+                          <TableCell
+                            align="center"
+                            style={{ fontWeight: 500, fontSize: "14px" }}
+                          >
+                            {product.title}
+                          </TableCell>
                           <TableCell>
                             <CardMedia
                               component="img"
@@ -199,8 +206,16 @@ export default function AllProducts() {
                               }}
                             />
                           </TableCell>
-                          <TableCell align="center">{product.price}</TableCell>
-                          <TableCell align="center">
+                          <TableCell
+                            align="center"
+                            style={{ fontWeight: 500, fontSize: "14px" }}
+                          >
+                            {product.price}
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{ fontWeight: 500, fontSize: "14px" }}
+                          >
                             {product.amount === 0 ? "Sold" : "In stock"}
                           </TableCell>
                           <TableCell align="center">

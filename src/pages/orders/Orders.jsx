@@ -165,21 +165,48 @@ function Orders() {
                       ).map((order, index) => {
                         return (
                           <TableRow hover tabIndex={-1} key={order._id}>
-                            <TableCell align="center">#{index + 1}</TableCell>
-                            <TableCell align="center">{order.user}</TableCell>
-                            <TableCell align="center">
+                            <TableCell
+                              align="center"
+                              style={{ fontWeight: 500, fontSize: "14px" }}
+                            >
+                              #{index + 1}
+                            </TableCell>
+                            <TableCell
+                              align="center"
+                              style={{ fontWeight: 500, fontSize: "14px" }}
+                            >
+                              {order.user}
+                            </TableCell>
+                            <TableCell
+                              align="center"
+                              style={{ fontWeight: 500, fontSize: "14px" }}
+                            >
                               {order.product}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell
+                              align="center"
+                              style={{ fontWeight: 500, fontSize: "14px" }}
+                            >
                               {order.paymentMethodType}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell
+                              align="center"
+                              style={{ fontWeight: 500, fontSize: "14px" }}
+                            >
                               {order.totalOrderPrice}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell
+                              align="center"
+                              style={{ fontWeight: 500, fontSize: "14px" }}
+                            >
                               {order.createdAt.slice(0, 10)}
                             </TableCell>
-                            <TableCell align="center">{order.status}</TableCell>
+                            <TableCell
+                              align="center"
+                              style={{ fontWeight: 500, fontSize: "14px" }}
+                            >
+                              {order.status}
+                            </TableCell>
                             <TableCell sx={{ display: "flex", gap: "20px" }}>
                               <Link to={`/orders/${order._id}`}>
                                 <RemoveRedEyeIcon sx={{ color: "#8FC83D" }} />

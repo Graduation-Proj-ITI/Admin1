@@ -84,17 +84,16 @@ function AllCategories() {
         <Topbar />
         <Box margin="0 0 20px 20px">
           <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-            <Link sx={{ textDecoration: "none" }}>Home</Link>
-            <Link sx={{ textDecoration: "none" }}>Categories</Link>
-            <Link
-              // underline="hover"
-              sx={{ textDecoration: "none" }}
-              color="#FF9934"
-              // href="/material-ui/react-breadcrumbs/"
-              aria-current="page"
+            <Typography sx={{ textDecoration: "none" }}>Home</Typography>
+            <Typography
+              sx={{
+                textDecoration: "none",
+                color: "#FF9934",
+                ariaCurrent: "page",
+              }}
             >
-              All categories
-            </Link>
+              Categories
+            </Typography>
           </Breadcrumbs>
           <Box
             sx={{

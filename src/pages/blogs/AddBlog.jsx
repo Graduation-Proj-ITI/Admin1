@@ -10,13 +10,13 @@ const AddBlog = () => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
     content: Yup.string().required("content is required"),
-    images: Yup.string().required("Image is required"),
+    image: Yup.string().required("Image is required"),
   });
 
   const initialValues = {
     title: "",
     content: "",
-    images: null,
+    image: "",
   };
 
   const token = localStorage.getItem("token");
@@ -32,7 +32,7 @@ const AddBlog = () => {
       await axios.post("https://furnival.onrender.com/blogs", values, config);
       resetForm();
       console.log(values);
-      console.log(e.target.files[0]);
+      // console.log(e.target.files[0]);
     } catch (error) {
       console.error(error);
     }
@@ -149,27 +149,32 @@ const AddBlog = () => {
                       *
                     </Typography>
                   </Box>
-                  {/* <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <Field
-                    type="file"
-                    id="images"
-                    name="images"
-                    style={{
-                      width: "580px",
-                      height: "50px",
-                      border: "none",
-                      borderRadius: "10px",
-                      outline: "1px solid lightgrey",
-                      padding: "16px",
-                    }}
-                  />
-                  <ErrorMessage
-                    name="image"
-                    component="div"
-                    style={{ color: "red", fontSize: "16px" }}
-                  />
-                </Box> */}
-                  <Field name="images">
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Field name="image">
+                      {({ field, form }) => (
+                        <div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(event) => {
+                              const file = event.currentTarget.files[0];
+                              form.setFieldValue(field.name, file);
+                            }}
+                            style={{
+                              width: "580px",
+                              height: "50px",
+                              border: "none",
+                              borderRadius: "10px",
+                              outline: "1px solid lightgrey",
+                              padding: "16px",
+                            }}
+                          />
+                          <ErrorMessage name="image" component="div" />
+                        </div>
+                      )}
+                    </Field>
+                  </Box>
+                  {/* <Field name="image">
                     {({ field, form }) => (
                       <div>
                         <input
@@ -183,7 +188,7 @@ const AddBlog = () => {
                         <ErrorMessage name="images" component="div" />
                       </div>
                     )}
-                  </Field>
+                  </Field> */}
                 </Box>
                 <Box
                   sx={{

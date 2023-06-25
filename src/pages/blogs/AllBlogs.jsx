@@ -43,6 +43,8 @@ const AllBlogs = () => {
       });
   }
 
+  console.log(posts);
+
   return (
     <Box
       sx={{
@@ -60,17 +62,14 @@ const AllBlogs = () => {
         <Topbar />
         <Box margin="0 0 20px 20px">
           <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-            <Link sx={{ textDecoration: "none" }}>Home</Link>
-            <Link sx={{ textDecoration: "none" }}>Categories</Link>
-            <Link
-              // underline="hover"
+            <Typography sx={{ textDecoration: "none" }}>Home</Typography>
+            <Typography
               sx={{ textDecoration: "none" }}
               color="#FF9934"
-              // href="/material-ui/react-breadcrumbs/"
               aria-current="page"
             >
               All blogs
-            </Link>
+            </Typography>
           </Breadcrumbs>
           <Box
             sx={{
@@ -118,7 +117,7 @@ const AllBlogs = () => {
               <Box>
                 <CardMedia
                   component="img"
-                  src={post.images[0]}
+                  src={post.image}
                   sx={{ width: "300px", height: "220px" }}
                 />
               </Box>
@@ -129,7 +128,7 @@ const AllBlogs = () => {
                     sx={{
                       fontSize: "22px",
                       fontWeight: 600,
-                      marginBottom: "20px",
+                      marginBottom: "5px",
                     }}
                   >
                     {post.title}
@@ -146,15 +145,17 @@ const AllBlogs = () => {
                   />
                 </Box>
                 <Box>
+                  <Typography marginBottom="15px">
+                    {post.createdAt.slice(0, 10)}
+                  </Typography>
+                </Box>
+                <Box>
                   <Typography
                     variant="body"
                     sx={{ fontSize: "16px", fontWeight: 200 }}
                   >
                     {post.content}
                   </Typography>
-                </Box>
-                <Box>
-                  <Typography>{post.createdAt.slice(0, 10)}</Typography>
                 </Box>
               </Box>
             </Box>

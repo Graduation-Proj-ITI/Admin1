@@ -14,9 +14,10 @@ function EditPost() {
   const [form, setForm] = useState({
     title: "",
     content: "",
-    images: [],
+    image: "",
   });
 
+  console.log(posts);
   useEffect(() => {
     async function fetchPostById() {
       const { data } = await axios.get(
@@ -26,8 +27,9 @@ function EditPost() {
       setForm({
         title: data.data.title,
         content: data.data.content,
-        images: data.data.images,
+        image: data.data.image,
       });
+      console.log(data.data.image);
     }
     fetchPostById();
   }, [blogId]);
@@ -70,7 +72,6 @@ function EditPost() {
         display: "grid",
         gridTemplateColumns: "repeat(12, 1fr)",
         gridAutoRows: "45px",
-        // gap:"20px"
       }}
     >
       <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
@@ -83,10 +84,8 @@ function EditPost() {
             <Link sx={{ textDecoration: "none" }}>Home</Link>
             <Link sx={{ textDecoration: "none" }}>Blogs</Link>
             <Link
-              // underline="hover"
               sx={{ textDecoration: "none" }}
               color="#FF9934"
-              // href="/material-ui/react-breadcrumbs/"
               aria-current="page"
             >
               Edit blog
@@ -194,7 +193,7 @@ function EditPost() {
                 <Box display="flex" mr={7.6}>
                   <Typography
                     sx={{ ml: 1, mr: 0, fontSize: "18px" }}
-                    htmlFor="image"
+                    htmlFor="images"
                   >
                     Image
                   </Typography>
@@ -212,7 +211,7 @@ function EditPost() {
                     type="file"
                     id="image"
                     name="image"
-                    value={form.images[0]}
+                    // value={form.image}
                     onChange={handleChange}
                     style={{
                       width: "580px",

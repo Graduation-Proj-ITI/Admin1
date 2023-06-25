@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, Breadcrumbs } from "@mui/material";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -54,7 +54,12 @@ function Dashboard() {
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Topbar />
-
+        <Breadcrumbs aria-label="breadcrumb" sx={{ margin: "0 0 0 20px" }}>
+          <Typography>Home</Typography>
+          <Typography color="#FF9934" aria-current="page">
+            Dashboard
+          </Typography>
+        </Breadcrumbs>
         <Box
           display="grid"
           gridTemplateColumns="repeat(12, 1fr)"
@@ -140,7 +145,11 @@ function Dashboard() {
                       key={category._id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell component="th" scope="row">
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        style={{ fontWeight: 500, fontSize: "12px" }}
+                      >
                         #{index + 1}
                       </TableCell>
                       <TableCell
@@ -206,7 +215,10 @@ function Dashboard() {
               progress="0.50"
               increase="+21%"
               icon={
-                <PointOfSaleIcon sx={{ fontSize: "26px", color: "#133A5E" }} />
+                <PointOfSaleIcon
+                  sx={{ fontSize: "26px" }}
+                  color={colors.greenAccent[900]}
+                />
               }
             />
           </Box>
@@ -227,7 +239,10 @@ function Dashboard() {
               progress="0.30"
               increase="+5%"
               icon={
-                <FilterFramesIcon sx={{ fontSize: "26px", color: "#133A5E" }} />
+                <FilterFramesIcon
+                  sx={{ fontSize: "26px" }}
+                  color={colors.greenAccent[900]}
+                />
               }
             />
           </Box>

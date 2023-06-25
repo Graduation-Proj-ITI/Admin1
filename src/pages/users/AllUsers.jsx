@@ -10,7 +10,6 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import FilterFramesIcon from "@mui/icons-material/FilterFrames";
 import StatBox from "../../components/shapes/StatBox";
-import GeographyChart from "../../components/shapes/GeographyChart";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -24,8 +23,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import useUsers from "../../hooks/useUsers";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
 import { tokens } from "../../utils/Theme";
@@ -99,11 +96,11 @@ function AllUsers() {
                 <Box
                   gridColumn="span 3"
                   gridRow="span 1"
-                  // backgroundColor={colors.primary[400]}
+                  backgroundColor={colors.primary[400]}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                  width="18vw"
+                  width="20vw"
                   height="150px"
                   marginTop="15px"
                   border="1px solid lightgrey"
@@ -115,7 +112,8 @@ function AllUsers() {
                     increase="+5%"
                     icon={
                       <FilterFramesIcon
-                        sx={{ fontSize: "26px", color: "#133A5E" }}
+                        sx={{ fontSize: "26px" }}
+                        color={colors.greenAccent[900]}
                       />
                     }
                   />
@@ -123,11 +121,11 @@ function AllUsers() {
                 <Box
                   gridColumn="span 3"
                   gridRow="span 1"
-                  // backgroundColor={colors.primary[400]}
+                  backgroundColor={colors.primary[400]}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                  width="18vw"
+                  width="20vw"
                   height="150px"
                   marginTop="15px"
                   border="1px solid lightgrey"
@@ -140,7 +138,8 @@ function AllUsers() {
                     increase="+43%"
                     icon={
                       <LocalShippingIcon
-                        sx={{ fontSize: "26px", color: "#133A5E" }}
+                        sx={{ fontSize: "26px" }}
+                        color={colors.greenAccent[900]}
                       />
                     }
                   />
@@ -148,11 +147,11 @@ function AllUsers() {
                 <Box
                   gridColumn="span 3"
                   gridRow="span 1"
-                  // backgroundColor={colors.primary[400]}
+                  backgroundColor={colors.primary[400]}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                  width="18vw"
+                  width="20vw"
                   height="150px"
                   marginTop="15px"
                   border="1px solid lightgrey"
@@ -164,66 +163,14 @@ function AllUsers() {
                     increase="+14%"
                     icon={
                       <PersonAddIcon
-                        sx={{ fontSize: "26px", color: "#133A5E" }}
+                        sx={{ fontSize: "26px" }}
+                        color={colors.greenAccent[900]}
                       />
                     }
                   />
                 </Box>
-                {/* <Box
-                  // display="flex"
-                  gridColumn="span 9"
-                  gridRow="span 1"
-                  // backgroundColor={colors.primary[400]}
-                  position="relative"
-                >
-                  <SearchIcon
-                    sx={{
-                      // color: colors.greenAccent[600],
-                      p: 1,
-                      fontSize: "15px",
-                      // ml: 1,
-                      position: "absolute",
-                      top: "6px",
-                      right: "100px",
-                      zIndex: 2,
-                      color: "#133A5E",
-                      marginRight: "30px",
-                    }}
-                  />
-                  <InputBase
-                    sx={{
-                      flex: 1,
-                      width: "750px",
-                      p: 1.2,
-                      border: "1px solid lightgrey",
-                      backgroundColor: "#F5F5F5",
-                      borderRadius: "10px",
-                    }}
-                    placeholder="Search here..."
-                  />
-                </Box> */}
               </Box>
-              {/* <Box
-          gridColumn="span 3"
-          marginRight="30px"
-          gridRow="span 2"
-          // backgroundColor={colors.primary[400]}
-          backgroundColor="#F5F5F5"
-          padding="15px"
-          width="20vw"
-          marginTop="5px"
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Sales by Locations
-          </Typography>
-          <Box height="200px">
-            <GeographyChart isDashboard={true} />
-          </Box>
-        </Box> */}
+
               <Box
                 sx={{
                   gridColumn: "span 12",
@@ -247,7 +194,6 @@ function AllUsers() {
                             sx={{
                               fontSize: "16px",
                               fontWeight: 550,
-                              // color: "#133a5e",
                             }}
                             color={colors.primary[400]}
                           >
@@ -258,7 +204,6 @@ function AllUsers() {
                             sx={{
                               fontSize: "16px",
                               fontWeight: 550,
-                              // color: "#133a5e",
                             }}
                             color={colors.primary[400]}
                           >
@@ -269,7 +214,6 @@ function AllUsers() {
                             sx={{
                               fontSize: "16px",
                               fontWeight: 550,
-                              // color: "#133a5e",
                             }}
                             color={colors.primary[400]}
                           >
@@ -280,18 +224,16 @@ function AllUsers() {
                             sx={{
                               fontSize: "16px",
                               fontWeight: 550,
-                              // color: "#133a5e",
                             }}
                             color={colors.primary[400]}
                           >
                             Email
                           </TableCell>
-                          <TableCell
+                          {/* <TableCell
                             align="center"
                             sx={{
                               fontSize: "16px",
                               fontWeight: 550,
-                              // color: "#133a5e",
                             }}
                             color={colors.primary[400]}
                           >
@@ -302,25 +244,12 @@ function AllUsers() {
                             sx={{
                               fontSize: "16px",
                               fontWeight: 550,
-                              // color: "#133a5e",
                             }}
                             color={colors.primary[400]}
                           >
                             Phone
-                          </TableCell>
-                          {/* <TableCell
-                            align="center"
-                            sx={{
-                              fontSize: "16px",
-                              fontWeight: 550,
-                              color: "#133a5e",
-                            }}
-                          >
-                            Status
                           </TableCell> */}
                           <TableCell align="center"></TableCell>
-                          {/* <TableCell align="center"></TableCell>
-                  <TableCell align="center"></TableCell> */}
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -333,30 +262,45 @@ function AllUsers() {
                           .map((user, index) => {
                             return (
                               <TableRow hover tabIndex={-1} key={user._id}>
-                                <TableCell align="center">
+                                <TableCell
+                                  align="center"
+                                  style={{ fontWeight: 500, fontSize: "14px" }}
+                                >
                                   #{index + 1}
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell
+                                  align="center"
+                                  style={{ fontWeight: 500, fontSize: "14px" }}
+                                >
                                   <CardMedia
                                     component="img"
                                     src={user.profileImg}
-                                    sx={{ width: "60px" }}
+                                    sx={{ width: "60px", margin: "0 auto" }}
                                   />
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell
+                                  align="center"
+                                  style={{ fontWeight: 500, fontSize: "14px" }}
+                                >
                                   {user.name}
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell
+                                  align="center"
+                                  style={{ fontWeight: 500, fontSize: "14px" }}
+                                >
                                   {user.email}
                                 </TableCell>
-                                <TableCell align="center">
-                                  {/* {user.addresses} */}
+                                {/* <TableCell
+                                  align="center"
+                                  style={{ fontWeight: 500, fontSize: "14px" }}
+                                >
+                                  {user.addresses}
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell
+                                  align="center"
+                                  style={{ fontWeight: 500, fontSize: "14px" }}
+                                >
                                   {user.phone}
-                                </TableCell>
-                                {/* <TableCell align="center">
-                                  {user.status}
                                 </TableCell> */}
                                 <TableCell>
                                   <Link to={`/users/${user._id}`}>
@@ -367,11 +311,6 @@ function AllUsers() {
                                       }}
                                     />
                                   </Link>
-                                  {/* <Link to={`/users/${user.id}`}>
-                              <EditIcon
-                                sx={{ color: "#336CDA", margin: "0 15px" }}
-                              />
-                            </Link> */}
                                   <DeleteForeverIcon
                                     sx={{ color: "#DA2121" }}
                                     onClick={() => handleDelete(user._id)}

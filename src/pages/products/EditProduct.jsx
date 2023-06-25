@@ -135,7 +135,7 @@ function EditProduct() {
                   marginBottom: "20px",
                 }}
               >
-                <Box display="flex" mr={8}>
+                <Box display="flex" mr={8.8}>
                   <Typography
                     sx={{ ml: 2.6, mr: 0, fontSize: "18px" }}
                     htmlFor="title"
@@ -176,7 +176,7 @@ function EditProduct() {
                   marginBottom: "20px",
                 }}
               >
-                <Box display="flex" mr={8}>
+                <Box display="flex" mr={4.6}>
                   <Typography
                     sx={{ ml: 2.6, mr: 0, fontSize: "18px" }}
                     htmlFor="category"
@@ -188,7 +188,19 @@ function EditProduct() {
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <Field name={category.name} as="select" id={category.name}>
+                  <Field
+                    name={category.name}
+                    as="select"
+                    id={category.name}
+                    style={{
+                      width: "580px",
+                      height: "50px",
+                      border: "none",
+                      borderRadius: "10px",
+                      outline: "1px solid lightgrey",
+                      padding: "16px",
+                    }}
+                  >
                     {allCategories.map((category) => (
                       <option
                         value={category._id}
@@ -201,84 +213,7 @@ function EditProduct() {
                   </Field>
                 </Box>
               </Box>
-              {/* <Box
-              sx={{
-                backgroundColor: "#F8F7F6",
-                display: "flex",
-                alignItems: "center",
-                p: 2,
-                borderRadius: "10px 10px 0 0",
-                width: "800px",
-                height: "90px",
-                marginBottom: "20px",
-              }}
-            >
-              <Box display="flex" mr={8}>
-                <Typography
-                  sx={{ ml: 2.6, mr: 0, fontSize: "18px" }}
-                  htmlFor="category"
-                >
-                  Color
-                </Typography>
-                <Typography sx={{ fontSize: "24px", color: "red" }}>
-                  *
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Field name={category.name} as="select" id={category.name}>
-                  {allCategories.map((category) => (
-                    <option
-                      value={category._id}
-                      key={category._id}
-                      selected={category.name === form.category}
-                    >
-                      {category.name}
-                    </option>
-                  ))}
-                </Field>
-              </Box>
-            </Box> */}
-              {/* <Box
-              sx={{
-                backgroundColor: "#F8F7F6",
-                display: "flex",
-                alignItems: "center",
-                p: 2,
-                borderRadius: "10px 10px 0 0",
-                width: "800px",
-                height: "90px",
-                marginBottom: "20px",
-              }}
-            >
-              <Box display="flex" mr={8}>
-                <Typography
-                  sx={{ ml: 2.6, mr: 0, fontSize: "18px" }}
-                  htmlFor="date"
-                >
-                  Date
-                </Typography>
-                <Typography sx={{ fontSize: "24px", color: "red" }}>
-                  *
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Field
-                  type="text"
-                  id="date"
-                  name="date"
-                  value={form.date}
-                  onChange={handleChange}
-                  style={{
-                    width: "580px",
-                    height: "50px",
-                    border: "none",
-                    borderRadius: "10px",
-                    outline: "1px solid lightgrey",
-                    padding: "16px",
-                  }}
-                />
-              </Box>
-            </Box> */}
+
               <Box
                 sx={{
                   backgroundColor: "#F8F7F6",
@@ -332,7 +267,7 @@ function EditProduct() {
                   marginBottom: "20px",
                 }}
               >
-                <Box display="flex" mr={8}>
+                <Box display="flex" mr={8.4}>
                   <Typography
                     sx={{ ml: 2.6, mr: 0, fontSize: "18px" }}
                     htmlFor="price"
@@ -373,7 +308,7 @@ function EditProduct() {
                   marginBottom: "20px",
                 }}
               >
-                <Box display="flex" mr={8}>
+                <Box display="flex" mr={5.8}>
                   <Typography
                     sx={{ ml: 2.6, mr: 0, fontSize: "18px" }}
                     htmlFor="quantity"
@@ -413,7 +348,7 @@ function EditProduct() {
                   marginBottom: "20px",
                 }}
               >
-                <Box display="flex" mr={3.2}>
+                <Box display="flex" mr={4}>
                   <Typography
                     sx={{ ml: 1, mr: 0, fontSize: "18px" }}
                     htmlFor="description"

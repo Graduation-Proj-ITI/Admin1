@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Typography, InputBase, Box, Button } from "@mui/material";
+import { Typography, Breadcrumbs, Box, Button } from "@mui/material";
 import Side from "../components/global/Sidebar";
 import Topbar from "../components/global/Topbar";
 import { Formik, Form, Field } from "formik";
@@ -85,7 +85,18 @@ function Setting() {
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", width: "80vw" }}>
         <Topbar />
-
+        <Breadcrumbs aria-label="breadcrumb" sx={{ margin: "0 0 10px 20px" }}>
+          <Typography sx={{ textDecoration: "none" }}>Home</Typography>
+          <Typography
+            sx={{
+              textDecoration: "none",
+              color: "#FF9934",
+              ariaCurrent: "page",
+            }}
+          >
+            Setting
+          </Typography>
+        </Breadcrumbs>
         <Box
           sx={{
             display: "flex",
