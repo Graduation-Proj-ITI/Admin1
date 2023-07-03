@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Typography, Box, Button, Breadcrumbs, Link } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Breadcrumbs,
+  Link,
+  Alert,
+} from "@mui/material";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useNavigate } from "react-router-dom";
 
 const AddCategory = () => {
+  const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState(false);
+  const [isAddCategory, setIsAddCategory] = useState(false);
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     image: Yup.string().required("Image is required"),
     icon: Yup.string().required("Icon is required"),
   });
+
+  const navigate = useNavigate();
+
+  const handleAdding = () => setIsAddCategory((show) => !show);
+  const handleLoading = () => setLoading((show) => !show);
 
   const token = localStorage.getItem("token");
   const config = {
@@ -38,8 +56,18 @@ const AddCategory = () => {
       );
 
       resetForm();
+      setLoading(false);
+      setContent(true);
+
+      if (setContent) {
+        setTimeout(() => {
+          navigate("/allCategories");
+        }, 2500);
+      }
     } catch (error) {
-      console.error(error);
+      if (!isAddCategory) {
+        handleAdding();
+      }
     }
   };
 
@@ -68,21 +96,31 @@ const AddCategory = () => {
             <Link sx={{ textDecoration: "none" }}>Home</Link>
             <Link sx={{ textDecoration: "none" }}>Categories</Link>
             <Link
-              // underline="hover"
               sx={{ textDecoration: "none" }}
               color="#FF9934"
-              // href="/material-ui/react-breadcrumbs/"
               aria-current="page"
             >
               Add category
             </Link>
           </Breadcrumbs>
-          <Typography
-            component="h1"
-            sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
-          >
-            Add category
-          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography
+              component="h1"
+              sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
+            >
+              Add category
+            </Typography>
+            <Box>
+              {content && (
+                <Alert
+                  severity="success"
+                  sx={{ width: "20vw", fontSize: "16px" }}
+                >
+                  Category added successfully!
+                </Alert>
+              )}
+            </Box>
+          </Box>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -260,8 +298,11 @@ const AddCategory = () => {
                       background: "#133A5E",
                       "&:hover": { backgroundColor: "#FF9934" },
                     }}
+                    onClick={(e) => {
+                      handleLoading();
+                    }}
                   >
-                    Save
+                    {loading ? <CircularProgress color="inherit" /> : "Save"}
                   </Button>
                 </Box>
               </Form>

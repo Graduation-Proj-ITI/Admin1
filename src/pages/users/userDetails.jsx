@@ -48,7 +48,7 @@ function UserDetails() {
         `https://furnival.onrender.com/users/${userId}`,
         config
       );
-      console.log(data);
+      // console.log(data);
       setForm({
         image: data.data.image,
         name: data.data.name,

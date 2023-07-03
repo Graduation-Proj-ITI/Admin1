@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useProducts from "../../hooks/useProducts";
 import { Formik, Form, Field } from "formik";
 import { Typography, Box, Button, Breadcrumbs } from "@mui/material";
 import useCategory from "../../hooks/useCategory";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function EditProduct() {
   const [categories, setCategories] = useState([]);
@@ -14,6 +16,9 @@ function EditProduct() {
   const { allCategories } = useCategory();
   const { products } = useProducts();
   const { productId } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [isAddProduct, setIsAddProduct] = useState(false);
+  const [content, setContent] = useState(false);
 
   const [form, setForm] = useState({
     title: "",
@@ -24,6 +29,11 @@ function EditProduct() {
     imageCover: "",
     colors: ["yellow"],
   });
+
+  const navigate = useNavigate();
+
+  const handleAdding = () => setIsAddProduct((show) => !show);
+  const handleLoading = () => setLoading((show) => !show);
 
   const token = localStorage.getItem("token");
   const config = {
@@ -60,7 +70,6 @@ function EditProduct() {
     fetchCategory();
   }, []);
 
-  // console.log(categories);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -75,21 +84,33 @@ function EditProduct() {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    const { data } = await axios.put(
-      `https://furnival.onrender.com/products/${productId}`,
-      {
-        title: form.title,
-        description: form.description,
-        price: form.price,
-        quantity: form.quantity,
-        category: categories.find((item) => item.name === form.category)._id,
-        imageCover: form.imageCover,
-      },
-      config
-    );
-    handleEditProduct(data);
+    try {
+      const { data } = await axios.put(
+        `https://furnival.onrender.com/products/${productId}`,
+        {
+          title: form.title,
+          description: form.description,
+          price: form.price,
+          quantity: form.quantity,
+          category: categories.find((item) => item.name === form.category)._id,
+          imageCover: form.imageCover,
+        },
+        config
+      );
+      handleEditProduct(data);
+      setLoading(false);
+      setContent(true);
+      if (setContent) {
+        setTimeout(() => {
+          navigate("/allProducts");
+        }, 2500);
+      }
+    } catch (error) {
+      if (!isAddProduct) {
+        handleAdding();
+      }
+    }
   };
-  // console.log(categories.find((item) => item.name === form.category));
 
   return (
     <>
@@ -121,8 +142,18 @@ function EditProduct() {
               Edit product
             </Typography>
           </Breadcrumbs>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            {content && (
+              <Alert
+                severity="success"
+                sx={{ width: "20vw", fontSize: "16px" }}
+              >
+                Product updated successfully!
+              </Alert>
+            )}
+          </Box>
           <Formik>
-            <Form onSubmit={handleEdit}>
+            <Form>
               <Box
                 sx={{
                   backgroundColor: "#F8F7F6",
@@ -395,8 +426,16 @@ function EditProduct() {
                     background: "#133A5E",
                     "&:hover": { backgroundColor: "#FF9934" },
                   }}
+                  onClick={(e) => {
+                    handleLoading();
+                    handleEdit(e);
+                  }}
                 >
-                  Save changes
+                  {loading ? (
+                    <CircularProgress color="inherit" />
+                  ) : (
+                    "Save changes"
+                  )}
                 </Button>
               </Box>
             </Form>

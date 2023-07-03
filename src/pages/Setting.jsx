@@ -1,18 +1,26 @@
 import { useState, useEffect } from "react";
-import { Typography, Breadcrumbs, Box, Button } from "@mui/material";
+import { Typography, Breadcrumbs, Box, Button, Alert } from "@mui/material";
 import Side from "../components/global/Sidebar";
 import Topbar from "../components/global/Topbar";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Setting() {
+  const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState(false);
+  const [isEditInfo, setIsEditInfo] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
+    profileImg: null,
   });
 
   const navigate = useNavigate();
+
+  const handleAdding = () => setIsEditInfo((show) => !show);
+  const handleLoading = () => setLoading((show) => !show);
 
   const [admin, setAdmin] = useState({});
 
@@ -30,12 +38,11 @@ function Setting() {
         .get("https://furnival.onrender.com/users/getMe", config)
         .then((response) => {
           setAdmin(response.data.data);
-          // console.log(response.data.data);
           setForm({
             name: response.data.data.name,
             email: response.data.data.email,
+            profileImg: response.data.data.profileImg,
           });
-          // setUserData(response.data.data);
         })
         .catch((error) => {
           console.log(error);
@@ -58,17 +65,27 @@ function Setting() {
       formData = {
         name: form.name,
         email: form.email,
+        profileImg: form.profileImg,
       };
     }
-    axios
-      .put("https://furnival.onrender.com/users/updateMe", formData, config)
-      .then((response) => {
-        setAdmin(response.data.data);
-        navigate("/setting");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      axios
+        .put("https://furnival.onrender.com/users/updateMe", formData, config)
+        .then((response) => {
+          setAdmin(response.data.data);
+          setLoading(false);
+          setContent(true);
+          if (setContent) {
+            setTimeout(() => {
+              navigate("/profile");
+            }, 2500);
+          }
+        });
+    } catch (error) {
+      if (!isEditInfo) {
+        handleAdding();
+      }
+    }
   };
 
   return (
@@ -105,12 +122,32 @@ function Setting() {
             marginLeft: "20px",
           }}
         >
-          <Typography
-            component="h1"
-            sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
           >
-            Update information
-          </Typography>
+            <Typography
+              component="h1"
+              sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
+            >
+              Update information
+            </Typography>
+            <Box>
+              {content && (
+                <Alert
+                  severity="success"
+                  sx={{
+                    width: "20vw",
+                    fontSize: "18px",
+                  }}
+                >
+                  Your info updated successfully
+                </Alert>
+              )}
+            </Box>
+          </Box>
           <Formik>
             <Form>
               <Box
@@ -199,9 +236,12 @@ function Setting() {
                     background: "#133A5E",
                     "&:hover": { backgroundColor: "#FF9934" },
                   }}
-                  onClick={(e) => handleEdit(e)}
+                  onClick={(e) => {
+                    handleEdit(e);
+                    handleLoading();
+                  }}
                 >
-                  Update
+                  {loading ? <CircularProgress color="inherit" /> : "Update"}
                 </Button>
               </Box>
             </Form>

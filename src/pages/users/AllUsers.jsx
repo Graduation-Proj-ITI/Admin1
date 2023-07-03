@@ -26,6 +26,7 @@ import useUsers from "../../hooks/useUsers";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
 import { tokens } from "../../utils/Theme";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function AllUsers() {
   const theme = useTheme();
@@ -44,8 +45,6 @@ function AllUsers() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  // console.log(users);
 
   function handleDelete(userId) {
     axios
@@ -170,7 +169,6 @@ function AllUsers() {
                   />
                 </Box>
               </Box>
-
               <Box
                 sx={{
                   gridColumn: "span 12",
@@ -178,58 +176,61 @@ function AllUsers() {
                   marginTop: "10px",
                 }}
               >
-                <Paper
-                  sx={{
-                    width: "80%",
-                    overflow: "hidden",
-                    marginBottom: "30px",
-                  }}
-                >
-                  <TableContainer sx={{ maxHeight: 640, overflow: "hidden" }}>
-                    <Table stickyHeader aria-label="sticky table">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell
-                            align="center"
-                            sx={{
-                              fontSize: "16px",
-                              fontWeight: 550,
-                            }}
-                            color={colors.primary[400]}
-                          >
-                            Id
-                          </TableCell>
-                          <TableCell
-                            align="center"
-                            sx={{
-                              fontSize: "16px",
-                              fontWeight: 550,
-                            }}
-                            color={colors.primary[400]}
-                          >
-                            Image
-                          </TableCell>
-                          <TableCell
-                            align="center"
-                            sx={{
-                              fontSize: "16px",
-                              fontWeight: 550,
-                            }}
-                            color={colors.primary[400]}
-                          >
-                            User
-                          </TableCell>
-                          <TableCell
-                            align="center"
-                            sx={{
-                              fontSize: "16px",
-                              fontWeight: 550,
-                            }}
-                            color={colors.primary[400]}
-                          >
-                            Email
-                          </TableCell>
-                          {/* <TableCell
+                {users.length == 0 ? (
+                  <CircularProgress sx={{ margin: "100px 0 0 370px" }} />
+                ) : (
+                  <Paper
+                    sx={{
+                      width: "80%",
+                      overflow: "hidden",
+                      marginBottom: "30px",
+                    }}
+                  >
+                    <TableContainer sx={{ maxHeight: 640, overflow: "hidden" }}>
+                      <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell
+                              align="center"
+                              sx={{
+                                fontSize: "16px",
+                                fontWeight: 550,
+                              }}
+                              color={colors.primary[400]}
+                            >
+                              Id
+                            </TableCell>
+                            <TableCell
+                              align="center"
+                              sx={{
+                                fontSize: "16px",
+                                fontWeight: 550,
+                              }}
+                              color={colors.primary[400]}
+                            >
+                              Image
+                            </TableCell>
+                            <TableCell
+                              align="center"
+                              sx={{
+                                fontSize: "16px",
+                                fontWeight: 550,
+                              }}
+                              color={colors.primary[400]}
+                            >
+                              User
+                            </TableCell>
+                            <TableCell
+                              align="center"
+                              sx={{
+                                fontSize: "16px",
+                                fontWeight: 550,
+                              }}
+                              color={colors.primary[400]}
+                            >
+                              Email
+                            </TableCell>
+                            {/* <TableCell
                             align="center"
                             sx={{
                               fontSize: "16px",
@@ -249,48 +250,60 @@ function AllUsers() {
                           >
                             Phone
                           </TableCell> */}
-                          <TableCell align="center"></TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {users
+                            <TableCell align="center"></TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {users
 
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
-                          .map((user, index) => {
-                            return (
-                              <TableRow hover tabIndex={-1} key={user._id}>
-                                <TableCell
-                                  align="center"
-                                  style={{ fontWeight: 500, fontSize: "14px" }}
-                                >
-                                  #{index + 1}
-                                </TableCell>
-                                <TableCell
-                                  align="center"
-                                  style={{ fontWeight: 500, fontSize: "14px" }}
-                                >
-                                  <CardMedia
-                                    component="img"
-                                    src={user.profileImg}
-                                    sx={{ width: "60px", margin: "0 auto" }}
-                                  />
-                                </TableCell>
-                                <TableCell
-                                  align="center"
-                                  style={{ fontWeight: 500, fontSize: "14px" }}
-                                >
-                                  {user.name}
-                                </TableCell>
-                                <TableCell
-                                  align="center"
-                                  style={{ fontWeight: 500, fontSize: "14px" }}
-                                >
-                                  {user.email}
-                                </TableCell>
-                                {/* <TableCell
+                            .slice(
+                              page * rowsPerPage,
+                              page * rowsPerPage + rowsPerPage
+                            )
+                            .map((user, index) => {
+                              return (
+                                <TableRow hover tabIndex={-1} key={user._id}>
+                                  <TableCell
+                                    align="center"
+                                    style={{
+                                      fontWeight: 500,
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    #{index + 1}
+                                  </TableCell>
+                                  <TableCell
+                                    align="center"
+                                    style={{
+                                      fontWeight: 500,
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    <CardMedia
+                                      component="img"
+                                      src={user.profileImg}
+                                      sx={{ width: "60px", margin: "0 auto" }}
+                                    />
+                                  </TableCell>
+                                  <TableCell
+                                    align="center"
+                                    style={{
+                                      fontWeight: 500,
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    {user.name}
+                                  </TableCell>
+                                  <TableCell
+                                    align="center"
+                                    style={{
+                                      fontWeight: 500,
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    {user.email}
+                                  </TableCell>
+                                  {/* <TableCell
                                   align="center"
                                   style={{ fontWeight: 500, fontSize: "14px" }}
                                 >
@@ -302,36 +315,37 @@ function AllUsers() {
                                 >
                                   {user.phone}
                                 </TableCell> */}
-                                <TableCell>
-                                  <Link to={`/users/${user._id}`}>
-                                    <RemoveRedEyeIcon
-                                      sx={{
-                                        color: "#8FC83D",
-                                        marginRight: "15px",
-                                      }}
+                                  <TableCell>
+                                    <Link to={`/users/${user._id}`}>
+                                      <RemoveRedEyeIcon
+                                        sx={{
+                                          color: "#8FC83D",
+                                          marginRight: "15px",
+                                        }}
+                                      />
+                                    </Link>
+                                    <DeleteForeverIcon
+                                      sx={{ color: "#DA2121" }}
+                                      onClick={() => handleDelete(user._id)}
                                     />
-                                  </Link>
-                                  <DeleteForeverIcon
-                                    sx={{ color: "#DA2121" }}
-                                    onClick={() => handleDelete(user._id)}
-                                  />
-                                </TableCell>
-                              </TableRow>
-                            );
-                          })}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                  <TablePagination
-                    rowsPerPageOptions={[2, 4]}
-                    component="div"
-                    count={users.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                  />
-                </Paper>
+                                  </TableCell>
+                                </TableRow>
+                              );
+                            })}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                    <TablePagination
+                      rowsPerPageOptions={[2, 4]}
+                      component="div"
+                      count={users.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      onPageChange={handleChangePage}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                  </Paper>
+                )}
               </Box>
             </Box>
           </Box>

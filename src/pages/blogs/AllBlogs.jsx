@@ -43,8 +43,6 @@ const AllBlogs = () => {
       });
   }
 
-  console.log(posts);
-
   return (
     <Box
       sx={{
@@ -99,80 +97,85 @@ const AllBlogs = () => {
               </Button>
             </Link>
           </Box>
-          {/* {posts.length == 0 ? <h1>There is no posts yet</h1> : ""} */}
-
-          {paginatedPosts.map((post) => (
-            <Box
-              key={post._id}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "20px",
-                width: "800px",
-                // margin: "0 auto",
-                marginBottom: "40px",
-                border: "1px solid lightgrey",
-              }}
-            >
-              <Box>
-                <CardMedia
-                  component="img"
-                  src={post.image}
-                  sx={{ width: "300px", height: "220px" }}
+          {posts.length === 0 ? (
+            <CircularProgress sx={{ margin: "100px 0 0 370px" }} />
+          ) : (
+            <Box>
+              {" "}
+              {paginatedPosts.map((post) => (
+                <Box
+                  key={post._id}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "20px",
+                    width: "800px",
+                    // margin: "0 auto",
+                    marginBottom: "40px",
+                    border: "1px solid lightgrey",
+                  }}
+                >
+                  <Box>
+                    <CardMedia
+                      component="img"
+                      src={post.image}
+                      sx={{ width: "300px", height: "220px" }}
+                    />
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Box sx={{ display: "flex" }}>
+                      <Typography
+                        variant="h4"
+                        sx={{
+                          fontSize: "22px",
+                          fontWeight: 600,
+                          marginBottom: "5px",
+                        }}
+                      >
+                        {post.title}
+                      </Typography>
+                      <Link to={`/blogs/${post._id}`}>
+                        <EditIcon
+                          sx={{ color: "#336CDA", margin: "0 10px" }}
+                          // onClick={() => edit(post.id)}
+                        />
+                      </Link>
+                      <DeleteForeverIcon
+                        sx={{ color: "red", marginRight: "10px" }}
+                        onClick={() => handleDelete(post._id)}
+                      />
+                    </Box>
+                    <Box>
+                      <Typography marginBottom="15px">
+                        {post.createdAt.slice(0, 10)}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        variant="body"
+                        sx={{ fontSize: "16px", fontWeight: 200 }}
+                      >
+                        {post.content}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              ))}
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                <Pagination
+                  count={totalPages}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  sx={{
+                    "& .Mui-selected": {
+                      backgroundColor: "#FF9934",
+                      color: "white",
+                    },
+                  }}
                 />
               </Box>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Box sx={{ display: "flex" }}>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "22px",
-                      fontWeight: 600,
-                      marginBottom: "5px",
-                    }}
-                  >
-                    {post.title}
-                  </Typography>
-                  <Link to={`/blogs/${post._id}`}>
-                    <EditIcon
-                      sx={{ color: "#336CDA", margin: "0 10px" }}
-                      // onClick={() => edit(post.id)}
-                    />
-                  </Link>
-                  <DeleteForeverIcon
-                    sx={{ color: "red", marginRight: "10px" }}
-                    onClick={() => handleDelete(post._id)}
-                  />
-                </Box>
-                <Box>
-                  <Typography marginBottom="15px">
-                    {post.createdAt.slice(0, 10)}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography
-                    variant="body"
-                    sx={{ fontSize: "16px", fontWeight: 200 }}
-                  >
-                    {post.content}
-                  </Typography>
-                </Box>
-              </Box>
             </Box>
-          ))}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Pagination
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-              sx={{
-                "& .Mui-selected": {
-                  backgroundColor: "#FF9934",
-                  color: "white",
-                },
-              }}
-            />
-          </Box>
+          )}
         </Box>
       </Box>
     </Box>

@@ -15,10 +15,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 function OrderDetails() {
   const { orderDetailsId } = useParams();
   const [cartItems, setCartItems] = useState([]);
+  const [cartItemsCount, setCartItemsCount] = useState([]);
   const [selectedValue, setSelectedValue] = useState([
     { id: 1, status: "Pending" },
     { id: 3, status: "Delivered" },
@@ -58,10 +61,12 @@ function OrderDetails() {
         `https://furnival.onrender.com/orders/${orderDetailsId}`,
         config
       );
-      console.log(data);
+      // console.log(data);
       setCartItems(data.data.cartItems[0].product.imageCover);
-      console.log(data.data.cartItems[0].product.title);
-      console.log(data.data.cartItems[0].product.imageCover);
+      setCartItemsCount(data.data.cartItems.length);
+      // console.log(data.data.cartItems);
+      // console.log(data.data.cartItems[0].product.imageCover);
+      // console.log(data.data.cartItems.length);
       setForm({
         user: data.data.user,
         image: data.data.image,
@@ -124,7 +129,7 @@ function OrderDetails() {
           <Box
             sx={{
               width: "650px",
-              height: "360px",
+              height: "300px",
               backgroundColor: "#f2f0f0",
               display: "flex",
               alignItems: "center",
@@ -149,7 +154,6 @@ function OrderDetails() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                // gap: "30px",
               }}
             >
               <Typography
@@ -158,19 +162,6 @@ function OrderDetails() {
               >
                 {form.product}
               </Typography>
-              <Divider sx={{ margin: "10px 0 20px" }} />
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: "80px",
-                  marginBottom: "10px",
-                }}
-              >
-                <Typography sx={{ fontSize: "16px" }}>name:</Typography>
-                <Typography sx={{ fontSize: "16px" }}>
-                  {cartItems.product}
-                </Typography>
-              </Box>
               <Box
                 sx={{
                   display: "flex",
@@ -180,7 +171,7 @@ function OrderDetails() {
               >
                 <Typography sx={{ fontSize: "16px" }}>quantity:</Typography>
                 <Typography sx={{ fontSize: "16px" }}>
-                  {cartItems.length}
+                  {cartItemsCount}
                 </Typography>
               </Box>
               <Box
@@ -211,40 +202,63 @@ function OrderDetails() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  // marginBottom: "10px",
                   gap: "70px",
                 }}
               >
                 <Typography sx={{ fontSize: "16px" }}>status:</Typography>
-                <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                  <Form>
-                    <select
-                      name={selectedValue.status}
-                      id={selectedValue.status}
-                      style={{ width: "120px", height: "35px", border: "none" }}
-                    >
-                      {selectedValue.map((val) => (
-                        <option value={val.status} key={val.id}>
-                          {val.status}
-                        </option>
-                      ))}
-                    </select>
-                    <Button
-                      variant="outlined"
-                      type="submit"
-                      sx={{
-                        width: "5px",
-                        // marginTop: "30px",
-                        marginLeft: "20px",
-                        // background: "#133A5E",
-                        "&:hover": { backgroundColor: "#FF9934" },
-                      }}
-                    >
-                      {/* change */}
-                      <EditIcon />
-                    </Button>
-                  </Form>
-                </Formik>
+                {form.status === "delivered" ? (
+                  <Box
+                    sx={{ display: "flex", alignItems: "center", gap: "5px" }}
+                  >
+                    <Typography sx={{ fontSize: "16px", color: "green" }}>
+                      delivered
+                    </Typography>
+                    <TaskAltIcon sx={{ fontSize: "16px", color: "green" }} />
+                  </Box>
+                ) : form.status === "canceled" ? (
+                  <Box
+                    sx={{ display: "flex", alignItems: "center", gap: "5px" }}
+                  >
+                    <Typography sx={{ fontSize: "16px", color: "red" }}>
+                      canceled
+                    </Typography>
+                    <CancelIcon sx={{ fontSize: "16px", color: "red" }} />
+                  </Box>
+                ) : (
+                  <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                    <Form>
+                      <select
+                        name={selectedValue.status}
+                        id={selectedValue.status}
+                        style={{
+                          width: "120px",
+                          height: "35px",
+                          border: "none",
+                        }}
+                      >
+                        {selectedValue.map((val) => (
+                          <option value={val.status} key={val.id}>
+                            {val.status}
+                          </option>
+                        ))}
+                      </select>
+                      <Button
+                        variant="outlined"
+                        type="submit"
+                        sx={{
+                          width: "5px",
+                          // marginTop: "30px",
+                          marginLeft: "20px",
+                          // background: "#133A5E",
+                          "&:hover": { backgroundColor: "#FF9934" },
+                        }}
+                      >
+                        {/* change */}
+                        <EditIcon />
+                      </Button>
+                    </Form>
+                  </Formik>
+                )}
               </Box>
               <Button
                 onClick={goBack}
@@ -254,7 +268,7 @@ function OrderDetails() {
                   height: "28px",
                   borderRadius: "5px",
                   padding: "16px 0",
-                  marginTop: "30px",
+                  marginTop: "20px",
                   color: "white",
                   fontSize: "15px",
                   "&:hover": {

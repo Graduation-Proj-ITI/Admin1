@@ -94,8 +94,8 @@ function Dashboard() {
               component={Paper}
               style={{
                 width: "35vw",
-                backgroundColor: "transparent",
                 border: "1px solid lightgrey",
+                backgroundColor: colors.primary[400],
               }}
             >
               <Table

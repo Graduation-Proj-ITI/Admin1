@@ -23,6 +23,7 @@ import Login from "./pages/Login";
 import UserDetails from "./pages/users/userDetails";
 import OrderDetails from "./pages/orders/OrderDetails";
 import Profile from "./pages/Profile";
+import Protected from "./components/global/protected";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -39,39 +40,171 @@ function App() {
             {/* <Topbar /> */}
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <Protected>
+                    <Dashboard />
+                  </Protected>
+                }
+              />
 
-              <Route path="/allBlogs" element={<AllBlogs />} />
-              <Route path="/addBlog" element={<AddBlog />} />
-              <Route path="/blogs/:blogId" element={<EditBlog />} />
+              <Route
+                path="/allBlogs"
+                element={
+                  <Protected>
+                    <AllBlogs />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/addBlog"
+                element={
+                  <Protected>
+                    <AddBlog />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/blogs/:blogId"
+                element={
+                  <Protected>
+                    <EditBlog />
+                  </Protected>
+                }
+              />
 
-              <Route path="/allCategories" element={<AllCategories />} />
-              <Route path="/topCategories" element={<TopCategories />} />
-              <Route path="/addCategory" element={<AddCategory />} />
-              <Route path="/categories/:id" element={<EditCategory />} />
+              <Route
+                path="/allCategories"
+                element={
+                  <Protected>
+                    <AllCategories />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/topCategories"
+                element={
+                  <Protected>
+                    <TopCategories />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/addCategory"
+                element={
+                  <Protected>
+                    <AddCategory />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/categories/:categoryId"
+                element={
+                  <Protected>
+                    <EditCategory />
+                  </Protected>
+                }
+              />
 
-              <Route path="/allProducts" element={<AllProducts />} />
-              <Route path="/addProduct" element={<AddProduct />} />
-              <Route path="/products/:productId" element={<EditProduct />} />
-              <Route path="/topProducts" element={<TopProducts />} />
+              <Route
+                path="/allProducts"
+                element={
+                  <Protected>
+                    <AllProducts />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/addProduct"
+                element={
+                  <Protected>
+                    <AddProduct />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/products/:productId"
+                element={
+                  <Protected>
+                    <EditProduct />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/topProducts"
+                element={
+                  <Protected>
+                    <TopProducts />
+                  </Protected>
+                }
+              />
 
-              <Route path="/orders" element={<Orders />} />
-              {/* <Route path="/orders/:orderId" element={<EditOrder />} /> */}
+              <Route
+                path="/orders"
+                element={
+                  <Protected>
+                    <Orders />
+                  </Protected>
+                }
+              />
               <Route
                 path="/orders/:orderDetailsId"
                 element={<OrderDetails />}
               />
 
-              <Route path="/users" element={<AllUsers />} />
-              <Route path="/users/:userId" element={<UserDetails />} />
+              <Route
+                path="/users"
+                element={
+                  <Protected>
+                    <AllUsers />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/users/:userId"
+                element={
+                  <Protected>
+                    <UserDetails />
+                  </Protected>
+                }
+              />
 
-              <Route path="/report" element={<Report />} />
+              <Route
+                path="/report"
+                element={
+                  <Protected>
+                    <Report />
+                  </Protected>
+                }
+              />
 
-              <Route path="/setting" element={<Setting />} />
+              <Route
+                path="/setting"
+                element={
+                  <Protected>
+                    <Setting />
+                  </Protected>
+                }
+              />
 
-              <Route path="/message" element={<BottomAppBar />} />
+              <Route
+                path="/message"
+                element={
+                  <Protected>
+                    <BottomAppBar />
+                  </Protected>
+                }
+              />
 
-              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/profile"
+                element={
+                  <Protected>
+                    <Profile />
+                  </Protected>
+                }
+              />
             </Routes>
           </Box>
         </Box>

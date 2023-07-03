@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { Typography, Box, Button, Breadcrumbs } from "@mui/material";
-import { Link } from "react-router-dom";
 import useCategory from "../../hooks/useCategory";
 import "react-quill/dist/quill.snow.css";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
+import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const AddProduct = () => {
+  const [content, setContent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isAddProduct, setIsAddProduct] = useState(false);
   const { allCategories } = useCategory();
+
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Name is required"),
@@ -20,6 +27,9 @@ const AddProduct = () => {
     description: Yup.string().required("Description is required"),
     imageCover: Yup.string().required("imageCover is required"),
   });
+
+  const handleAdding = () => setIsAddProduct((show) => !show);
+  const handleLoading = () => setLoading((show) => !show);
 
   const token = localStorage.getItem("token");
   const config = {
@@ -40,19 +50,28 @@ const AddProduct = () => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      // console.log("ello");
-      console.log(values);
       await axios.post(
         "https://furnival.onrender.com/products",
         values,
         config
       );
-      // console.log(data);
       resetForm();
-    } catch (error) {
-      console.error(error);
+      setLoading(false);
+      setContent(true);
+      if (setContent) {
+        setTimeout(() => {
+          navigate("/allProducts");
+        }, 2500);
+      }
+    } catch (e) {
+      if (!isAddProduct) {
+        handleAdding();
+      }
+
+      // if (typeof e.response.data.message !== "object")
+      //   setAlertContent(e.response.data.message);
+      // else setAlertContent(e.response.data.message[0]);
     }
-    console.log(values);
   };
 
   return (
@@ -82,7 +101,6 @@ const AddProduct = () => {
               <Typography sx={{ textDecoration: "none" }}>Products</Typography>
             </Typography>
             <Typography
-              // underline="hover"
               sx={{ textDecoration: "none" }}
               color="#FF9934"
               aria-current="page"
@@ -90,12 +108,24 @@ const AddProduct = () => {
               Add product
             </Typography>
           </Breadcrumbs>
-          <Typography
-            component="h1"
-            sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
-          >
-            Add product
-          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography
+              component="h1"
+              sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
+            >
+              Add product
+            </Typography>
+            <Box>
+              {content && (
+                <Alert
+                  severity="success"
+                  sx={{ width: "20vw", fontSize: "16px" }}
+                >
+                  Product added successfully!
+                </Alert>
+              )}
+            </Box>
+          </Box>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -304,9 +334,7 @@ const AddProduct = () => {
                     </Typography>
                   </Box>
                   <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <Field
-                      name="imageCover"
-                    >
+                    <Field name="imageCover">
                       {({ field, form }) => (
                         <div>
                           <input
@@ -402,8 +430,12 @@ const AddProduct = () => {
                       background: "#133A5E",
                       "&:hover": { backgroundColor: "#FF9934" },
                     }}
+                    onClick={(e) => {
+                      handleLoading();
+                      handleSubmit(e);
+                    }}
                   >
-                    Save
+                    {loading ? <CircularProgress color="inherit" /> : "Save"}
                   </Button>
                 </Box>
               </Form>

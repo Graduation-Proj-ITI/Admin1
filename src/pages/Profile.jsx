@@ -17,6 +17,7 @@ function Profile() {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    profileImg: null,
   });
 
   const [admin, setAdmin] = useState({});
@@ -44,6 +45,7 @@ function Profile() {
           setForm({
             name: response.data.data.name,
             email: response.data.data.email,
+            profileImg: response.data.data.profileImg,
           });
         })
         .catch((error) => {
@@ -71,7 +73,8 @@ function Profile() {
               <Link sx={{ textDecoration: "none" }}>Home</Link>
               <Link
                 sx={{ textDecoration: "none" }}
-                color="#FF9934"s
+                color="#FF9934"
+                s
                 aria-current="page"
               >
                 Profile
@@ -92,7 +95,7 @@ function Profile() {
               <Box>
                 <CardMedia
                   component="img"
-                  src={localStorage.getItem("profileImg")}
+                  src={form.profileImg}
                   sx={{
                     width: "170px",
                     marginLeft: "40px",
@@ -111,7 +114,7 @@ function Profile() {
                   variant="h4"
                   sx={{ fontSize: "22px", fontWeight: 600 }}
                 >
-                  Hello, I am {localStorage.getItem("name")}
+                  Hello, I am {form.name}
                 </Typography>
                 <Divider sx={{ margin: "10px 0 20px" }} />
                 <Box

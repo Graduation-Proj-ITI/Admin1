@@ -15,6 +15,7 @@ import { useTheme } from "@mui/material";
 import { tokens } from "../../utils/Theme";
 import Side from "../../components/global/Sidebar";
 import Topbar from "../../components/global/Topbar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Orders() {
   const theme = useTheme();
@@ -34,7 +35,7 @@ function Orders() {
     setPage(0);
   };
 
-  console.log(Orders);
+  // console.log(Orders);
 
   return (
     <Box
@@ -57,50 +58,63 @@ function Orders() {
             </Typography>
           </Breadcrumbs>
           <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography
+              component="h1"
+              sx={{ fontSize: "22px", fontWeight: 600, margin: "10px 0 20px 20px" }}
+            >
+              All Orders
+            </Typography>
+          </Box>
+          <Box
             display="grid"
             gridTemplateColumns="repeat(12, 1fr)"
             gridAutoRows="10px"
             marginLeft="20px"
           >
-            <Box
-              display="grid"
-              gridTemplateColumns="repeat(12, 1fr)"
-              gridColumn="span 9"
-              gridRow="span 2"
-              gap="20px"
-            ></Box>
-
-            <Box sx={{ gridColumn: "span 12", gridRow: "span 5" }}>
-              <Paper
-                sx={{ width: "80%", overflow: "hidden", marginBottom: "30px" }}
-              >
-                <TableContainer sx={{ maxHeight: 640, overflow: "hidden" }}>
-                  <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell
-                          align="center"
-                          sx={{
-                            fontSize: "16px",
-                            fontWeight: 550,
-                            // color: "#133a5e",
-                          }}
-                          color={colors.primary[400]}
-                        >
-                          Id
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          sx={{
-                            fontSize: "16px",
-                            fontWeight: 550,
-                            // color: "#133a5e",
-                          }}
-                          color={colors.primary[400]}
-                        >
-                          User
-                        </TableCell>
-                        <TableCell
+            {Orders.length === 0 ? (
+              <CircularProgress sx={{ margin: "100px 0 0 370px" }} />
+            ) : (
+              <Box sx={{ gridColumn: "span 12", gridRow: "span 5" }}>
+                <Paper
+                  sx={{
+                    width: "80%",
+                    overflow: "hidden",
+                    marginBottom: "30px",
+                  }}
+                >
+                  <TableContainer sx={{ maxHeight: 640, overflow: "hidden" }}>
+                    <Table stickyHeader aria-label="sticky table">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Id
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            User
+                          </TableCell>
+                          {/* <TableCell
                           align="center"
                           sx={{
                             fontSize: "16px",
@@ -110,109 +124,109 @@ function Orders() {
                           color={colors.primary[400]}
                         >
                           Product
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          sx={{
-                            fontSize: "16px",
-                            fontWeight: 550,
-                            // color: "#133a5e",
-                          }}
-                          color={colors.primary[400]}
-                        >
-                          Payment
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          sx={{
-                            fontSize: "16px",
-                            fontWeight: 550,
-                            // color: "#133a5e",
-                          }}
-                          color={colors.primary[400]}
-                        >
-                          Total
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          sx={{
-                            fontSize: "16px",
-                            fontWeight: 550,
-                            // color: "#133a5e",
-                          }}
-                          color={colors.primary[400]}
-                        >
-                          Date
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          sx={{
-                            fontSize: "16px",
-                            fontWeight: 550,
-                            // color: "#133a5e",
-                          }}
-                          color={colors.primary[400]}
-                        >
-                          Status
-                        </TableCell>
-                        <TableCell align="center"></TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {Orders.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      ).map((order, index) => {
-                        return (
-                          <TableRow hover tabIndex={-1} key={order._id}>
-                            <TableCell
-                              align="center"
-                              style={{ fontWeight: 500, fontSize: "14px" }}
-                            >
-                              #{index + 1}
-                            </TableCell>
-                            <TableCell
-                              align="center"
-                              style={{ fontWeight: 500, fontSize: "14px" }}
-                            >
-                              {order.user}
-                            </TableCell>
-                            <TableCell
+                        </TableCell> */}
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Payment
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Total
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Date
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              fontSize: "16px",
+                              fontWeight: 550,
+                              // color: "#133a5e",
+                            }}
+                            color={colors.primary[400]}
+                          >
+                            Status
+                          </TableCell>
+                          <TableCell align="center"></TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {Orders.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        ).map((order, index) => {
+                          return (
+                            <TableRow hover tabIndex={-1} key={order._id}>
+                              <TableCell
+                                align="center"
+                                style={{ fontWeight: 500, fontSize: "14px" }}
+                              >
+                                #{index + 1}
+                              </TableCell>
+                              <TableCell
+                                align="center"
+                                style={{ fontWeight: 500, fontSize: "14px" }}
+                              >
+                                {order.user}
+                              </TableCell>
+                              {/* <TableCell
                               align="center"
                               style={{ fontWeight: 500, fontSize: "14px" }}
                             >
                               {order.product}
-                            </TableCell>
-                            <TableCell
-                              align="center"
-                              style={{ fontWeight: 500, fontSize: "14px" }}
-                            >
-                              {order.paymentMethodType}
-                            </TableCell>
-                            <TableCell
-                              align="center"
-                              style={{ fontWeight: 500, fontSize: "14px" }}
-                            >
-                              {order.totalOrderPrice}
-                            </TableCell>
-                            <TableCell
-                              align="center"
-                              style={{ fontWeight: 500, fontSize: "14px" }}
-                            >
-                              {order.createdAt.slice(0, 10)}
-                            </TableCell>
-                            <TableCell
-                              align="center"
-                              style={{ fontWeight: 500, fontSize: "14px" }}
-                            >
-                              {order.status}
-                            </TableCell>
-                            <TableCell sx={{ display: "flex", gap: "20px" }}>
-                              <Link to={`/orders/${order._id}`}>
-                                <RemoveRedEyeIcon sx={{ color: "#8FC83D" }} />
-                              </Link>
+                            </TableCell> */}
+                              <TableCell
+                                align="center"
+                                style={{ fontWeight: 500, fontSize: "14px" }}
+                              >
+                                {order.paymentMethodType}
+                              </TableCell>
+                              <TableCell
+                                align="center"
+                                style={{ fontWeight: 500, fontSize: "14px" }}
+                              >
+                                {order.totalOrderPrice}
+                              </TableCell>
+                              <TableCell
+                                align="center"
+                                style={{ fontWeight: 500, fontSize: "14px" }}
+                              >
+                                {order.createdAt.slice(0, 10)}
+                              </TableCell>
+                              <TableCell
+                                align="center"
+                                style={{ fontWeight: 500, fontSize: "14px" }}
+                              >
+                                {order.status}
+                              </TableCell>
+                              <TableCell sx={{ display: "flex", gap: "20px" }}>
+                                <Link to={`/orders/${order._id}`}>
+                                  <RemoveRedEyeIcon sx={{ color: "#8FC83D" }} />
+                                </Link>
 
-                              {/* {order.status === "pending" ? (
+                                {/* {order.status === "pending" ? (
                             <Link to={`/orders/${order._id}`}>
                               <EditIcon sx={{ color: "#336CDA" }} />
                             </Link>
@@ -220,28 +234,29 @@ function Orders() {
                             ""
                           )} */}
 
-                              {/* <DeleteForeverIcon
+                                {/* <DeleteForeverIcon
                               sx={{ color: "#DA2121" }}
                               onClick={() => handleDelete(product.id)}
                             /> */}
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-                <TablePagination
-                  rowsPerPageOptions={[5, 10]}
-                  component="div"
-                  count={Orders.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-              </Paper>
-            </Box>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                  <TablePagination
+                    rowsPerPageOptions={[2, 4]}
+                    component="div"
+                    count={Orders.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                  />
+                </Paper>
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>

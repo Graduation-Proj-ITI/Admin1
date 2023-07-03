@@ -15,24 +15,22 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Profile from "./Profile";
 
 function Login() {
-  const navigate = useNavigate();
-
   const [AlertContent, setAlertContent] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleLogin = () => setIsLogin((show) => !show);
 
-  const [loading, setLoading] = useState(false);
   const handleLoading = () => setLoading((show) => !show);
 
   const handleSubmit = async (e) => {
@@ -46,7 +44,7 @@ function Login() {
       localStorage.setItem("name", data.data.name);
       localStorage.setItem("email", data.data.email);
       localStorage.setItem("profileImg", data.data.profileImg);
-      console.log(data.data);
+      // console.log(data.data);
 
       navigate("/dashboard", { replace: true });
     } catch (e) {
@@ -84,7 +82,6 @@ function Login() {
           flexDirection: "column",
           alignItems: "center",
           backgroundColor: "#133A5E",
-          // backgroundColor: "white",
           borderRadius: "15px",
           width: "42vw",
           height: "58vh",
@@ -109,12 +106,16 @@ function Login() {
             sx={{
               fontSize: "35px",
               fontWeight: 550,
+              color: "white",
             }}
           >
             Furnival
           </Typography>
         </Box>
-        <Typography variant="body" sx={{ fontSize: "14px", marginTop: "3px" }}>
+        <Typography
+          variant="body"
+          sx={{ fontSize: "14px", marginTop: "3px", color: "white" }}
+        >
           Make Your Dream Home True
         </Typography>
         <Box sx={{ marginTop: "40px" }}>
@@ -128,11 +129,7 @@ function Login() {
               }}
             >
               {isLogin ? (
-                <Alert
-                  severity="error"
-                  color="error"
-                  // className="mb-3 text-capitalize"
-                >
+                <Alert severity="error" color="error">
                   {AlertContent}
                 </Alert>
               ) : (
@@ -150,7 +147,6 @@ function Login() {
               />
               <FormControl variant="standard" className="mt-3">
                 <InputLabel
-                  // htmlFor="standard-adornment-password"
                   color="secondary"
                 >
                   Password
@@ -164,7 +160,6 @@ function Login() {
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
-                        // onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
                         {showPassword ? (

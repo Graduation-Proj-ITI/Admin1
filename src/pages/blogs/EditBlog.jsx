@@ -6,8 +6,14 @@ import { Box, Button, Typography, Breadcrumbs, Link } from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import Side from "../../components/global/Sidebar";
 import Topbar from "../../components/global/Topbar";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useNavigate } from "react-router-dom";
 
 function EditPost() {
+  const [loading, setLoading] = useState(false);
+  const [blogContent, setBlogContent] = useState(false);
+  const [isEditBlog, setIsEditBlog] = useState(false);
   const { posts } = useBlogs();
   const { blogId } = useParams();
 
@@ -17,7 +23,12 @@ function EditPost() {
     image: "",
   });
 
-  console.log(posts);
+  const navigate = useNavigate();
+
+  const handleAdding = () => setIsEditBlog((show) => !show);
+  const handleLoading = () => setLoading((show) => !show);
+
+  // console.log(posts);
   useEffect(() => {
     async function fetchPostById() {
       const { data } = await axios.get(
@@ -54,16 +65,30 @@ function EditPost() {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    const { data } = await axios.put(
-      `https://furnival.onrender.com/blogs/${blogId}`,
-      {
-        title: form.title,
-        content: form.content,
-        images: form.images,
-      },
-      config
-    );
-    handleEditPost(data);
+    try {
+      const { data } = await axios.put(
+        `https://furnival.onrender.com/blogs/${blogId}`,
+        {
+          title: form.title,
+          content: form.content,
+          image: form.image,
+        },
+        config
+      );
+      handleEditPost(data);
+      setLoading(false);
+      setBlogContent(true);
+
+      if (setBlogContent) {
+        setTimeout(() => {
+          navigate("/allBlogs");
+        }, 2500);
+      }
+    } catch (error) {
+      if (!isEditBlog) {
+        handleAdding();
+      }
+    }
   };
 
   return (
@@ -91,6 +116,18 @@ function EditPost() {
               Edit blog
             </Link>
           </Breadcrumbs>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box>
+              {blogContent && (
+                <Alert
+                  severity="success"
+                  sx={{ width: "20vw", fontSize: "16px" }}
+                >
+                  Blog updated successfully!
+                </Alert>
+              )}
+            </Box>
+          </Box>
           <Formik>
             <Form onSubmit={handleEdit}>
               <Box
@@ -236,8 +273,15 @@ function EditPost() {
                     background: "#133A5E",
                     "&:hover": { backgroundColor: "#FF9934" },
                   }}
+                  onClick={(e) => {
+                    handleLoading();
+                  }}
                 >
-                  Save changes
+                  {loading ? (
+                    <CircularProgress color="inherit" />
+                  ) : (
+                    "Save changes"
+                  )}
                 </Button>
               </Box>
             </Form>

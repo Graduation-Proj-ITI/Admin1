@@ -5,13 +5,25 @@ import axios from "axios";
 import { Typography, Box, Button, Breadcrumbs, Link } from "@mui/material";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
+  const [loading, setLoading] = useState(false);
+  const [isAddBlog, setIsAddBlog] = useState(false);
+  const [content, setContent] = useState(false);
+
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
     content: Yup.string().required("content is required"),
     image: Yup.string().required("Image is required"),
   });
+
+  const navigate = useNavigate();
+
+  const handleAdding = () => setIsAddBlog((show) => !show);
+  const handleLoading = () => setLoading((show) => !show);
 
   const initialValues = {
     title: "",
@@ -31,10 +43,19 @@ const AddBlog = () => {
     try {
       await axios.post("https://furnival.onrender.com/blogs", values, config);
       resetForm();
-      console.log(values);
-      // console.log(e.target.files[0]);
+
+      setLoading(false)
+      setContent(true)
+
+      if (setContent) {
+        setTimeout(() => {
+          navigate("/allBlogs");
+        }, 2500);
+      }
     } catch (error) {
-      console.error(error);
+      if (!isAddBlog) {
+        handleAdding();
+      }
     }
   };
 
@@ -70,12 +91,24 @@ const AddBlog = () => {
               Add blog
             </Link>
           </Breadcrumbs>
-          <Typography
-            component="h1"
-            sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
-          >
-            Add blog
-          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography
+              component="h1"
+              sx={{ fontSize: "22px", fontWeight: 600, marginBottom: "30px" }}
+            >
+              Add blog
+            </Typography>
+            <Box>
+              {content && (
+                <Alert
+                  severity="success"
+                  sx={{ width: "20vw", fontSize: "16px" }}
+                >
+                  Blog added successfully!
+                </Alert>
+              )}
+            </Box>
+          </Box>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -95,7 +128,7 @@ const AddBlog = () => {
                     marginBottom: "20px",
                   }}
                 >
-                  <Box display="flex" mr={8}>
+                  <Box display="flex" mr={9.4}>
                     <Typography
                       sx={{ ml: 1, mr: 0, fontSize: "18px" }}
                       htmlFor="title"
@@ -174,21 +207,6 @@ const AddBlog = () => {
                       )}
                     </Field>
                   </Box>
-                  {/* <Field name="image">
-                    {({ field, form }) => (
-                      <div>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={(event) => {
-                            const file = event.currentTarget.files[0];
-                            form.setFieldValue(field.name, file);
-                          }}
-                        />
-                        <ErrorMessage name="images" component="div" />
-                      </div>
-                    )}
-                  </Field> */}
                 </Box>
                 <Box
                   sx={{
@@ -200,7 +218,7 @@ const AddBlog = () => {
                     height: "fit-content",
                   }}
                 >
-                  <Box display="flex" mr={3.2}>
+                  <Box display="flex" mr={6.4}>
                     <Typography
                       sx={{ ml: 1, mr: 0, fontSize: "18px" }}
                       htmlFor="content"
@@ -257,8 +275,11 @@ const AddBlog = () => {
                       background: "#133A5E",
                       "&:hover": { backgroundColor: "#FF9934" },
                     }}
+                    onClick={(e) => {
+                      handleLoading();
+                    }}
                   >
-                    Save
+                    {loading ? <CircularProgress color="inherit" /> : "Save"}
                   </Button>
                 </Box>
               </Form>
