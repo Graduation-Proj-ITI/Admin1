@@ -50,7 +50,7 @@ const AddBlog = () => {
       if (setContent) {
         setTimeout(() => {
           navigate("/allBlogs");
-        }, 2500);
+        }, 1800);
       }
     } catch (error) {
       if (!isAddBlog) {

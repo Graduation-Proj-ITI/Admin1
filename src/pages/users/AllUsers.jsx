@@ -282,7 +282,11 @@ function AllUsers() {
                                     <CardMedia
                                       component="img"
                                       src={user.profileImg}
-                                      sx={{ width: "60px", margin: "0 auto" }}
+                                      sx={{
+                                        width: "60px",
+                                        height: "60px",
+                                        margin: "0 auto",
+                                      }}
                                     />
                                   </TableCell>
                                   <TableCell
@@ -325,7 +329,10 @@ function AllUsers() {
                                       />
                                     </Link>
                                     <DeleteForeverIcon
-                                      sx={{ color: "#DA2121" }}
+                                      sx={{
+                                        color: "#DA2121",
+                                        cursor: "pointer",
+                                      }}
                                       onClick={() => handleDelete(user._id)}
                                     />
                                   </TableCell>

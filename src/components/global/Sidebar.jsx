@@ -23,18 +23,17 @@ function Side() {
   };
 
   return (
-    <Box>
+    <Box mr={32}>
       <Sidebar
-        // backgroundColor="#EEEEEE"
         backgroundColor={colors.primary[400]}
         style={{
           height: "100vh",
-          bottom: 0,
+          // bottom: 0,
           display: "flex",
           flexDirection: "column",
-          // justifyContent: "space-between",
           width: "250px",
           borderRight: "none",
+          position: "fixed",
         }}
       >
         <Menu

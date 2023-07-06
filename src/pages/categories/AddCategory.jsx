@@ -62,7 +62,7 @@ const AddCategory = () => {
       if (setContent) {
         setTimeout(() => {
           navigate("/allCategories");
-        }, 2500);
+        }, 1800);
       }
     } catch (error) {
       if (!isAddCategory) {

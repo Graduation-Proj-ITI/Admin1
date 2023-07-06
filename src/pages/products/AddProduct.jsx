@@ -61,7 +61,7 @@ const AddProduct = () => {
       if (setContent) {
         setTimeout(() => {
           navigate("/allProducts");
-        }, 2500);
+        }, 1800);
       }
     } catch (e) {
       if (!isAddProduct) {

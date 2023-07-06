@@ -1,27 +1,23 @@
-import useUsers from "../../hooks/useUsers";
 import { useNavigate, useParams } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import {
-  Box,
-  Button,
-  CardMedia,
-  Divider,
-  Typography,
-  Breadcrumbs,
-} from "@mui/material";
+import { Box, Button, CardMedia, Typography, Breadcrumbs } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import CancelIcon from "@mui/icons-material/Cancel";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function OrderDetails() {
   const { orderDetailsId } = useParams();
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsCount, setCartItemsCount] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState(false);
   const [selectedValue, setSelectedValue] = useState([
     { id: 1, status: "Pending" },
     { id: 3, status: "Delivered" },
@@ -94,7 +90,13 @@ function OrderDetails() {
         },
         config
       );
-      // console.log(res);
+      setLoading(false);
+      setContent(true);
+      if (setContent) {
+        setTimeout(() => {
+          navigate("/orders");
+        }, 1800);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -116,16 +118,25 @@ function OrderDetails() {
         <Topbar />
         <Box sx={{ marginLeft: "20px" }}>
           <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-            <Link sx={{ textDecoration: "none" }}>Home</Link>
-            <Link sx={{ textDecoration: "none" }}>Orders</Link>
-            <Link
-              sx={{ textDecoration: "none" }}
-              color="#FF9934"
+            <Typography sx={{ textDecoration: "none" }}>Home</Typography>
+            <Typography sx={{ textDecoration: "none" }}>Orders</Typography>
+            <Typography
+              sx={{ textDecoration: "none", color: "#FF9934" }}
               aria-current="page"
             >
               Order Details
-            </Link>
+            </Typography>
           </Breadcrumbs>
+          <Box>
+            {content && (
+              <Alert
+                severity="success"
+                sx={{ width: "20vw", fontSize: "16px" }}
+              >
+                Status added successfully!
+              </Alert>
+            )}
+          </Box>
           <Box
             sx={{
               width: "650px",
@@ -253,8 +264,11 @@ function OrderDetails() {
                           "&:hover": { backgroundColor: "#FF9934" },
                         }}
                       >
-                        {/* change */}
-                        <EditIcon />
+                        {loading ? (
+                          <CircularProgress color="inherit" />
+                        ) : (
+                          <EditIcon />
+                        )}
                       </Button>
                     </Form>
                   </Formik>

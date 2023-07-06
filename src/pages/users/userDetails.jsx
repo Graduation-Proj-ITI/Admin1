@@ -142,7 +142,7 @@ function UserDetails() {
                 <Typography sx={{ fontSize: "16px" }}>email:</Typography>
                 <Typography sx={{ fontSize: "16px" }}>{form.email}</Typography>
               </Box>
-              <Box
+              {/* <Box
                 sx={{
                   display: "flex",
                   gap: "80px",
@@ -163,7 +163,7 @@ function UserDetails() {
                 <Typography sx={{ fontSize: "16px" }}>
                   {form.location}
                 </Typography>
-              </Box>
+              </Box> */}
               <Box
                 sx={{
                   display: "flex",

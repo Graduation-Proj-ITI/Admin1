@@ -103,7 +103,7 @@ function EditProduct() {
       if (setContent) {
         setTimeout(() => {
           navigate("/allProducts");
-        }, 2500);
+        }, 1800);
       }
     } catch (error) {
       if (!isAddProduct) {

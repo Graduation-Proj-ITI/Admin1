@@ -78,7 +78,7 @@ function Setting() {
           if (setContent) {
             setTimeout(() => {
               navigate("/profile");
-            }, 2500);
+            }, 1800);
           }
         });
     } catch (error) {

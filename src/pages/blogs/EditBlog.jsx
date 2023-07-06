@@ -82,7 +82,7 @@ function EditPost() {
       if (setBlogContent) {
         setTimeout(() => {
           navigate("/allBlogs");
-        }, 2500);
+        }, 1800);
       }
     } catch (error) {
       if (!isEditBlog) {
