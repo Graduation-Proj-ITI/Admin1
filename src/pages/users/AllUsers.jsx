@@ -111,8 +111,10 @@ function AllUsers() {
                     increase="+5%"
                     icon={
                       <FilterFramesIcon
-                        sx={{ fontSize: "26px" }}
-                        color={colors.greenAccent[900]}
+                        sx={{
+                          fontSize: "26px",
+                          color: colors.greenAccent[900],
+                        }}
                       />
                     }
                   />
@@ -137,8 +139,10 @@ function AllUsers() {
                     increase="+43%"
                     icon={
                       <LocalShippingIcon
-                        sx={{ fontSize: "26px" }}
-                        color={colors.greenAccent[900]}
+                        sx={{
+                          fontSize: "26px",
+                          color: colors.greenAccent[900],
+                        }}
                       />
                     }
                   />
@@ -162,8 +166,10 @@ function AllUsers() {
                     increase="+14%"
                     icon={
                       <PersonAddIcon
-                        sx={{ fontSize: "26px" }}
-                        color={colors.greenAccent[900]}
+                        sx={{
+                          fontSize: "26px",
+                          color: colors.greenAccent[900],
+                        }}
                       />
                     }
                   />

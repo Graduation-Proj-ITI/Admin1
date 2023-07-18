@@ -8,12 +8,16 @@ import {
   Divider,
   Typography,
   Breadcrumbs,
-  Link,
+  useTheme,
 } from "@mui/material";
 import Topbar from "../components/global/Topbar";
 import Side from "../components/global/Sidebar";
+import { tokens } from "../utils/Theme";
 
 function Profile() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -70,21 +74,22 @@ function Profile() {
           <Topbar />
           <Box sx={{ marginLeft: "20px" }}>
             <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-              <Link sx={{ textDecoration: "none" }}>Home</Link>
-              <Link
+              <Typography sx={{ textDecoration: "none" }}>Home</Typography>
+              <Typography
                 sx={{ textDecoration: "none" }}
                 color="#FF9934"
                 s
                 aria-current="page"
               >
                 Profile
-              </Link>
+              </Typography>
             </Breadcrumbs>
             <Box
               sx={{
                 width: "650px",
                 height: "330px",
-                backgroundColor: "#f2f0f0",
+                // backgroundColor: "#f2f0f0",
+                backgroundColor: colors.primary[400],
                 display: "flex",
                 alignItems: "center",
                 gap: "40px",

@@ -216,7 +216,7 @@ function Dashboard() {
               increase="+21%"
               icon={
                 <PointOfSaleIcon
-                  sx={{ fontSize: "26px" }}
+                  sx={{ fontSize: "26px", color: colors.greenAccent[900] }}
                   color={colors.greenAccent[900]}
                 />
               }
@@ -240,8 +240,7 @@ function Dashboard() {
               increase="+5%"
               icon={
                 <FilterFramesIcon
-                  sx={{ fontSize: "26px" }}
-                  color={colors.greenAccent[900]}
+                  sx={{ fontSize: "26px", color: colors.greenAccent[900] }}
                 />
               }
             />
@@ -256,7 +255,6 @@ function Dashboard() {
             height="120px"
             marginTop="25px"
             border="1px solid lightgrey"
-            // boxShadow="10px 10px 20px 0px #B9B9B9"
           >
             <StatBox
               title="ORDERS"
@@ -265,8 +263,7 @@ function Dashboard() {
               increase="+43%"
               icon={
                 <LocalShippingIcon
-                  sx={{ fontSize: "26px" }}
-                  color={colors.greenAccent[400]}
+                  sx={{ fontSize: "26px", color: colors.greenAccent[900] }}
                 />
               }
             />
@@ -290,7 +287,7 @@ function Dashboard() {
               icon={
                 <PersonAddIcon
                   color={colors.greenAccent[900]}
-                  sx={{ fontSize: "26px" }}
+                  sx={{ fontSize: "26px", color: colors.greenAccent[900] }}
                 />
               }
             />

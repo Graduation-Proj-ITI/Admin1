@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useProducts from "../../hooks/useProducts";
 import { Formik, Form, Field } from "formik";
-import { Typography, Box, Button, Breadcrumbs } from "@mui/material";
+import { Typography, Box, Button, Breadcrumbs, useTheme } from "@mui/material";
 import useCategory from "../../hooks/useCategory";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
+import { tokens } from "../../utils/Theme";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -19,6 +20,9 @@ function EditProduct() {
   const [loading, setLoading] = useState(false);
   const [isAddProduct, setIsAddProduct] = useState(false);
   const [content, setContent] = useState(false);
+
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   const [form, setForm] = useState({
     title: "",
@@ -156,7 +160,8 @@ function EditProduct() {
             <Form>
               <Box
                 sx={{
-                  backgroundColor: "#F8F7F6",
+                  // backgroundColor: "#F8F7F6",
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   alignItems: "center",
                   p: 2,
@@ -197,7 +202,8 @@ function EditProduct() {
               </Box>
               <Box
                 sx={{
-                  backgroundColor: "#F8F7F6",
+                  // backgroundColor: "#F8F7F6",
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   alignItems: "center",
                   p: 2,
@@ -247,7 +253,8 @@ function EditProduct() {
 
               <Box
                 sx={{
-                  backgroundColor: "#F8F7F6",
+                  // backgroundColor: "#F8F7F6",
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   alignItems: "center",
                   p: 2,
@@ -288,7 +295,8 @@ function EditProduct() {
               </Box>
               <Box
                 sx={{
-                  backgroundColor: "#F8F7F6",
+                  // backgroundColor: "#F8F7F6",
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   alignItems: "center",
                   p: 2,
@@ -329,7 +337,8 @@ function EditProduct() {
               </Box>
               <Box
                 sx={{
-                  backgroundColor: "#F8F7F6",
+                  // backgroundColor: "#F8F7F6",
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   alignItems: "center",
                   p: 2,
@@ -370,7 +379,8 @@ function EditProduct() {
               </Box>
               <Box
                 sx={{
-                  backgroundColor: "#F8F7F6",
+                  // backgroundColor: "#F8F7F6",
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   p: 2,
                   borderRadius: "0 0 10px 10px",

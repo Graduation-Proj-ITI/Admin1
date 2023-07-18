@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { useTheme } from "@mui/material";
 import Input from "@mui/material/Input";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -15,8 +16,12 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { tokens } from "../utils/Theme";
 
 function Login() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const [AlertContent, setAlertContent] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -146,11 +151,7 @@ function Login() {
                 sx={{ width: "18vw" }}
               />
               <FormControl variant="standard" className="mt-3">
-                <InputLabel
-                  color="secondary"
-                >
-                  Password
-                </InputLabel>
+                <InputLabel color="secondary">Password</InputLabel>
                 <Input
                   id="password"
                   type={showPassword ? "text" : "password"}

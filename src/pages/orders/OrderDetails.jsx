@@ -2,17 +2,27 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Box, Button, CardMedia, Typography, Breadcrumbs } from "@mui/material";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Typography,
+  Breadcrumbs,
+  useTheme,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { Link } from "react-router-dom";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
+import { tokens } from "../../utils/Theme";
 
 function OrderDetails() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const { orderDetailsId } = useParams();
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsCount, setCartItemsCount] = useState([]);
@@ -60,9 +70,6 @@ function OrderDetails() {
       // console.log(data);
       setCartItems(data.data.cartItems[0].product.imageCover);
       setCartItemsCount(data.data.cartItems.length);
-      // console.log(data.data.cartItems);
-      // console.log(data.data.cartItems[0].product.imageCover);
-      // console.log(data.data.cartItems.length);
       setForm({
         user: data.data.user,
         image: data.data.image,
@@ -108,7 +115,6 @@ function OrderDetails() {
         display: "grid",
         gridTemplateColumns: "repeat(12, 1fr)",
         gridAutoRows: "45px",
-        // gap:"20px"
       }}
     >
       <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
@@ -141,7 +147,8 @@ function OrderDetails() {
             sx={{
               width: "650px",
               height: "300px",
-              backgroundColor: "#f2f0f0",
+              // backgroundColor: "#f2f0f0",
+              backgroundColor: colors.primary[400],
               display: "flex",
               alignItems: "center",
               gap: "40px",
@@ -260,8 +267,8 @@ function OrderDetails() {
                           width: "5px",
                           // marginTop: "30px",
                           marginLeft: "20px",
-                          // background: "#133A5E",
-                          "&:hover": { backgroundColor: "#FF9934" },
+                          color: colors.greenAccent[900],
+                          // "&:hover": { backgroundColor: "#FF9934" },
                         }}
                       >
                         {loading ? (

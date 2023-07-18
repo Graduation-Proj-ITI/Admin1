@@ -114,17 +114,6 @@ function Orders() {
                           >
                             User
                           </TableCell>
-                          {/* <TableCell
-                          align="center"
-                          sx={{
-                            fontSize: "16px",
-                            fontWeight: 550,
-                            // color: "#133a5e",
-                          }}
-                          color={colors.primary[400]}
-                        >
-                          Product
-                        </TableCell> */}
                           <TableCell
                             align="center"
                             sx={{

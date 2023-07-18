@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Typography, Box, Button, Breadcrumbs } from "@mui/material";
+import { Typography, Box, Button, Breadcrumbs, useTheme } from "@mui/material";
 import useCategory from "../../hooks/useCategory";
 import "react-quill/dist/quill.snow.css";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
 import { useNavigate } from "react-router-dom";
+import { tokens } from "../../utils/Theme";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -16,6 +17,9 @@ const AddProduct = () => {
   const [loading, setLoading] = useState(false);
   const [isAddProduct, setIsAddProduct] = useState(false);
   const { allCategories } = useCategory();
+
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   const navigate = useNavigate();
 
@@ -67,10 +71,6 @@ const AddProduct = () => {
       if (!isAddProduct) {
         handleAdding();
       }
-
-      // if (typeof e.response.data.message !== "object")
-      //   setAlertContent(e.response.data.message);
-      // else setAlertContent(e.response.data.message[0]);
     }
   };
 
@@ -135,7 +135,8 @@ const AddProduct = () => {
               <Form>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    // backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     alignItems: "center",
                     p: 2,
@@ -145,9 +146,14 @@ const AddProduct = () => {
                     marginBottom: "20px",
                   }}
                 >
-                  <Box display="flex" mr={11}>
+                  <Box display="flex" mr={11.8}>
                     <Typography
-                      sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                      sx={{
+                        ml: 1,
+                        mr: 0,
+                        fontSize: "18px",
+                        color: colors.redAccent[700],
+                      }}
                       htmlFor="title"
                     >
                       title
@@ -179,7 +185,8 @@ const AddProduct = () => {
                 </Box>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    // backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     alignItems: "center",
                     p: 2,
@@ -188,9 +195,14 @@ const AddProduct = () => {
                     marginBottom: "20px",
                   }}
                 >
-                  <Box display="flex" mr={7}>
+                  <Box display="flex" mr={7.2}>
                     <Typography
-                      sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                      sx={{
+                        ml: 1,
+                        mr: 0,
+                        fontSize: "18px",
+                        color: colors.redAccent[700],
+                      }}
                       htmlFor="category"
                     >
                       Category
@@ -227,7 +239,8 @@ const AddProduct = () => {
                 </Box>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    // backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     alignItems: "center",
                     p: 2,
@@ -238,7 +251,12 @@ const AddProduct = () => {
                 >
                   <Box display="flex" mr={11}>
                     <Typography
-                      sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                      sx={{
+                        ml: 1,
+                        mr: 0,
+                        fontSize: "18px",
+                        color: colors.redAccent[700],
+                      }}
                       htmlFor="price"
                     >
                       price
@@ -270,7 +288,8 @@ const AddProduct = () => {
                 </Box>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    // backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     alignItems: "center",
                     p: 2,
@@ -281,7 +300,12 @@ const AddProduct = () => {
                 >
                   <Box display="flex" mr={7.8}>
                     <Typography
-                      sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                      sx={{
+                        ml: 1,
+                        mr: 0,
+                        fontSize: "18px",
+                        color: colors.redAccent[700],
+                      }}
                       htmlFor="quantity"
                     >
                       quantity
@@ -314,7 +338,8 @@ const AddProduct = () => {
 
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    // backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     p: 2,
                     marginBottom: "20px",
@@ -324,7 +349,12 @@ const AddProduct = () => {
                 >
                   <Box display="flex" mr={5}>
                     <Typography
-                      sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                      sx={{
+                        ml: 1,
+                        mr: 0,
+                        fontSize: "18px",
+                        color: colors.redAccent[700],
+                      }}
                       htmlFor="imageCover"
                     >
                       imageCover
@@ -366,7 +396,7 @@ const AddProduct = () => {
                 </Box>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     p: 2,
                     borderRadius: "0 0 10px 10px",
@@ -376,7 +406,12 @@ const AddProduct = () => {
                 >
                   <Box display="flex" mr={5}>
                     <Typography
-                      sx={{ ml: 1, mr: 0, fontSize: "18px" }}
+                      sx={{
+                        ml: 1,
+                        mr: 0,
+                        fontSize: "18px",
+                        color: colors.redAccent[700],
+                      }}
                       htmlFor="description"
                     >
                       Description

@@ -81,15 +81,15 @@ const AddBlog = () => {
           }}
         >
           <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-            <Link sx={{ textDecoration: "none" }}>Home</Link>
-            <Link sx={{ textDecoration: "none" }}>Blogs</Link>
-            <Link
+            <Typography sx={{ textDecoration: "none" }}>Home</Typography>
+            <Typography sx={{ textDecoration: "none" }}>Blogs</Typography>
+            <Typography
               sx={{ textDecoration: "none" }}
               color="#FF9934"
               aria-current="page"
             >
               Add blog
-            </Link>
+            </Typography>
           </Breadcrumbs>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography

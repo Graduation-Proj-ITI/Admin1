@@ -1,12 +1,11 @@
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Box, useTheme, Typography, CardMedia, Button } from "@mui/material";
 import { tokens } from "../../utils/Theme";
 import LogoutIcon from "@mui/icons-material/Logout";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
-import MailIcon from "@mui/icons-material/Mail";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import CategoryIcon from "@mui/icons-material/Category";
@@ -80,9 +79,20 @@ function Side() {
               </Typography>
             </Box>
             <Box sx={{ marginLeft: "5px" }}>
-              <MenuItem component={<NavLink to="/dashboard"></NavLink>}>
+              <MenuItem
+                component={<NavLink to="/dashboard"></NavLink>}
+                // style={{
+                //   "&:hover": {
+                //     backgroundColor: colors.greenAccent[900],
+                //   },
+                // }}
+              >
                 <Box
-                  sx={{ display: "flex", alignItems: "center", gap: "20px" }}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "20px",
+                  }}
                 >
                   <GridViewRoundedIcon />
                   <Typography
@@ -93,15 +103,6 @@ function Side() {
                   </Typography>
                 </Box>
               </MenuItem>
-              {/* </Box> */}
-              {/* <SubMenu
-                label="Products"
-                style={{ fontWeight: 500, fontSize: "16px" }}
-              > */}
-              {/* <NavLink exact to="/allProducts" activeClassName="active">
-                  All products
-                </NavLink> */}
-              {/* </MenuItem> */}
               <MenuItem
                 component={<NavLink to="/allProducts"></NavLink>}
                 style={{ fontWeight: 500, fontSize: "16px" }}
@@ -115,17 +116,6 @@ function Side() {
                   </Typography>
                 </Box>
               </MenuItem>
-              {/* <MenuItem
-                  component={<NavLink to="/topProducts"></NavLink>}
-                  style={{ fontWeight: 500, fontSize: "16px" }}
-                >
-                  Top products
-                </MenuItem> */}
-              {/* <MenuItem component={<NavLink to="/addProduct"></NavLink>}>
-                Add product
-              </MenuItem> */}
-              {/* </SubMenu> */}
-
               <MenuItem component={<NavLink to="/orders"></NavLink>}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}
@@ -144,12 +134,6 @@ function Side() {
                   // gap: "10px",
                 }}
               >
-                {/* <CategoryRoundedIcon /> */}
-                {/* <SubMenu
-                  label="Categories"
-                  style={{ fontWeight: 500, fontSize: "16px" }}
-                > */}
-                {/* <CategoryIcon /> */}
                 <MenuItem
                   component={<NavLink to="/allCategories"></NavLink>}
                   style={{ fontWeight: 500, fontSize: "18px" }}
@@ -163,13 +147,6 @@ function Side() {
                     </Typography>
                   </Box>
                 </MenuItem>
-                {/* <MenuItem component={<NavLink to="/topCategories"></NavLink>}>
-                    Top categories
-                  </MenuItem> */}
-                {/* <MenuItem component={<NavLink to="/addCategory"></NavLink>}>
-                Add category
-              </MenuItem> */}
-                {/* </SubMenu> */}
               </Box>
               <MenuItem component={<NavLink to="/users"></NavLink>}>
                 <Box
@@ -191,45 +168,9 @@ function Side() {
                   </Typography>
                 </Box>
               </MenuItem>
-              {/* <MenuItem component={<Link to="/message" />}>
-                <Box
-                  sx={{ display: "flex", alignItems: "center", gap: "20px" }}
-                >
-                  <MailIcon />
-                  <Typography style={{ fontWeight: 500, fontSize: "16px" }}>
-                    Messages
-                  </Typography>
-                </Box>
-              </MenuItem> */}
-              <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
-                {/* <SubMenu
-                  label="Blogs"
-                  style={{ fontWeight: 500, fontSize: "16px" }}
-                > */}
-                {/* <MenuItem
-                    component={<NavLink to="/allBlogs"></NavLink>}
-                    style={{ fontWeight: 500, fontSize: "16px" }}
-                  >
-                    Blogs
-                  </MenuItem> */}
-                {/* <MenuItem
-                    component={<NavLink to="/addBlog"></NavLink>}
-                    style={{ fontWeight: 500, fontSize: "16px" }}
-                  >
-                    Add blog
-                  </MenuItem>
-                </SubMenu> */}
-              </Box>
-              {/* <MenuItem component={<Link to="/report" />}>
-                <Box
-                  sx={{ display: "flex", alignItems: "center", gap: "20px" }}
-                >
-                  <ShowChartIcon />
-                  <Typography style={{ fontWeight: 500, fontSize: "16px" }}>
-                    Report
-                  </Typography>
-                </Box>
-              </MenuItem> */}
+              <Box
+                sx={{ display: "flex", alignItems: "center", gap: "20px" }}
+              ></Box>
               <MenuItem component={<NavLink to="/setting"></NavLink>}>
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "20px" }}

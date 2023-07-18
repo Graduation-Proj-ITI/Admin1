@@ -1,4 +1,3 @@
-import useUsers from "../../hooks/useUsers";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -9,13 +8,15 @@ import {
   Divider,
   Typography,
   Breadcrumbs,
-  Link,
+  useTheme,
 } from "@mui/material";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
 import { tokens } from "../../utils/Theme";
 
 function UserDetails() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const { userId } = useParams();
   const [form, setForm] = useState({
     image: "",
@@ -79,9 +80,9 @@ function UserDetails() {
         <Topbar />
         <Box sx={{ marginLeft: "20px" }}>
           <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-            <Link sx={{ textDecoration: "none" }}>Home</Link>
-            <Link sx={{ textDecoration: "none" }}>Users</Link>
-            <Link
+            <Typography sx={{ textDecoration: "none" }}>Home</Typography>
+            <Typography sx={{ textDecoration: "none" }}>Users</Typography>
+            <Typography
               // underline="hover"
               sx={{ textDecoration: "none" }}
               color="#FF9934"
@@ -89,13 +90,14 @@ function UserDetails() {
               aria-current="page"
             >
               User Details
-            </Link>
+            </Typography>
           </Breadcrumbs>
           <Box
             sx={{
               width: "650px",
               height: "330px",
-              backgroundColor: "#f2f0f0",
+              // backgroundColor: "#f2f0f0",
+              backgroundColor: colors.primary[400],
               display: "flex",
               alignItems: "center",
               gap: "40px",
@@ -142,28 +144,6 @@ function UserDetails() {
                 <Typography sx={{ fontSize: "16px" }}>email:</Typography>
                 <Typography sx={{ fontSize: "16px" }}>{form.email}</Typography>
               </Box>
-              {/* <Box
-                sx={{
-                  display: "flex",
-                  gap: "80px",
-                  marginBottom: "10px",
-                }}
-              >
-                <Typography sx={{ fontSize: "16px" }}>phone:</Typography>
-                <Typography sx={{ fontSize: "16px" }}>{form.phone}</Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  marginBottom: "10px",
-                  gap: "80px",
-                }}
-              >
-                <Typography sx={{ fontSize: "16px" }}>address:</Typography>
-                <Typography sx={{ fontSize: "16px" }}>
-                  {form.location}
-                </Typography>
-              </Box> */}
               <Box
                 sx={{
                   display: "flex",

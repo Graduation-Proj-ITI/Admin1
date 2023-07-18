@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
-import { Typography, Breadcrumbs, Box, Button, Alert } from "@mui/material";
+import { Typography, Breadcrumbs, Box, Button, Alert, useTheme } from "@mui/material";
 import Side from "../components/global/Sidebar";
 import Topbar from "../components/global/Topbar";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
+import { tokens } from "../utils/Theme";
 
 function Setting() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const [loading, setLoading] = useState(false);
   const [content, setContent] = useState(false);
   const [isEditInfo, setIsEditInfo] = useState(false);
@@ -151,8 +155,9 @@ function Setting() {
           <Formik>
             <Form>
               <Box
-                backgroundColor="#F8F7F6"
+                // backgroundColor="#F8F7F6"
                 sx={{
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   alignItems: "center",
                   borderRadius: "14px 14px 0 0",
@@ -186,8 +191,9 @@ function Setting() {
                 </Box>
               </Box>
               <Box
-                backgroundColor="#F8F7F6"
+                // backgroundColor="#F8F7F6"
                 sx={{
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   alignItems: "center",
                   marginBottom: "15px",

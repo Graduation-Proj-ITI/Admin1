@@ -7,15 +7,19 @@ import {
   Box,
   Button,
   Breadcrumbs,
-  Link,
   Alert,
+  useTheme,
 } from "@mui/material";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
+import { tokens } from "../../utils/Theme";
 
 const AddCategory = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const [loading, setLoading] = useState(false);
   const [content, setContent] = useState(false);
   const [isAddCategory, setIsAddCategory] = useState(false);
@@ -93,15 +97,15 @@ const AddCategory = () => {
           }}
         >
           <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-            <Link sx={{ textDecoration: "none" }}>Home</Link>
-            <Link sx={{ textDecoration: "none" }}>Categories</Link>
-            <Link
+            <Typography sx={{ textDecoration: "none" }}>Home</Typography>
+            <Typography sx={{ textDecoration: "none" }}>Categories</Typography>
+            <Typography
               sx={{ textDecoration: "none" }}
               color="#FF9934"
               aria-current="page"
             >
               Add category
-            </Link>
+            </Typography>
           </Breadcrumbs>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography
@@ -130,7 +134,8 @@ const AddCategory = () => {
               <Form>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    // backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     alignItems: "center",
                     p: 2,
@@ -174,7 +179,8 @@ const AddCategory = () => {
                 </Box>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    // backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     p: 2,
                     marginBottom: "20px",
@@ -227,7 +233,8 @@ const AddCategory = () => {
                 </Box>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    // backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     p: 2,
                     marginBottom: "20px",
