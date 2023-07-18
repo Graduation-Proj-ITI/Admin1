@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Typography, Box, Button, Breadcrumbs, Link } from "@mui/material";
+import { Typography, Box, Button, Breadcrumbs, useTheme } from "@mui/material";
 import Topbar from "../../components/global/Topbar";
 import Side from "../../components/global/Sidebar";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
+import { tokens } from "../../utils/Theme";
 
 const AddBlog = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const [loading, setLoading] = useState(false);
   const [isAddBlog, setIsAddBlog] = useState(false);
   const [content, setContent] = useState(false);
@@ -44,8 +48,8 @@ const AddBlog = () => {
       await axios.post("https://furnival.onrender.com/blogs", values, config);
       resetForm();
 
-      setLoading(false)
-      setContent(true)
+      setLoading(false);
+      setContent(true);
 
       if (setContent) {
         setTimeout(() => {
@@ -118,7 +122,7 @@ const AddBlog = () => {
               <Form>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     alignItems: "center",
                     p: 2,
@@ -163,7 +167,7 @@ const AddBlog = () => {
 
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     p: 2,
                     marginBottom: "20px",
@@ -210,7 +214,7 @@ const AddBlog = () => {
                 </Box>
                 <Box
                   sx={{
-                    backgroundColor: "#F8F7F6",
+                    backgroundColor: colors.primary[400],
                     display: "flex",
                     p: 2,
                     borderRadius: "0 0 10px 10px",

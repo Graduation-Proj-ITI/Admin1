@@ -2,15 +2,26 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
-import { Box, Button, Typography, Breadcrumbs, Link } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Breadcrumbs,
+  Link,
+  useTheme,
+} from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import Side from "../../components/global/Sidebar";
 import Topbar from "../../components/global/Topbar";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
+import { tokens } from "../../utils/Theme";
 
 function EditPost() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const [loading, setLoading] = useState(false);
   const [blogContent, setBlogContent] = useState(false);
   const [isEditBlog, setIsEditBlog] = useState(false);
@@ -28,19 +39,16 @@ function EditPost() {
   const handleAdding = () => setIsEditBlog((show) => !show);
   const handleLoading = () => setLoading((show) => !show);
 
-  // console.log(posts);
   useEffect(() => {
     async function fetchPostById() {
       const { data } = await axios.get(
         `https://furnival.onrender.com/blogs/${blogId}`
       );
-      console.log(data);
       setForm({
         title: data.data.title,
         content: data.data.content,
         image: data.data.image,
       });
-      console.log(data.data.image);
     }
     fetchPostById();
   }, [blogId]);
@@ -132,7 +140,7 @@ function EditPost() {
             <Form onSubmit={handleEdit}>
               <Box
                 sx={{
-                  backgroundColor: "#F8F7F6",
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   alignItems: "center",
                   p: 2,
@@ -173,7 +181,7 @@ function EditPost() {
               </Box>
               <Box
                 sx={{
-                  backgroundColor: "#F8F7F6",
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   p: 2,
                   borderRadius: "0 0 10px 10px",
@@ -219,7 +227,7 @@ function EditPost() {
               </Box>
               <Box
                 sx={{
-                  backgroundColor: "#F8F7F6",
+                  backgroundColor: colors.primary[400],
                   display: "flex",
                   p: 2,
                   marginBottom: "20px",
