@@ -2,10 +2,8 @@ import React from "react";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import { ColorModeContext, useMode } from "./utils/Theme";
-import BottomAppBar from "./pages/Message";
 import Setting from "./pages/Setting";
 import Dashboard from "./pages/Dashboard";
-import Report from "./pages/Report";
 import AllCategories from "./pages/categories/AllCategories";
 import AllBlogs from "./pages/blogs/AllBlogs";
 import AddBlog from "./pages/blogs/AddBlog";
@@ -167,28 +165,10 @@ function App() {
               />
 
               <Route
-                path="/report"
-                element={
-                  <Protected>
-                    <Report />
-                  </Protected>
-                }
-              />
-
-              <Route
                 path="/setting"
                 element={
                   <Protected>
                     <Setting />
-                  </Protected>
-                }
-              />
-
-              <Route
-                path="/message"
-                element={
-                  <Protected>
-                    <BottomAppBar />
                   </Protected>
                 }
               />
