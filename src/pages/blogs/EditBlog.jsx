@@ -2,14 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
-import {
-  Box,
-  Button,
-  Typography,
-  Breadcrumbs,
-  Link,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Typography, Breadcrumbs, useTheme } from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import Side from "../../components/global/Sidebar";
 import Topbar from "../../components/global/Topbar";
@@ -114,15 +107,15 @@ function EditPost() {
         <Topbar />
         <Box sx={{ marginLeft: "20px" }}>
           <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "10px" }}>
-            <Link sx={{ textDecoration: "none" }}>Home</Link>
-            <Link sx={{ textDecoration: "none" }}>Blogs</Link>
-            <Link
+            <Typography sx={{ textDecoration: "none" }}>Home</Typography>
+            <Typography sx={{ textDecoration: "none" }}>Blogs</Typography>
+            <Typography
               sx={{ textDecoration: "none" }}
               color="#FF9934"
               aria-current="page"
             >
               Edit blog
-            </Link>
+            </Typography>
           </Breadcrumbs>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Box>
