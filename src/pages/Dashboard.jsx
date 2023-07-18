@@ -83,7 +83,6 @@ function Dashboard() {
               p="15px"
             >
               <Typography
-                // color={colors.grey[100]}
                 variant="h5"
                 fontWeight="600"
               >

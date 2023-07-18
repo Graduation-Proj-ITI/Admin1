@@ -17,7 +17,7 @@ import { tokens } from "../utils/Theme";
 function Profile() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -88,7 +88,6 @@ function Profile() {
               sx={{
                 width: "650px",
                 height: "330px",
-                // backgroundColor: "#f2f0f0",
                 backgroundColor: colors.primary[400],
                 display: "flex",
                 alignItems: "center",

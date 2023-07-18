@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { Typography, Breadcrumbs, Box, Button, Alert, useTheme } from "@mui/material";
+import {
+  Typography,
+  Breadcrumbs,
+  Box,
+  Button,
+  Alert,
+  useTheme,
+} from "@mui/material";
 import Side from "../components/global/Sidebar";
 import Topbar from "../components/global/Topbar";
 import { Formik, Form, Field } from "formik";
@@ -155,7 +162,6 @@ function Setting() {
           <Formik>
             <Form>
               <Box
-                // backgroundColor="#F8F7F6"
                 sx={{
                   backgroundColor: colors.primary[400],
                   display: "flex",
@@ -191,7 +197,6 @@ function Setting() {
                 </Box>
               </Box>
               <Box
-                // backgroundColor="#F8F7F6"
                 sx={{
                   backgroundColor: colors.primary[400],
                   display: "flex",

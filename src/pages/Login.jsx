@@ -61,7 +61,6 @@ function Login() {
       if (typeof e.response.data.message !== "object")
         setAlertContent(e.response.data.message);
       else setAlertContent(e.response.data.message[0]);
-      //   console.log(e.response.data.message);
     }
   };
 

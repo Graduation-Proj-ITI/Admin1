@@ -33,11 +33,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box className="app">
-          {/* {localStorage.getItem("token") ? <Side /> : ""} */}
-          {/* localStorage.setItem("token", data.token); */}
           <Box className="content">
-            {/* {localStorage.getItem("token") ? <Topbar /> : ""} */}
-            {/* <Topbar /> */}
             <Routes>
               <Route path="/" element={<Login />} />
               <Route
